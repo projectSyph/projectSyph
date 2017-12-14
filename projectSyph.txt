@@ -9,9 +9,9 @@
     When a creature attacks it requires 10 energy. If energy drops <= 0 the creature loses 80% of its current health and 100% of its armor.
 
     When a creature attacks 3 things can happen: 
--- if its attack is higher than the opponent’s, its attack is removed from its opponent’s armor first, and health second (e.g. your monster has 250 attack, opponent has 100 attack 200 health, 100 armor; your monster attacks and your opponent loses 100  armor and 150 health).
--- if its attack is equal to the opponent’s, both die.
--- if its attack is less than the opponent, same thing as the first, only reversed
+	-- if its attack is higher than the opponent’s, its attack is removed from its opponent’s armor first, and health second (e.g. your monster has 250 attack, opponent has 100 attack 200 health, 100 armor; your monster attacks and your opponent loses 100  armor and 150 health).
+	-- if its attack is equal to the opponent’s, both die.
+	-- if its attack is less than the opponent, same thing as the first, only reversed
 
     The game ends when there is only one player (for 2 and 3 players) or only one team (for 4 players) left standing.
     You will be able to save the log of the battle in a .txt file in the Windows Documents directory.
