@@ -1,9 +1,9 @@
 # projectSyph
 
-###Description
+### Description
 projectSyph is an **open-source** turn-based game written in C# with support for 2 (1v1), 3 (everyone for themselves) or 4 (2v2) players and it is developed as the first team project for Telerik Academy Alpha.
 
-###Quick guide
+### Quick guide
 When you start a **new game**, you have to enter your username, which will be used for the period of the game. There can be 2, 3 or 4 players. Each player starts with 8000 souls and the goal is to keep them for as long as you can.
 
 You can have different **spawns**, each with their own attack, health, armor, energy and souls. Each creature requires 20 energy to attack. When its energy drops to **zero or below**, it loses 80% of its **current** health and **all** of its armor.
