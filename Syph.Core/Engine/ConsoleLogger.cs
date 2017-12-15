@@ -7,6 +7,8 @@ namespace Syph.Core.Engine
 {
     class ConsoleLogger : ILogger
     {
+        //TODO
+
         public void Print(string message)
         {
             Console.WriteLine(message);

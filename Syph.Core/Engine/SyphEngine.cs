@@ -10,7 +10,7 @@ namespace Syph.Core
     {
         private static readonly string title = "projectSyph";
         private static readonly string definition = "A project for Telerik Academy";
-        private static readonly string mainMenu = "1. New Game\n2. Options\n3. Guide\n\n0. Exit";
+        private static readonly string mainMenu = "1. New Game\n2. Guide\n3. Credits\n\n0. Exit";
 
         //private static List<string> battleLog;
 
@@ -63,7 +63,7 @@ namespace Syph.Core
             {
                 case 1: break;
                 case 2: break;
-                case 3: break;
+                case 3: Credits(); break;
 
                 case 0: return;
             }
@@ -91,6 +91,19 @@ namespace Syph.Core
             } while (!valid);
 
             return num;
+        }
+
+        public static void Credits()
+        {
+            string credits = File.ReadAllText("./../content/credits.txt");
+
+            Console.Clear();
+            Console.WriteLine(credits);
+            Console.WriteLine("\nPress any key to go back to Main Menu..");
+            Console.ReadKey();
+            Console.Clear();
+
+            MainMenu();
         }
     }
 }

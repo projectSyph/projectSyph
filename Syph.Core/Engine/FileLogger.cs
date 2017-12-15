@@ -8,6 +8,8 @@ namespace Syph.Core.Engine
 {
     class FileLogger : ILogger
     {
+        //TODO
+
         private string location;
 
         FileLogger(string location)
