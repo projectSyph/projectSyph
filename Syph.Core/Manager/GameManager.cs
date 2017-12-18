@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Syph.Core.Manager
 {
-    class GameManager
+    public class GameManager
     {
+
     }
 }

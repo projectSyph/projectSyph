@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Manager\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>
