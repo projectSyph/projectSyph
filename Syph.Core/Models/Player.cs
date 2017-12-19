@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Syph.Core.Contracts;
-
+using System.Text.RegularExpressions;
 namespace Syph.Core.Models
 {
     class Player : IPlayer
@@ -21,6 +21,10 @@ namespace Syph.Core.Models
         public Player(string name)
         {
             //ADD VALIDATIONS
+            if (string.IsNullOrEmpty(name) || name.Length < 4 || name.Length>15 )
+            {
+                throw new ArgumentException("name of player is invalid");
+            }
             this.name = name;
 
             this.souls = 8000;
@@ -32,10 +36,8 @@ namespace Syph.Core.Models
 
             set { this.playerInventory = value; }
         }
-
-        public uint Souls
-        {
-            get { return this.souls; }
+        public string Name { get { return this.name; } }
+        public uint Souls  {get { return this.souls; }
         }
     }
 }
