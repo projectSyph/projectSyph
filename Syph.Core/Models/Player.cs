@@ -16,11 +16,26 @@ namespace Syph.Core.Models
 
         private string name;
 
+        private uint souls;
+
+        public Player(string name)
+        {
+            //ADD VALIDATIONS
+            this.name = name;
+
+            this.souls = 8000;
+        }
+
         public ISpawn[][] Inventory
         {
             get { return this.playerInventory; }
 
             set { this.playerInventory = value; }
+        }
+
+        public uint Souls
+        {
+            get { return this.souls; }
         }
     }
 }
