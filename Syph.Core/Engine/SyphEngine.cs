@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using Syph.Core.Contracts;
+using Syph.Core.Engine;
 
 namespace Syph.Core
 {
@@ -18,7 +19,7 @@ namespace Syph.Core
 
         private static readonly SyphEngine engine = new SyphEngine();
 
-        public SyphEngine()
+        private SyphEngine()
         {
 
         }
@@ -69,17 +70,17 @@ namespace Syph.Core
             }
         }
 
-        private static ushort ValidateChoice(string str) 
+        private static byte ValidateChoice(string str) 
         {
             bool valid;
-            ushort num;
+            byte num;
 
             do
             {
                 Console.Write($"{str}");
-                valid = ushort.TryParse(Console.ReadLine(), out num);
+                valid = byte.TryParse(Console.ReadLine(), out num);
 
-                if (!valid)
+                if (!valid || num > 4)
                 {
                     Console.WriteLine("Invalid choice. Try again!");
                     Thread.Sleep(1000);

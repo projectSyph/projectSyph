@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Syph.Entities
+namespace Syph.Core.Contracts
 {
-    class Player
+    interface ISpawn
     {
         //TODO
     }

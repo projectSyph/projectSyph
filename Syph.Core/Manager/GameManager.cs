@@ -6,6 +6,6 @@ namespace Syph.Core.Manager
 {
     public class GameManager
     {
-
+        //TODO
     }
 }
