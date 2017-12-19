@@ -63,7 +63,7 @@ namespace Syph.Core
             switch (ValidateChoice("Choice: "))
             {
                 case 1: break;
-                case 2: break;
+                case 2: Guide(); break;
                 case 3: Credits(); break;
 
                 case 0: return;
@@ -80,7 +80,7 @@ namespace Syph.Core
                 Console.Write($"{str}");
                 valid = byte.TryParse(Console.ReadLine(), out num);
 
-                if (!valid || num > 4)
+                if (!valid || num > 3)
                 {
                     Console.WriteLine("Invalid choice. Try again!");
                     Thread.Sleep(1000);
@@ -92,6 +92,19 @@ namespace Syph.Core
             } while (!valid);
 
             return num;
+        }
+
+        public static void Guide()
+        {
+            string credits = File.ReadAllText("./../content/guide.txt");
+
+            Console.Clear();
+            Console.WriteLine(credits);
+            Console.WriteLine("\nPress any key to go back to Main Menu..");
+            Console.ReadKey();
+            Console.Clear();
+
+            MainMenu();
         }
 
         public static void Credits()
