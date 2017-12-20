@@ -6,6 +6,6 @@ namespace Syph.Core.Contracts
 {
     interface ILogger
     {
-        //TODO
+        void WriteLog(string[] log);
     }
 }

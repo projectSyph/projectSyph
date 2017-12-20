@@ -21,10 +21,5 @@ namespace Syph.Core.Engine
             Thread.Sleep(1000);
             Console.Clear();
         }
-
-        public string Read()
-        {
-            return Console.ReadLine();
-        }
     }
 }
