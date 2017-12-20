@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace Syph.Core.Engine
 {
-    public class FileLogger : ILogger
+    public sealed class FileLogger : IFileLogger
     {
         private string fileName;
         private string file;
@@ -20,11 +20,11 @@ namespace Syph.Core.Engine
             this.file = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\projectSyph\logs\{this.fileName}";
         }
 
-        public void WriteLog(string[] log)
+        public void WriteLog(List<string> log)
         {
             using (StreamWriter Writer = File.AppendText(file))
             {
-                foreach (var line in log)
+                foreach (string line in log)
                 {
                     Writer.WriteLine(line);
                 }

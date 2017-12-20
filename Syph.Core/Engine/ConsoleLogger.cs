@@ -6,10 +6,8 @@ using Syph.Core.Contracts;
 
 namespace Syph.Core.Engine
 {
-    public class ConsoleLogger : ILogger
+    public static class ConsoleLogger
     {
-        //TODO
-
         public static void Print(string str)
         {
             Console.WriteLine(str);

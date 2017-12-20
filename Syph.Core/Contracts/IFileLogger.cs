@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Syph.Core.Contracts
 {
-    interface ILogger
+    interface IFileLogger
     {
-        void WriteLog(string[] log);
+        void WriteLog(List<string> log);
     }
 }

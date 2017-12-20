@@ -4,24 +4,20 @@ using System.IO;
 using System.Threading;
 using Syph.Core.Contracts;
 using Syph.Core.Engine;
+using Syph.Core.Manager;
 
 namespace Syph.Core
 {
     public sealed class SyphEngine : IEngine
     {
-        private static readonly string title = "projectSyph";
-        private static readonly string definition = "A project for Telerik Academy";
-        private static readonly string mainMenu = "1. New Game\n2. Guide\n3. Credits\n\n0. Exit";
-
-        //private static List<string> battleLog;
-
-        private readonly ILogger logger;
+        private const string title = "projectSyph";
+        private const string definition = "A project for Telerik Academy";
+        private const string mainMenu = "1. New Game\n2. Guide\n3. Credits\n4. About\n\n0. Exit";
 
         private static readonly SyphEngine engine = new SyphEngine();
 
         private SyphEngine()
         {
-
         }
 
         public static SyphEngine Instance 
@@ -46,20 +42,29 @@ namespace Syph.Core
 
         private static void MainMenu()
         {
-
             ConsoleLogger.Print(mainMenu);
 
             switch (ValidateChoice("Choice: "))
             {
-                case 1: break;
-                case 2: Guide(); break;
-                case 3: Credits(); break;
+                case 1:
+                    GameManager.NewGame();
+                    break;
+                case 2:
+                    Guide();
+                    break;
+                case 3:
+                    Credits();
+                    break;
+                case 4:
+                    //About();
+                    break;
 
-                case 0: return;
+                case 0:
+                    return;
             }
         }
 
-        private static byte ValidateChoice(string str) 
+        private static byte ValidateChoice(string str, int lowerLimit = 0, int upperLimit = 4) 
         {
             bool valid;
             byte num;
@@ -69,11 +74,9 @@ namespace Syph.Core
                 Console.Write($"{str}");
                 valid = byte.TryParse(Console.ReadLine(), out num);
 
-                if (!valid || num > 3)
+                if ((!valid) || (num < lowerLimit) ||(num > upperLimit))
                 {
-                    Console.WriteLine("Invalid choice. Try again!");
-                    Thread.Sleep(1000);
-                    Console.Clear();
+                    ConsoleLogger.Print("Invalid choice. Try again!", 1000);
                     MainMenu();
                     break;
                 }

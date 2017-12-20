@@ -9,10 +9,7 @@ namespace Syph
     {
         static void Main(string[] args)
         {
-            string[] r = { "pe6o attacked", "go6o died" };
-            FileLogger a = new FileLogger();
-            a.WriteLog(r);
-            //SyphEngine.Instance.Start();
+            SyphEngine.Instance.Start();
         }
     }
 }
