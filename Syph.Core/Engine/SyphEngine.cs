@@ -38,27 +38,16 @@ namespace Syph.Core
             MainMenu();
         }
 
-        private static void Print(string str) 
-        {
-            Console.WriteLine(str);
-        }
-
-        private static void Print(string str, uint ms) 
-        {
-            Console.Write($"{str}");
-            Thread.Sleep(1000);
-            Console.Clear();
-        }
-
         private static void Intro() 
         {
-            Print(title, 1000);
-            Print(definition, 1000);
+            ConsoleLogger.Print(title, 1000);
+            ConsoleLogger.Print(definition, 1000);
         }
 
         private static void MainMenu()
         {
-            Print(mainMenu);
+
+            ConsoleLogger.Print(mainMenu);
 
             switch (ValidateChoice("Choice: "))
             {

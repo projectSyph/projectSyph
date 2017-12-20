@@ -1,17 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using Syph.Core.Contracts;
 
 namespace Syph.Core.Engine
 {
-    class ConsoleLogger : ILogger
+    public class ConsoleLogger : ILogger
     {
         //TODO
 
-        public void Print(string message)
+        public static void Print(string str)
         {
-            Console.WriteLine(message);
+            Console.WriteLine(str);
+        }
+
+        public static void Print(string str, uint ms)
+        {
+            Console.Write($"{str}");
+            Thread.Sleep(1000);
+            Console.Clear();
         }
 
         public string Read()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Syph.Core;
+using Syph.Core.Engine;
 
 namespace Syph
 {
@@ -8,7 +9,10 @@ namespace Syph
     {
         static void Main(string[] args)
         {
-            SyphEngine.Instance.Start();
+            string[] r = { "pe6o attacked", "go6o died" };
+            FileLogger a = new FileLogger();
+            a.WriteLog(r);
+            //SyphEngine.Instance.Start();
         }
     }
 }

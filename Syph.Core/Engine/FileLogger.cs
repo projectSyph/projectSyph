@@ -1,30 +1,29 @@
 ﻿using Syph.Core.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 
 namespace Syph.Core.Engine
 {
-    class FileLogger : ILogger
+    public class FileLogger : ILogger
     {
-        //TODO
+        private string fileName;
+        private string file;
 
-        private string location;
-
-        FileLogger(string location)
+        public FileLogger()
         {
-            this.location = location;
+            this.fileName = $"{DateTime.Now.ToString("ddMMyyyyHHmmss")}.txt";
+
+            this.file = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\projectSyph\logs\{this.fileName}";
+
+            File.Create(file);
         }
 
-        public void Print(string message)
+        public void WriteLog(string[] message)
         {
-            File.WriteAllText(this.location, message);
-        }
-
-        public string Read()
-        {
-            throw new NotImplementedException();
+            //TODO
         }
     }
 }

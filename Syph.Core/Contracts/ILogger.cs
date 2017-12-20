@@ -6,8 +6,6 @@ namespace Syph.Core.Contracts
 {
     interface ILogger
     {
-        void Print(string message);
-
-        string Read();
+        //TODO
     }
 }
