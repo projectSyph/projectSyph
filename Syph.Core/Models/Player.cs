@@ -16,7 +16,7 @@ namespace Syph.Core.Models
 
         private string name;
 
-        private uint souls;
+        private int souls;
 
         public Player(string name)
         {
@@ -36,8 +36,13 @@ namespace Syph.Core.Models
 
             set { this.playerInventory = value; }
         }
+
         public string Name { get { return this.name; } }
-        public uint Souls  {get { return this.souls; }
+        public int Souls  {get { return this.souls; } }
+
+        public void TakeDamage(int d)
+        {
+            this.souls -= d;
         }
     }
 }

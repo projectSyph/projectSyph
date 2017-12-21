@@ -20,7 +20,7 @@ namespace Syph.Core.Engine
             this.file = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\projectSyph\logs\{this.fileName}";
         }
 
-        public void WriteLog(List<string> log)
+        public void WriteLog(IList<string> log)
         {
             using (StreamWriter Writer = File.AppendText(file))
             {

@@ -8,16 +8,22 @@ namespace Syph.Core.Engine
 {
     public static class ConsoleLogger
     {
-        public static void Print(string str)
+        public static void Print(string msg)
         {
-            Console.WriteLine(str);
+            Console.WriteLine(msg);
         }
 
-        public static void Print(string str, uint ms)
+        public static void Print(string msg, uint ms)
         {
-            Console.Write($"{str}");
+            Console.Write($"{msg}");
             Thread.Sleep(1000);
             Console.Clear();
+        }
+
+        public static void PrintAndWrite(string msg, IList<string> collection)
+        {
+            Console.WriteLine(msg);
+            collection.Add($"{DateTime.Now.ToString("HH:mm:ss")} : {msg}");
         }
     }
 }

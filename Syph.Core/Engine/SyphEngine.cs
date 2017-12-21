@@ -47,7 +47,7 @@ namespace Syph.Core
             switch (ValidateChoice("Choice: "))
             {
                 case 1:
-                    GameManager.NewGame();
+                    GameManager.NewGame();                    
                     break;
                 case 2:
                     Guide();
