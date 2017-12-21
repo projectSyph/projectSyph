@@ -6,6 +6,8 @@ namespace Syph.Core.Contracts
 {
     interface IFileLogger
     {
-        void WriteLog(IList<string> log);
+        void Log(string msg);
+
+        void WriteLog();
     }
 }

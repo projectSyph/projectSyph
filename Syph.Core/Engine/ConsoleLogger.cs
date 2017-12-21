@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading;
 using Syph.Core.Contracts;
@@ -20,10 +21,20 @@ namespace Syph.Core.Engine
             Console.Clear();
         }
 
-        public static void PrintAndWrite(string msg, IList<string> collection)
+        public static void PrintTextFile(string filename)
         {
-            Console.WriteLine(msg);
-            collection.Add($"{DateTime.Now.ToString("HH:mm:ss")} : {msg}");
+            if (!File.Exists($"./../content/{filename}.txt"))
+            {
+                throw new ArgumentException("file doesnt exist");
+            }
+
+            string credits = File.ReadAllText($"./../content/{filename}.txt");
+
+            Console.Clear();
+            Console.WriteLine(credits);
+            Console.WriteLine("\nPress any key to go back to Main Menu..");
+            Console.ReadKey();
+            Console.Clear();
         }
     }
 }

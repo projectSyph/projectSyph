@@ -12,19 +12,33 @@ namespace Syph.Core.Engine
     {
         private string fileName;
         private string file;
+        private IList<string> log;
 
         public FileLogger()
         {
             this.fileName = $"{DateTime.Now.ToString("ddMMyyyyHHmmss")}.txt";
 
             this.file = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\projectSyph\logs\{this.fileName}";
+
+            this.log = new List<string>();
         }
 
-        public void WriteLog(IList<string> log)
+        public void Log(string msg)
         {
+            Console.WriteLine(msg);
+            this.log.Add($"{DateTime.Now.ToString("HH:mm:ss")} : {msg}");
+        }
+
+        public void WriteLog()
+        {
+            if (!Directory.Exists($@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\projectSyph\logs\"))
+            {
+                Directory.CreateDirectory($@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\projectSyph\logs\");
+            }
+
             using (StreamWriter Writer = File.AppendText(file))
             {
-                foreach (string line in log)
+                foreach (string line in this.log)
                 {
                     Writer.WriteLine(line);
                 }

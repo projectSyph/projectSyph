@@ -39,6 +39,8 @@ namespace Syph.Core.Manager
 
             Console.Clear();
 
+            var logger = new FileLogger();
+
             while (inGame)
             {
                 for (int i = 0; i < p; i++)
@@ -48,24 +50,24 @@ namespace Syph.Core.Manager
                     if (a.Key == ConsoleKey.A)
                     {
                         players[i].TakeDamage(4000);
-                        ConsoleLogger.PrintAndWrite($"{players[i].Name} takes 4000 damage", log);
+                        logger.Log($"{players[i].Name} takes 4000 damage");
                     }
                     else if (a.Key == ConsoleKey.W)
                     {
                         players[i].TakeDamage(-3000);
-                        ConsoleLogger.PrintAndWrite($"{players[i].Name} heals", log);
+                        logger.Log($"{players[i].Name} heals");
                     }
                     if (players[i].Souls <= 0)
                     {
                         inGame = false;
-                        ConsoleLogger.PrintAndWrite($"{players[i].Name} is dead{Environment.NewLine}Game Over", log);
+                        logger.Log($"{players[i].Name} is dead{Environment.NewLine}Game Over");
                         break;
                     }
                 }
             }
 
-            var logger = new FileLogger();
-            logger.WriteLog(log);
+            logger.WriteLog();
+            ConsoleLogger.Print("", 2000);
         }
 
         private static byte ValidateChoice(string str, int lowerLimit = 0, int upperLimit = 4)

@@ -44,27 +44,29 @@ namespace Syph.Core
         {
             ConsoleLogger.Print(mainMenu);
 
-            switch (ValidateChoice("Choice: "))
+            switch (ValidateChoice("Choice: ", mainMenu))
             {
                 case 1:
                     GameManager.NewGame();                    
                     break;
                 case 2:
-                    Guide();
+                    ConsoleLogger.PrintTextFile("guide");
                     break;
                 case 3:
-                    Credits();
+                    ConsoleLogger.PrintTextFile("credits");
                     break;
                 case 4:
-                    //About();
+                    ConsoleLogger.PrintTextFile("about");
                     break;
 
                 case 0:
                     return;
             }
+
+            MainMenu();
         }
 
-        private static byte ValidateChoice(string str, int lowerLimit = 0, int upperLimit = 4) 
+        private static byte ValidateChoice(string str, string backup, int lowerLimit = 0, int upperLimit = 4) 
         {
             bool valid;
             byte num;
@@ -74,7 +76,13 @@ namespace Syph.Core
                 Console.Write($"{str}");
                 valid = byte.TryParse(Console.ReadLine(), out num);
 
-                if ((!valid) || (num < lowerLimit) ||(num > upperLimit))
+                
+                if ((!valid))
+                {
+                    ConsoleLogger.Print("Invalid choice. Try again!", 1000);
+                    Console.WriteLine(backup);
+                }
+                else if ((num < lowerLimit) || (num > upperLimit))
                 {
                     ConsoleLogger.Print("Invalid choice. Try again!", 1000);
                     MainMenu();
@@ -84,32 +92,6 @@ namespace Syph.Core
             } while (!valid);
 
             return num;
-        }
-
-        public static void Guide()
-        {
-            string credits = File.ReadAllText("./../content/guide.txt");
-
-            Console.Clear();
-            Console.WriteLine(credits);
-            Console.WriteLine("\nPress any key to go back to Main Menu..");
-            Console.ReadKey();
-            Console.Clear();
-
-            MainMenu();
-        }
-
-        public static void Credits()
-        {
-            string credits = File.ReadAllText("./../content/credits.txt");
-
-            Console.Clear();
-            Console.WriteLine(credits);
-            Console.WriteLine("\nPress any key to go back to Main Menu..");
-            Console.ReadKey();
-            Console.Clear();
-
-            MainMenu();
         }
     }
 }
