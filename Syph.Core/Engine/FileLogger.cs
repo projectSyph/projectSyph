@@ -1,10 +1,7 @@
-﻿using Syph.Core.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Text;
-using System.Threading;
+using Syph.Core.Contracts;
 
 namespace Syph.Core.Engine
 {
@@ -26,6 +23,7 @@ namespace Syph.Core.Engine
         public void Log(string msg)
         {
             Console.WriteLine(msg);
+
             this.log.Add($"{DateTime.Now.ToString("HH:mm:ss")} : {msg}");
         }
 

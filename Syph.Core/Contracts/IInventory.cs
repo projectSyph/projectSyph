@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Syph.Core.Contracts
+﻿namespace Syph.Core.Contracts
 {
     public interface IInventory
     {

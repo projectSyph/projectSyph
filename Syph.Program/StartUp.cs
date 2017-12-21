@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Syph.Core;
-using Syph.Core.Engine;
+﻿using Syph.Core;
 
 namespace Syph
 {
