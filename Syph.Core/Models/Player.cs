@@ -23,7 +23,7 @@ namespace Syph.Core.Models
             //ADD VALIDATIONS
             if (string.IsNullOrEmpty(name) || name.Length < 4 || name.Length>15 )
             {
-                throw new ArgumentException("name of player is invalid");
+                throw new ArgumentException("Name of player is invalid");
             }
             this.name = name;
 

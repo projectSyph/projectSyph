@@ -14,6 +14,7 @@ namespace Syph.Core.Manager
         private static Player[] players;
         private static bool inGame;
         private static IList<string> log;
+        private static ulong turn;
 
         public static void NewGame()
         {
@@ -22,52 +23,66 @@ namespace Syph.Core.Manager
             int p = ValidateChoice("Players: ", 2, 4);
             players = new Player[p];
             log = new List<string>();
+            turn = 0;
 
             for (int i = 0; i < p; i++)
             {
                 try
                 {
-                    Console.Write(i);
+                    Console.Write($"Enter Player{i + 1}'s name: ");
                     players[i] = new Player(Console.ReadLine());
+                    ConsoleLogger.Print($"Player {players[i].Name} with ID {i} was created");
                 }
-                catch
+                catch (Exception ex)
                 {
+                    ConsoleLogger.Print(ex.Message);
                     i--;
                 }
             }
+
             inGame = true;
 
-            Console.Clear();
+            ConsoleLogger.Print("", 1000);
 
-            var logger = new FileLogger();
+            var battleLogger = new FileLogger();
 
             while (inGame)
             {
+                turn++;
+
                 for (int i = 0; i < p; i++)
                 {
                     Console.WriteLine($"{players[i].Name}'s turn: {players[i].Souls} souls");
+
+                    //THIS IS JUST FOR TESTING. IT IS NOT TO BE INCLUDED IN THE FINAL RELEASE
                     var a = Console.ReadKey();
                     if (a.Key == ConsoleKey.A)
                     {
                         players[i].TakeDamage(4000);
-                        logger.Log($"{players[i].Name} takes 4000 damage");
+                        battleLogger.Log($"{players[i].Name} takes 4000 damage");
                     }
                     else if (a.Key == ConsoleKey.W)
                     {
                         players[i].TakeDamage(-3000);
-                        logger.Log($"{players[i].Name} heals");
+                        battleLogger.Log($"{players[i].Name} heals");
                     }
                     if (players[i].Souls <= 0)
                     {
                         inGame = false;
-                        logger.Log($"{players[i].Name} is dead{Environment.NewLine}Game Over");
+                        battleLogger.Log($"{players[i].Name} is dead{Environment.NewLine}Game Over");
                         break;
                     }
+                    //////////////////////////////////////////////////////////////////////////
                 }
             }
 
-            logger.WriteLog();
-            ConsoleLogger.Print("", 2000);
+            ConsoleLogger.Print($"{Environment.NewLine}Write BattleLog to file? (y/n): ");
+            ConsoleKey choice = Console.ReadKey().Key;
+            ConsoleLogger.Print(Environment.NewLine);
+
+            if (choice == ConsoleKey.Y)
+                battleLogger.WriteLog();
+            Console.Clear();
         }
 
         private static byte ValidateChoice(string str, int lowerLimit = 0, int upperLimit = 4)
