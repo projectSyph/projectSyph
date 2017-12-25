@@ -28,6 +28,8 @@ namespace Syph.Core
         public void Start()
         {
             //Intro();
+            //Chofexx- Add logo on instance
+            ConsoleLogger.PrintTextFile("logo");
             MainMenu();
         }
 
