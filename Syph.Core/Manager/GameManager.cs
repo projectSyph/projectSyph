@@ -52,25 +52,40 @@ namespace Syph.Core.Manager
 
                 for (int i = 0; i < p; i++)
                 {
-                    Console.WriteLine($"{players[i].Name}'s turn: {players[i].Souls} souls");
+                    battleLogger.Log($"{players[i].Name}'s turn: {players[i].Souls} souls");
 
                     //THIS IS JUST FOR TESTING. IT IS NOT TO BE INCLUDED IN THE FINAL RELEASE
-                    var a = Console.ReadKey();
-                    if (a.Key == ConsoleKey.A)
+                    string command = Console.ReadLine().ToLower().Trim();
+                    if (command == "summon")
                     {
-                        players[i].TakeDamage(4000);
-                        battleLogger.Log($"{players[i].Name} takes 4000 damage");
+                        if (players[i].Souls >= Monster.Cost)
+                        {
+                            if (players[i].Monsters.Count < Monster.MaxCount)
+                            {
+                                players[i].Monsters.Add(new Monster());
+                                players[i].Souls -= Monster.Cost;
+                                battleLogger.Log("You have summoned a monster");
+                            }
+                            else
+                            {
+                                battleLogger.Log($"You can't have more than {Monster.MaxCount} monsters");
+                            }
+                        }
+                        else
+                        {
+                            battleLogger.Log($"You need at least {Monster.Cost} souls to summon a monster");
+                        }
                     }
-                    else if (a.Key == ConsoleKey.W)
+                    else if (command == "surrender")
                     {
-                        players[i].TakeDamage(-3000);
-                        battleLogger.Log($"{players[i].Name} heals");
-                    }
-                    if (players[i].Souls <= 0)
-                    {
+                        battleLogger.Log("You have surrendered. Game Over");
                         inGame = false;
-                        battleLogger.Log($"{players[i].Name} is dead{Environment.NewLine}Game Over");
                         break;
+                    }
+                    else
+                    {
+                        battleLogger.Log("Unrecognised command. Please try again");
+                        i--;
                     }
                     //////////////////////////////////////////////////////////////////////////
                 }
