@@ -1,6 +1,8 @@
-﻿namespace Syph.Core.Contracts
+﻿using Syph.Core.Contracts.Entities;
+
+namespace Syph.Core.Contracts
 {
-    public interface ISpawn
+    public interface ISpawn : IEntity
     {
         int Health { get; }
 
