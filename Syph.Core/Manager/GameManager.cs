@@ -20,6 +20,7 @@ namespace Syph.Core.Manager
         {
             Console.Clear();
 
+            
             int p = ValidateChoice("Players: ", 2, 4);
             players = new Player[p];
             log = new List<string>();

@@ -9,7 +9,7 @@ namespace Syph.Core
     {
         private const string title = "projectSyph";
         private const string definition = "A project for Telerik Academy";
-        private const string mainMenu = "1. New Game\n2. Guide\n3. Credits\n4. About\n\n0. Exit";
+        //private const string mainMenu = "1. New Game\n2. Guide\n3. Credits\n4. About\n\n0. Exit";
 
         private static readonly SyphEngine engine = new SyphEngine();
 
@@ -29,7 +29,8 @@ namespace Syph.Core
         {
             //Intro();
             //Chofexx- Add logo on instance
-            ConsoleLogger.PrintTextFile("logo");
+            ConsoleLogger.PrintTextFile("logo", "menu");
+            
             MainMenu();
         }
 
@@ -74,21 +75,24 @@ namespace Syph.Core
 
         private static void MainMenu()
         {
-            ConsoleLogger.Print(mainMenu);
+            //ConsoleLogger.Print(mainMenu);
         
-            switch (ValidateChoice("Choice: ", mainMenu))
+            switch (ValidateChoice("Choice: "))
             {
                 case 1:
                     GameManager.NewGame();                    
                     break;
                 case 2:
                     ConsoleLogger.PrintTextFile("guide");
+                    ConsoleLogger.PrintReturnToMenu();
                     break;
                 case 3:
                     ConsoleLogger.PrintTextFile("credits");
+                    ConsoleLogger.PrintReturnToMenu();
                     break;
                 case 4:
                     ConsoleLogger.PrintTextFile("about");
+                    ConsoleLogger.PrintReturnToMenu();
                     break;
         
                 case 0:
@@ -98,7 +102,11 @@ namespace Syph.Core
             MainMenu();
         }
 
-        private static byte ValidateChoice(string str, string backup, int lowerLimit = 0, int upperLimit = 4)
+        /// <summary>
+        /// Chofexx -> Remove string backup -> and use print menu 
+        /// </summary>
+        
+        private static byte ValidateChoice(string str, int lowerLimit = 0, int upperLimit = 4)
         {
             bool valid;
             byte num;
@@ -112,7 +120,8 @@ namespace Syph.Core
                 if ((!valid))
                 {
                     ConsoleLogger.Print("Invalid choice. Try again!", 1000);
-                    Console.WriteLine(backup);
+                   // Console.WriteLine(backup);
+                    ConsoleLogger.PrintTextFile("menu");
                 }
                 else if ((num < lowerLimit) || (num > upperLimit))
                 {
