@@ -18,20 +18,42 @@ namespace Syph.Core.Engine
             Console.Clear();
         }
 
-        public static void PrintTextFile(string filename)
+
+        /// <summary>
+        /// Chofexx can print multiple files if it's neaded
+        /// </summary>
+        /// <param name="filenames"></param>
+        public static void PrintTextFile(params string[] filenames)
         {
-            if (!File.Exists($"./../content/{filename}.txt"))
+            foreach (var file in filenames)
             {
-                throw new ArgumentException("file doesnt exist");
+                if (!File.Exists($"./../content/{file}.txt"))
+                {
+                    throw new ArgumentException("File doesnt exist");
+                }
+
+                string credits = File.ReadAllText($"./../content/{file}.txt");
+
+                //Console.Clear(); Chofexx- It,s messing up with logo printing
+                Console.WriteLine(credits);
             }
+          
+            //Console.WriteLine("\nPress any key to go back to Main Menu..");
+            //Console.ReadKey();
+            //Console.Clear();
+        }
 
-            string credits = File.ReadAllText($"./../content/{filename}.txt");
-
-            Console.Clear();
-            Console.WriteLine(credits);
+        /// <summary>
+        /// Print return to main menu - NOTE: can we use Print(str,uint) method ?
+        /// </summary>
+        public static void PrintReturnToMenu()
+        {
             Console.WriteLine("\nPress any key to go back to Main Menu..");
             Console.ReadKey();
             Console.Clear();
+            ConsoleLogger.PrintTextFile("menu");
         }
+
+       
     }
 }
