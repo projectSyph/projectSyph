@@ -4,9 +4,11 @@ using System.Text;
 
 namespace Syph.Core.Contracts
 {
-    interface ICommand
+    public interface ICommand
     {
-         string NameOfMove { get; }
+        string Name { get; }
         List<string> Parameters { get; }
+        string InvalidReason { get; }
+        bool IsValid();
     }
 }

@@ -10,7 +10,10 @@ namespace Syph.Core.Engine
         {
             Console.WriteLine(msg);
         }
-
+        public static void PrintNoNewLine(string msg)
+        {
+            Console.Write(msg);
+        }
         public static void Print(string msg, uint ms)
         {
             Console.Write($"{msg}");

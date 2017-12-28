@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Syph.Core.Engine
 {
-    class Command : ICommand
+    public class Command : ICommand
     {
         private const char SplitBySpace = ' ';
-        private string nameOfMove;
+        private string name;
         private List<string> parameters;
 
         public Command(string input)
@@ -17,11 +17,11 @@ namespace Syph.Core.Engine
             this.TranslateInput(input);
         }
 
-        public string NameOfMove
+        public string Name
         {
             get
             {
-                return this.nameOfMove;
+                return this.name;
             }
 
             private set
@@ -32,7 +32,7 @@ namespace Syph.Core.Engine
                     throw new ArgumentNullException("Name cannot be null or empty.");
                 }
 
-                this.nameOfMove = value;
+                this.name = value.ToLower();
             }
         }
 
@@ -54,29 +54,37 @@ namespace Syph.Core.Engine
             }
         }
 
-        private void TranslateInput(string input)
+        public string InvalidReason
         {
-            var indexOfFirstSpace = input.IndexOf(SplitBySpace);
-            //System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("{{.+(?=}})}}");
-
-            if (indexOfFirstSpace < 0)
+            get
             {
-                this.NameOfMove = input;
-                return;
-            }
-            else
-            {
-                this.NameOfMove = input.Substring(0, indexOfFirstSpace);
-
-                if (input.IndexOf(SplitBySpace) < 0)
-                {
-                    this.Parameters.Add(input.Substring(0).Trim());
-                    input = string.Empty;
-                }
-                this.Parameters.AddRange(input.Remove(0, indexOfFirstSpace).Split(SplitBySpace, StringSplitOptions.RemoveEmptyEntries));
-
+                throw new NotImplementedException();
             }
         }
 
+        public bool IsValid()
+        {
+            switch (this.Name)
+            {
+                case "help":
+                    return true;
+                default:
+                    throw new NotImplementedException();
+            }
+            
+        }
+
+        private void TranslateInput(string input)
+        {
+            string[] tokens = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            this.Name = tokens[0];
+            if (tokens.Length > 1)
+            {
+                for (int i = 1; i < tokens.Length; i++)
+                {
+                    Parameters.Add(tokens[i]);
+                }
+            }
+        }
     }
 }

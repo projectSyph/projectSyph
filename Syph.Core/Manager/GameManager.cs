@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading;
 using Syph.Core.Engine;
 using Syph.Core.Models;
+using Syph.Core.Contracts;
 
 namespace Syph.Core.Manager
 {
@@ -20,7 +21,7 @@ namespace Syph.Core.Manager
         {
             Console.Clear();
 
-            
+
             int p = ValidateChoice("Players: ", 2, 4);
             players = new Player[p];
             log = new List<string>();
@@ -51,20 +52,65 @@ namespace Syph.Core.Manager
             {
                 turn++;
 
-                for (int i = 0; i < p; i++)
+                foreach (var player in players)
                 {
-                    battleLogger.Log($"{players[i].Name}'s turn: {players[i].Souls} souls");
+                    battleLogger.Log($"{player.Name}'s turn: {player.Souls} souls");
+                    bool stillPlayerTurn = true;
+                    while (stillPlayerTurn)
+                    {
+                        ICommand command;
+                        bool commandIsValid;
+                        do
+                        {
+                            command = ReadCommand();
+                            commandIsValid = command.IsValid();
+                            if (!commandIsValid)
+                            {
+                                ConsoleLogger.Print($"Invalid command: {command.InvalidReason}. Try again! ");
+                            }
+                        } while (!commandIsValid);
 
+                        //ProcessCommand(command);
+                        switch (command.Name)
+                        {
+                            case "help":
+                                ConsoleLogger.PrintTextFile("help");
+                                break;
+
+                            case "attack":
+                                string opponentName = command.Parameters[0];
+                                string opponentMonsterType = command.Parameters[1];
+                                string opponentMonsterID = command.Parameters[2];
+                                string myMonsterType = command.Parameters[3];
+                                string myMonsterID = command.Parameters[4];
+                                throw new NotImplementedException();
+                                break;
+                            case "summon":
+                                throw new NotImplementedException();
+                                break;
+                            case "surrender":
+                                throw new NotImplementedException();
+                                break;
+                            default:
+                                //return string.Format(InvalidCommand, command.Name);
+                                throw new NotImplementedException();
+                        }
+
+                    }
+
+                }
+                /*
+                {
                     //THIS IS JUST FOR TESTING. IT IS NOT TO BE INCLUDED IN THE FINAL RELEASE
                     string command = Console.ReadLine().ToLower().Trim();
                     if (command == "summon")
                     {
-                        if (players[i].Souls >= Monster.Cost)
+                        if (player.Souls >= Monster.Cost)
                         {
-                            if (players[i].Monsters.Count < Monster.MaxCount)
+                            if (player.Monsters.Count < Monster.MaxCount)
                             {
-                                players[i].Monsters.Add(new Monster());
-                                players[i].Souls -= Monster.Cost;
+                                player.Monsters.Add(new Monster());
+                                player.Souls -= Monster.Cost;
                                 battleLogger.Log("You have summoned a monster");
                             }
                             else
@@ -90,6 +136,7 @@ namespace Syph.Core.Manager
                     }
                     //////////////////////////////////////////////////////////////////////////
                 }
+                */
             }
 
             ConsoleLogger.Print($"{Environment.NewLine}Write BattleLog to file? (y/n): ");
@@ -99,6 +146,13 @@ namespace Syph.Core.Manager
             if (choice == ConsoleKey.Y)
                 battleLogger.WriteLog();
             Console.Clear();
+        }
+        private static ICommand ReadCommand()
+        {
+            ConsoleLogger.PrintNoNewLine("Enter command: ");
+            string playerInputLine = Console.ReadLine();
+            Command currentCommand = new Command(playerInputLine);
+            return currentCommand;
         }
 
         private static byte ValidateChoice(string str, int lowerLimit = 0, int upperLimit = 4)
