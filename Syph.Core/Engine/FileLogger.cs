@@ -24,7 +24,7 @@ namespace Syph.Core.Engine
         {
             Console.WriteLine(msg);
 
-            this.log.Add($"{DateTime.Now.ToString("HH:mm:ss")} : {msg}");
+            this.log.Add($"{msg}");
         }
 
         public void WriteLog()

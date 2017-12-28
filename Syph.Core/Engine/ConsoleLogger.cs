@@ -17,8 +17,7 @@ namespace Syph.Core.Engine
             Thread.Sleep(1000);
             Console.Clear();
         }
-
-
+        
         /// <summary>
         /// Chofexx can print multiple files if it's neaded
         /// </summary>
@@ -32,10 +31,10 @@ namespace Syph.Core.Engine
                     throw new ArgumentException("File doesnt exist");
                 }
 
-                string credits = File.ReadAllText($"./../content/{file}.txt");
+                string text = File.ReadAllText($"./../content/{file}.txt");
 
                 //Console.Clear(); Chofexx- It,s messing up with logo printing
-                Console.WriteLine(credits);
+                Console.WriteLine(text);
             }
           
             //Console.WriteLine("\nPress any key to go back to Main Menu..");
@@ -51,9 +50,9 @@ namespace Syph.Core.Engine
             Console.WriteLine("\nPress any key to go back to Main Menu..");
             Console.ReadKey();
             Console.Clear();
-            ConsoleLogger.PrintTextFile("menu");
+            PrintTextFile("logo", "menu");
         }
 
-       
+
     }
 }

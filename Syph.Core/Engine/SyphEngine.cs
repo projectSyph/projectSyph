@@ -29,7 +29,7 @@ namespace Syph.Core
         {
             //Intro();
             //Chofexx- Add logo on instance
-            ConsoleLogger.PrintTextFile("logo", "menu");
+            //.PrintTextFile("logo", "menu");
             
             MainMenu();
         }
@@ -76,30 +76,32 @@ namespace Syph.Core
         private static void MainMenu()
         {
             //ConsoleLogger.Print(mainMenu);
-        
-            switch (ValidateChoice("Choice: "))
+            ConsoleLogger.PrintTextFile("logo", "menu");
+
+            while (true)
             {
-                case 1:
-                    GameManager.NewGame();                    
-                    break;
-                case 2:
-                    ConsoleLogger.PrintTextFile("guide");
-                    ConsoleLogger.PrintReturnToMenu();
-                    break;
-                case 3:
-                    ConsoleLogger.PrintTextFile("credits");
-                    ConsoleLogger.PrintReturnToMenu();
-                    break;
-                case 4:
-                    ConsoleLogger.PrintTextFile("about");
-                    ConsoleLogger.PrintReturnToMenu();
-                    break;
-        
-                case 0:
-                    return;
+                switch (ValidateChoice("Choice: "))
+                {
+                    case 1:
+                        GameManager.NewGame();
+                        break;
+                    case 2:
+                        ConsoleLogger.PrintTextFile("guide");
+                        ConsoleLogger.PrintReturnToMenu();
+                        break;
+                    case 3:
+                        ConsoleLogger.PrintTextFile("credits");
+                        ConsoleLogger.PrintReturnToMenu();
+                        break;
+                    case 4:
+                        ConsoleLogger.PrintTextFile("about");
+                        ConsoleLogger.PrintReturnToMenu();
+                        break;
+
+                    case 0:
+                        return;
+                }
             }
-        
-            MainMenu();
         }
 
         /// <summary>
@@ -121,7 +123,7 @@ namespace Syph.Core
                 {
                     ConsoleLogger.Print("Invalid choice. Try again!", 1000);
                    // Console.WriteLine(backup);
-                    ConsoleLogger.PrintTextFile("menu");
+                    ConsoleLogger.PrintTextFile("logo", "menu");
                 }
                 else if ((num < lowerLimit) || (num > upperLimit))
                 {

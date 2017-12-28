@@ -1,15 +1,20 @@
-﻿using Syph.Core.Contracts.Entities;
+﻿using Syph.Core.Common;
+using Syph.Core.Contracts.Entities;
 
 namespace Syph.Core.Contracts
 {
     public interface ISpawn : IEntity
     {
-        int Health { get; }
+        double Health { get; }
 
-        int Demage { get; }
+        double Damage { get; }
 
-        int Armour { get; }
+        double Armour { get; }
+
+        int Energy { get; }
 
         int Souls { get; }
+
+        SpawnRank Rank { get; }
     }
 }
