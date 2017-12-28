@@ -80,7 +80,7 @@ namespace Syph.Core
 
             while (true)
             {
-                switch (ValidateChoice("Choice: "))
+                switch (ValidateMainMenuChoice("Choice: "))
                 {
                     case 1:
                         GameManager.NewGame();
@@ -108,7 +108,7 @@ namespace Syph.Core
         /// Chofexx -> Remove string backup -> and use print menu 
         /// </summary>
         
-        private static byte ValidateChoice(string str, int lowerLimit = 0, int upperLimit = 4)
+        private static byte ValidateMainMenuChoice(string str, int lowerLimit = 0, int upperLimit = 4)
         {
             bool valid;
             byte num;

@@ -1,5 +1,7 @@
-﻿using Syph.Core.Common;
+﻿using System;
+using Syph.Core.Common;
 using Syph.Core.Contracts;
+using Syph.Core.Engine.Exceptions;
 
 namespace Syph.Core.Models
 {
@@ -15,7 +17,14 @@ namespace Syph.Core.Models
         public Spawn(string name, int souls)
             : base(name, EntityType.Spawn)
         {
+            if (souls < 0 || souls > 4000) //NEED TO RECHECK FOR EXACT SOULS VALUES
+            {
+                throw new InvalidSpawnSummonException("You must use between 0 and 4000 souls to summon a Spawn!");
+            }
 
+            this.health = 0.4 * souls;
+            this.armour = 0.2 * souls;
+            this.souls = (int)Math.Ceiling(0.2 * souls);
         }
 
         public double Health => this.health;
@@ -36,8 +45,18 @@ namespace Syph.Core.Models
             protected set => this.energy = value;
         }
 
-        public int Souls => throw new System.NotImplementedException();
+        public int Souls => this.souls;
 
-        public SpawnRank Rank => throw new System.NotImplementedException();
+        public SpawnRank Rank
+        {
+            get => this.rank;
+
+            set => this.rank = value;
+        }
+
+        public override string ToString()
+        {
+            return $"{this.rank} {this.Type} {this.Name}";
+        }
     }
 }
