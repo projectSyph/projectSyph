@@ -1,7 +1,14 @@
-﻿namespace Syph.Core.Contracts
+﻿using Syph.Core.Contracts.Entities;
+using System.Collections.Generic;
+
+namespace Syph.Core.Contracts
 {
-    interface IPlayer
+    public interface IPlayer : IEntity
     {
-        //TODO
+        IList<ISpawn> Inventory { get; }
+
+        int Souls { get; }
+
+        int ID { get; }
     }
 }

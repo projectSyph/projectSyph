@@ -30,7 +30,7 @@ namespace Syph.Core.Manager
                 try
                 {
                     Console.Write($"Enter Player{i + 1}'s name: ");
-                    players[i] = new Player(Console.ReadLine());
+                    players[i] = new Player(Console.ReadLine(), i);
                     ConsoleLogger.Print($"Player {players[i].Name} with ID {i} was created");
                 }
                 catch (Exception ex)

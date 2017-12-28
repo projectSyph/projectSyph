@@ -3,42 +3,44 @@ using System.Collections.Generic;
 using System.Text;
 using Syph.Core.Contracts;
 using System.Text.RegularExpressions;
+using Syph.Core.Common;
+
 namespace Syph.Core.Models
 {
-    class Player : IPlayer
+    class Player : Entity, IPlayer
     {
-        private ISpawn[][] playerInventory = new ISpawn[][]
-        {
-            new ISpawn[3], //Senior
-            new ISpawn[5], //Regular
-            new ISpawn[7]  //Junior
-        };
-
         private string name;
-
         private int souls;
+        private IList<ISpawn> playerInventory;
+        private int juniors;
+        private int regulars;
+        private int seniors;
+        private int id;
 
-        public Player(string name)
+        public Player(string name, int id)
+            : base(name, EntityType.Player)
         {
-            //ADD VALIDATIONS
-            if (string.IsNullOrEmpty(name) || name.Length < 4 || name.Length>15 )
-            {
-                throw new ArgumentException("Name of player is invalid");
-            }
             this.name = name;
 
             this.souls = 8000;
+
+            this.id = id;
+
+            this.playerInventory = new List<ISpawn>();
+
+            this.juniors = 0;
+            this.regulars = 0;
+            this.seniors = 0;
         }
 
-        public ISpawn[][] Inventory
+        public IList<ISpawn> Inventory
         {
-            get { return this.playerInventory; }
-
-            set { this.playerInventory = value; }
+            get => this.playerInventory;
         }
 
-        public string Name { get { return this.name; } }
-        public int Souls  {get { return this.souls; } }
+        public int Souls => this.souls;
+
+        public int ID => this.id;
 
         public void TakeDamage(int d)
         {

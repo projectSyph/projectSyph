@@ -11,11 +11,5 @@ namespace Syph.Core.Contracts
         int Armour { get; }
 
         int Souls { get; }
-
-        int DepleteArmour { set; }
-
-        int DepleteHealth { set; }
-
-        int DepleteSouls { set; }
     }
 }
