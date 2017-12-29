@@ -131,7 +131,7 @@ namespace Syph.Core
                 else if ((num < lowerLimit) || (num > upperLimit))
                 {
                     ConsoleLogger.Print("Invalid choice. Try again!", 1000);
-                    MainMenu();
+                    ConsoleLogger.PrintTextFile("logo", "menu");
                     break;
                 }
 
