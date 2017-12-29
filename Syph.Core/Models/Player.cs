@@ -17,8 +17,6 @@ namespace Syph.Core.Models
         private Dictionary<SpawnRank, int> spawns;
         private int id;
 
-        LoggerDelegate log = new LoggerDelegate(FileLogger.Log);
-
         public Player(string name, int id)
             : base(name, EntityType.Player)
         {
@@ -36,7 +34,7 @@ namespace Syph.Core.Models
             };
 
 
-            log($"Player {this.Name} with ID {this.id} was created.");
+            FileLogger.Log($"Player {this.Name} with ID {this.id} entered the game.");
         }
 
         public IList<ISpawn> Inventory
@@ -52,7 +50,7 @@ namespace Syph.Core.Models
         {
             this.souls -= d;
 
-            log($" -- Player {this.Name} takes {d} damage");
+            FileLogger.Log($" -- Player {this.Name} takes {d} damage");
         }
 
         public void Summon(ISpawn spawn)
@@ -66,7 +64,7 @@ namespace Syph.Core.Models
 
             this.spawns[spawn.Rank]--;
 
-            log($" -- Player {this.Name} has summoned {spawn.Rank} {spawn.Type} {spawn.Name}!");
+            FileLogger.Log($" -- Player {this.Name} has summoned {spawn.Rank} {spawn.Type} {spawn.Name}!");
         }
     }
 }

@@ -8,8 +8,6 @@ using Syph.Core.Models;
 
 namespace Syph.Core.Manager
 {
-    public delegate void LoggerDelegate(string msg);
-
     public static class GameManager
     {
         //TODO
@@ -23,17 +21,16 @@ namespace Syph.Core.Manager
         {
             Console.Clear();
 
-            int p = ValidateChoice("Players: ", 2, 4);
+            int p = ValidateChoice("Number of players: ", 2, 4);
             players = new Player[p];
             log = new List<string>();
-            LoggerDelegate logger = new LoggerDelegate(FileLogger.Log);
             turn = 0;
 
             for (int i = 0; i < p; i++)
             {
                 try
                 {
-                    Console.Write($"Enter Player{i + 1}'s name: ");
+                    ConsoleLogger.Print($"Enter Player {i + 1}'s name: ");
                     players[i] = new Player(Console.ReadLine(), i);
                 }
                 catch (Exception ex)
@@ -43,11 +40,11 @@ namespace Syph.Core.Manager
                 }
             }
 
+            FileLogger.Log("-------------------");
+
             inGame = true;
 
             ConsoleLogger.Print("", 1000);
-
-            FileLogger battleLogger = new FileLogger();
 
             while (inGame)
             {
@@ -55,11 +52,11 @@ namespace Syph.Core.Manager
 
                 for (int i = 0; i < p; i++)
                 {
-                    logger($"{players[i].Name}'s turn: {players[i].Souls} souls");
+                    FileLogger.Log($"{players[i].Name}'s turn: {players[i].Souls} souls");
 
                     //JUST TESTING!!!
                     ConsoleLogger.Print("Press a key or smth");
-                    logger(Console.ReadKey().Key.ToString());
+                    FileLogger.Log(Console.ReadKey().Key.ToString());
                     players[0].TakeDamage(2000);
                     if (players[i].Souls <= 0)
                     {
@@ -70,19 +67,35 @@ namespace Syph.Core.Manager
                 }
             }
 
-            ConfirmWriteLog(battleLogger);
+            ConfirmWriteLog();
         }
 
-        private static void ConfirmWriteLog(FileLogger logger)
+        private static void ConfirmWriteLog()
         {
-            ConsoleLogger.Print($"{Environment.NewLine}Write BattleLog to file? (y/n): ");
-            ConsoleKey choice = Console.ReadKey().Key;
-            ConsoleLogger.Print(Environment.NewLine);
+            while (true)
+            {
+                ConsoleLogger.Print($"{Environment.NewLine}Write BattleLog to file? (Yes/No): ");
+                string choice = Console.ReadLine().ToLower();
 
-            if (choice == ConsoleKey.Y)
-                logger.WriteLog();
-            Console.Clear();
+                switch (choice)
+                {
+                    case "yes":
+                    case "y":
+                        FileLogger.WriteLog();
+                        Console.Clear();
+                        return;
 
+                    case "no":
+                    case "n":
+                        FileLogger.Clear();
+                        Console.Clear();
+                        return;
+
+                    default:
+                        ConsoleLogger.Print("Invalid choice. Try again!");
+                        break;
+                }
+            }
         }
 
         private static byte ValidateChoice(string str, int lowerLimit = 0, int upperLimit = 4)

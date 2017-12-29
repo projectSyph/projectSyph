@@ -5,18 +5,9 @@ using Syph.Core.Contracts;
 
 namespace Syph.Core.Engine
 {
-    public sealed class FileLogger : IFileLogger
+    public static class FileLogger
     {
-        private string fileName;
-        private string file;
         private static IList<string> log = new List<string>();
-
-        public FileLogger()
-        {
-            this.fileName = $"{DateTime.Now.ToString("ddMMyyyyHHmmss")}.txt";
-
-            this.file = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\projectSyph\logs\{this.fileName}";
-        }
 
         public static void Log(string msg)
         {
@@ -25,8 +16,17 @@ namespace Syph.Core.Engine
             log.Add($"{msg}");
         }
 
-        public void WriteLog()
+        public static void Clear()
         {
+            log.Clear();
+        }
+
+        public static void WriteLog()
+        {
+            string fileName = $"{DateTime.Now.ToString("ddMMyyyyHHmmss")}.txt";
+
+            string file = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\projectSyph\logs\{fileName}";
+
             if (!Directory.Exists($@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\projectSyph\logs\"))
             {
                 Directory.CreateDirectory($@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\projectSyph\logs\");
