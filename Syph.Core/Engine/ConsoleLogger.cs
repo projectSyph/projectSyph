@@ -11,6 +11,11 @@ namespace Syph.Core.Engine
             Console.WriteLine(msg);
         }
 
+        public static void PrintNoNewLine(string msg)
+        {
+            Console.Write(msg);
+        }
+
         public static void Print(string msg, uint ms)
         {
             Console.Write($"{msg}");
@@ -36,10 +41,6 @@ namespace Syph.Core.Engine
                 //Console.Clear(); Chofexx- It,s messing up with logo printing
                 Console.WriteLine(text);
             }
-          
-            //Console.WriteLine("\nPress any key to go back to Main Menu..");
-            //Console.ReadKey();
-            //Console.Clear();
         }
 
         /// <summary>

@@ -12,7 +12,7 @@ namespace Syph.Core.Manager
     {
         //TODO
 
-        private static Player[] players;
+        private static IList<Player> players;
         private static bool inGame;
         private static IList<string> log;
         private static ulong turn;
@@ -21,8 +21,11 @@ namespace Syph.Core.Manager
         {
             Console.Clear();
 
-            int p = ValidateChoice("Number of players: ", 2, 4);
-            players = new Player[p];
+            ///////
+            int p = ValidateChoice("Players: ", 2, 3); // FIXME add 2 vs 2 mode
+            players = new List<Player>();
+            ///////
+
             log = new List<string>();
             turn = 0;
 
@@ -31,7 +34,7 @@ namespace Syph.Core.Manager
                 try
                 {
                     ConsoleLogger.Print($"Enter Player {i + 1}'s name: ");
-                    players[i] = new Player(Console.ReadLine(), i);
+                    players.Add(new Player(Console.ReadLine(), i));
                 }
                 catch (Exception ex)
                 {
@@ -50,21 +53,114 @@ namespace Syph.Core.Manager
             {
                 turn++;
 
-                for (int i = 0; i < p; i++)
+                foreach (var player in players)
                 {
-                    FileLogger.Log($"{players[i].Name}'s turn: {players[i].Souls} souls");
-
-                    //JUST TESTING!!!
-                    ConsoleLogger.Print("Press a key or smth");
-                    FileLogger.Log(Console.ReadKey().Key.ToString());
-                    players[0].TakeDamage(2000);
-                    if (players[i].Souls <= 0)
+                    if (!inGame)
                     {
+                        break;
+                    }
+
+                    FileLogger.Log($"{player.Name}'s turn: {player.Souls} souls");
+                    bool stillPlayerTurn = true;
+
+                    while (stillPlayerTurn)
+                    {
+                        ICommand command;
+                        bool commandIsValid;
+                        do
+                        {
+                            command = ReadCommand();
+                            commandIsValid = command.IsValid();
+                            if (!commandIsValid)
+                            {
+                                ConsoleLogger.Print($"Invalid command: {command.InvalidReason}. Try again! ");
+                            }
+                        } while (!commandIsValid);
+
+                        //ProcessCommand(command);
+                        switch (command.Name)
+                        {
+                            case "help":
+                                ConsoleLogger.PrintTextFile("help");
+                                break;
+
+                            case "surrender":
+                                if (players.Count== 2)
+                                {
+                                    inGame = false;
+                                    stillPlayerTurn = false;
+                                    FileLogger.Log($"Player {player.Name} has surrendered.");
+                                }
+                                else if (players.Count== 3)
+                                {
+                                    stillPlayerTurn = false;
+                                    FileLogger.Log($"Player {player.Name} has surrendered.");
+                                    players.Remove(player);
+                                }
+                                break;
+
+                            case "attack":
+                                string opponentName = command.Parameters[0];
+                                string opponentMonsterType = command.Parameters[1];
+                                string opponentMonsterID = command.Parameters[2];
+                                string myMonsterType = command.Parameters[3];
+                                string myMonsterID = command.Parameters[4];
+                                throw new NotImplementedException();
+                                //break;
+                            case "summon":
+                                throw new NotImplementedException();
+                                //break;
+                            default:
+                                //return string.Format(InvalidCommand, command.Name);
+                                throw new NotImplementedException();
+                        }
+
+                    }
+
+                }
+                /*
+                {
+                    //THIS IS JUST FOR TESTING. IT IS NOT TO BE INCLUDED IN THE FINAL RELEASE
+                    string command = Console.ReadLine().ToLower().Trim();
+                    if (command == "summon")
+                    {
+                        if (player.Souls >= Monster.Cost)
+                        {
+                            if (player.Monsters.Count < Monster.MaxCount)
+                            {
+                                player.Monsters.Add(new Monster());
+                                player.Souls -= Monster.Cost;
+                                battleLogger.Log("You have summoned a monster");
+                            }
+                            else
+                            {
+                                battleLogger.Log($"You can't have more than {Monster.MaxCount} monsters");
+                            }
+                        }
+                        else
+                        {
+                            battleLogger.Log($"You need at least {Monster.Cost} souls to summon a monster");
+                        }
+                    }
+                    else if (command == "surrender")
+
+                    {
+                        battleLogger.Log("You have surrendered. Game Over");
                         inGame = false;
                         break;
                     }
+<<<<<<< HEAD
                     /////////////////
+=======
+                    else
+                    {
+                        battleLogger.Log("Unrecognised command. Please try again");
+                        i--;
+                    }
+                    //////////////////////////////////////////////////////////////////////////
+>>>>>>> master
                 }
+                */
             }
 
             ConfirmWriteLog();
@@ -96,6 +192,14 @@ namespace Syph.Core.Manager
                         break;
                 }
             }
+        }
+
+        private static ICommand ReadCommand()
+        {
+            ConsoleLogger.PrintNoNewLine("Enter command: ");
+            string playerInputLine = Console.ReadLine();
+            Command currentCommand = new Command(playerInputLine);
+            return currentCommand;
         }
 
         private static byte ValidateChoice(string str, int lowerLimit = 0, int upperLimit = 4)

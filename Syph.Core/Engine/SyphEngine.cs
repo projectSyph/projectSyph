@@ -9,6 +9,7 @@ namespace Syph.Core
     {
         private const string title = "projectSyph";
         private const string definition = "A project for Telerik Academy";
+        private const string hint = "Use F11 for Full-Screen mode";
         //private const string mainMenu = "1. New Game\n2. Guide\n3. Credits\n4. About\n\n0. Exit";
 
         private static readonly SyphEngine engine = new SyphEngine();
@@ -27,10 +28,7 @@ namespace Syph.Core
 
         public void Start()
         {
-            //Intro();
-            //Chofexx- Add logo on instance
-            //.PrintTextFile("logo", "menu");
-            
+            //Intro();            
             MainMenu();
         }
 
@@ -38,45 +36,11 @@ namespace Syph.Core
         {
             ConsoleLogger.Print(title, 1000);
             ConsoleLogger.Print(definition, 1000);
+            ConsoleLogger.Print(hint, 2000);
         }
-
-        // This could be used as well
-
-        //private static void MainMenu()
-        //{
-        //    ConsoleLogger.Print(mainMenu);
-        //
-        //    ConsoleKey choice = Console.ReadKey().Key;
-        //    Console.WriteLine();
-        //
-        //    switch (choice)
-        //    {
-        //        case ConsoleKey.D1:
-        //            GameManager.NewGame();
-        //            break;
-        //        case ConsoleKey.D2:
-        //            ConsoleLogger.PrintTextFile("guide");
-        //            break;
-        //        case ConsoleKey.D3:
-        //            ConsoleLogger.PrintTextFile("credits");
-        //            break;
-        //        case ConsoleKey.D4:
-        //            ConsoleLogger.PrintTextFile("about");
-        //            break;
-        //        case ConsoleKey.D0:
-        //            return;
-        //
-        //        default:
-        //            ConsoleLogger.Print("Invalid choice", 1000);
-        //            break;
-        //    }
-        //    MainMenu();
-        //}
 
         private static void MainMenu()
         {
-            //ConsoleLogger.Print(mainMenu);
-
             while (true)
             {
                 Console.Clear();
@@ -107,10 +71,6 @@ namespace Syph.Core
             }
         }
 
-        /// <summary>
-        /// Chofexx -> Remove string backup -> and use print menu 
-        /// </summary>
-        
         private static byte ValidateMainMenuChoice(string str, int lowerLimit = 0, int upperLimit = 4)
         {
             bool valid;

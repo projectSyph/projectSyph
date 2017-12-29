@@ -32,8 +32,7 @@ namespace Syph.Core.Models
                 { SpawnRank.Regular, 5},
                 { SpawnRank.Senior, 3}
             };
-
-
+            
             FileLogger.Log($"Player {this.Name} with ID {this.id} entered the game.");
         }
 
