@@ -7,8 +7,11 @@ namespace Syph.Core.Contracts
     public interface ICommand
     {
         string Name { get; }
+
         List<string> Parameters { get; }
+
         string InvalidReason { get; }
+
         bool IsValid();
     }
 }

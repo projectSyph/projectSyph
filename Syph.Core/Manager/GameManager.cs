@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using Syph.Core.Contracts;
 using Syph.Core.Engine;
 using Syph.Core.Models;
-using Syph.Core.Contracts;
 
 namespace Syph.Core.Manager
 {
-    public class GameManager
+    public static class GameManager
     {
         //TODO
 
@@ -21,9 +21,11 @@ namespace Syph.Core.Manager
         {
             Console.Clear();
 
-
+            ///////
             int p = ValidateChoice("Players: ", 2, 3); // FIXME add 2 vs 2 mode
             players = new List<Player>();
+            ///////
+
             log = new List<string>();
             turn = 0;
 
@@ -31,9 +33,8 @@ namespace Syph.Core.Manager
             {
                 try
                 {
-                    Console.Write($"Enter Player{i + 1}'s name: ");
-                    players.Add(new Player(Console.ReadLine()));
-                    ConsoleLogger.Print($"Player {players[i].Name} with ID {i} was created");
+                    ConsoleLogger.Print($"Enter Player {i + 1}'s name: ");
+                    players.Add(new Player(Console.ReadLine(), i));
                 }
                 catch (Exception ex)
                 {
@@ -42,11 +43,11 @@ namespace Syph.Core.Manager
                 }
             }
 
+            FileLogger.Log("-------------------");
+
             inGame = true;
 
             ConsoleLogger.Print("", 1000);
-
-            var battleLogger = new FileLogger();
 
             while (inGame)
             {
@@ -58,8 +59,10 @@ namespace Syph.Core.Manager
                     {
                         break;
                     }
-                    battleLogger.Log($"{player.Name}'s turn: {player.Souls} souls");
+
+                    FileLogger.Log($"{player.Name}'s turn: {player.Souls} souls");
                     bool stillPlayerTurn = true;
+
                     while (stillPlayerTurn)
                     {
                         ICommand command;
@@ -86,12 +89,12 @@ namespace Syph.Core.Manager
                                 {
                                     inGame = false;
                                     stillPlayerTurn = false;
-                                    battleLogger.Log($"Player {player.Name} has surrendered.");
+                                    FileLogger.Log($"Player {player.Name} has surrendered.");
                                 }
                                 else if (players.Count== 3)
                                 {
                                     stillPlayerTurn = false;
-                                    battleLogger.Log($"Player {player.Name} has surrendered.");
+                                    FileLogger.Log($"Player {player.Name} has surrendered.");
                                     players.Remove(player);
                                 }
                                 break;
@@ -103,10 +106,10 @@ namespace Syph.Core.Manager
                                 string myMonsterType = command.Parameters[3];
                                 string myMonsterID = command.Parameters[4];
                                 throw new NotImplementedException();
-                                break;
+                                //break;
                             case "summon":
                                 throw new NotImplementedException();
-                                break;
+                                //break;
                             default:
                                 //return string.Format(InvalidCommand, command.Name);
                                 throw new NotImplementedException();
@@ -140,30 +143,57 @@ namespace Syph.Core.Manager
                         }
                     }
                     else if (command == "surrender")
+
                     {
                         battleLogger.Log("You have surrendered. Game Over");
                         inGame = false;
                         break;
                     }
+<<<<<<< HEAD
+                    /////////////////
+=======
                     else
                     {
                         battleLogger.Log("Unrecognised command. Please try again");
                         i--;
                     }
                     //////////////////////////////////////////////////////////////////////////
+>>>>>>> master
                 }
                 */
             }
 
-            ConsoleLogger.Print($"{Environment.NewLine}Game Over." +
-                                $"{Environment.NewLine}Write BattleLog to file? (y/n): ");
-            ConsoleKey choice = Console.ReadKey().Key;
-            ConsoleLogger.Print(Environment.NewLine);
-
-            if (choice == ConsoleKey.Y)
-                battleLogger.WriteLog();
-            Console.Clear();
+            ConfirmWriteLog();
         }
+
+        private static void ConfirmWriteLog()
+        {
+            while (true)
+            {
+                ConsoleLogger.Print($"{Environment.NewLine}Write BattleLog to file? (Yes/No): ");
+                string choice = Console.ReadLine().ToLower();
+
+                switch (choice)
+                {
+                    case "yes":
+                    case "y":
+                        FileLogger.WriteLog();
+                        Console.Clear();
+                        return;
+
+                    case "no":
+                    case "n":
+                        FileLogger.Clear();
+                        Console.Clear();
+                        return;
+
+                    default:
+                        ConsoleLogger.Print("Invalid choice. Try again!");
+                        break;
+                }
+            }
+        }
+
         private static ICommand ReadCommand()
         {
             ConsoleLogger.PrintNoNewLine("Enter command: ");

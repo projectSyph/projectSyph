@@ -5,30 +5,28 @@ using Syph.Core.Contracts;
 
 namespace Syph.Core.Engine
 {
-    public sealed class FileLogger : IFileLogger
+    public static class FileLogger
     {
-        private string fileName;
-        private string file;
-        private IList<string> log;
+        private static IList<string> log = new List<string>();
 
-        public FileLogger()
-        {
-            this.fileName = $"{DateTime.Now.ToString("ddMMyyyyHHmmss")}.txt";
-
-            this.file = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\projectSyph\logs\{this.fileName}";
-
-            this.log = new List<string>();
-        }
-
-        public void Log(string msg)
+        public static void Log(string msg)
         {
             Console.WriteLine(msg);
 
-            this.log.Add($"{DateTime.Now.ToString("HH:mm:ss")} : {msg}");
+            log.Add($"{msg}");
         }
 
-        public void WriteLog()
+        public static void Clear()
         {
+            log.Clear();
+        }
+
+        public static void WriteLog()
+        {
+            string fileName = $"{DateTime.Now.ToString("ddMMyyyyHHmmss")}.txt";
+
+            string file = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\projectSyph\logs\{fileName}";
+
             if (!Directory.Exists($@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\projectSyph\logs\"))
             {
                 Directory.CreateDirectory($@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\projectSyph\logs\");
@@ -36,7 +34,7 @@ namespace Syph.Core.Engine
 
             using (StreamWriter Writer = File.AppendText(file))
             {
-                foreach (string line in this.log)
+                foreach (string line in log)
                 {
                     Writer.WriteLine(line);
                 }

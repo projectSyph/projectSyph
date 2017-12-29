@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Syph.Entities
+namespace Syph.Core.Engine.Factories
 {
-    class Player
+    class PlayerFactory
     {
-        //TODO
     }
 }

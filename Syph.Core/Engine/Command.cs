@@ -72,8 +72,7 @@ namespace Syph.Core.Engine
                     return true;
                 default:
                     throw new NotImplementedException();
-            }
-            
+            }            
         }
 
         private void TranslateInput(string input)

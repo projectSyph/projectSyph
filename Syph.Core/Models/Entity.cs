@@ -1,8 +1,6 @@
 ﻿using Syph.Core.Common;
 using Syph.Core.Contracts.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Syph.Core.Engine.Exceptions;
 
 namespace Syph.Core.Models
 {
@@ -14,7 +12,9 @@ namespace Syph.Core.Models
         public Entity(string name, EntityType type)
         {
             if (name.Length < 2 || name.Length > 25)
-                { throw new ArgumentException("Entity name can't be less than 2 or more than 25 symbols long!"); }
+            {
+                throw new InvalidEntityNameException("Entity name can't be less than 2 or more than 25 symbols long!");
+            }
 
             this.name = name;
             this.type = type;
