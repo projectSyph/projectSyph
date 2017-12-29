@@ -122,19 +122,11 @@ namespace Syph.Core
                 valid = byte.TryParse(Console.ReadLine(), out num);
 
 
-                if ((!valid))
-                {
-                    ConsoleLogger.Print("Invalid choice. Try again!", 1000);
-                   // Console.WriteLine(backup);
-                    ConsoleLogger.PrintTextFile("logo", "menu");
-                }
-                else if ((num < lowerLimit) || (num > upperLimit))
+                if ((!valid) || (num < lowerLimit) || (num > upperLimit))
                 {
                     ConsoleLogger.Print("Invalid choice. Try again!", 1000);
                     ConsoleLogger.PrintTextFile("logo", "menu");
-                    break;
                 }
-
             } while (!valid);
 
             return num;
