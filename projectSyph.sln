@@ -7,11 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Syph.Program", "Syph.Progra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Syph.Core", "Syph.Core\Syph.Core.csproj", "{00E97F36-E609-4BAB-864A-708302F19DB1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EDC8F869-BAC0-4580-9D9C-95A84B2B0C42}"
-	ProjectSection(SolutionItems) = preProject
-		projectSyph.txt = projectSyph.txt
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
