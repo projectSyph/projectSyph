@@ -13,7 +13,7 @@ namespace Syph.Core.Models
         {
             if (name.Length < 2 || name.Length > 25)
             {
-                throw new InvalidEntityName("Entity name can't be less than 2 or more than 25 symbols long!");
+                throw new InvalidEntityNameException("Entity name can't be less than 2 or more than 25 symbols long!");
             }
 
             this.name = name;
