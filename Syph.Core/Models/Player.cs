@@ -5,6 +5,8 @@ using Syph.Core.Contracts;
 using System.Text.RegularExpressions;
 using Syph.Core.Common;
 using Syph.Core.Engine.Exceptions;
+using Syph.Core.Manager;
+using Syph.Core.Engine;
 
 namespace Syph.Core.Models
 {
@@ -14,6 +16,8 @@ namespace Syph.Core.Models
         private IList<ISpawn> playerInventory;
         private Dictionary<SpawnRank, int> spawns;
         private int id;
+
+        LoggerDelegate log = new LoggerDelegate(FileLogger.Log);
 
         public Player(string name, int id)
             : base(name, EntityType.Player)
@@ -30,6 +34,9 @@ namespace Syph.Core.Models
                 { SpawnRank.Regular, 5},
                 { SpawnRank.Senior, 3}
             };
+
+
+            log($"Player {this.Name} with ID {this.id} was created.");
         }
 
         public IList<ISpawn> Inventory
@@ -44,6 +51,8 @@ namespace Syph.Core.Models
         public void TakeDamage(int d)
         {
             this.souls -= d;
+
+            log($" -- Player {this.Name} takes {d} damage");
         }
 
         public void Summon(ISpawn spawn)
@@ -56,6 +65,8 @@ namespace Syph.Core.Models
             this.playerInventory.Add(spawn);
 
             this.spawns[spawn.Rank]--;
+
+            log($" -- Player {this.Name} has summoned {spawn.Rank} {spawn.Type} {spawn.Name}!");
         }
     }
 }

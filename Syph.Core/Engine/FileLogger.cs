@@ -5,19 +5,17 @@ using Syph.Core.Contracts;
 
 namespace Syph.Core.Engine
 {
-    public sealed class FileLogger //: IFileLogger
+    public sealed class FileLogger : IFileLogger
     {
         private string fileName;
         private string file;
-        private static IList<string> log;
+        private static IList<string> log = new List<string>();
 
         public FileLogger()
         {
             this.fileName = $"{DateTime.Now.ToString("ddMMyyyyHHmmss")}.txt";
 
             this.file = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\projectSyph\logs\{this.fileName}";
-
-            log = new List<string>();
         }
 
         public static void Log(string msg)

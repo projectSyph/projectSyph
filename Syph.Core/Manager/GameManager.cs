@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using Syph.Core.Contracts;
 using Syph.Core.Engine;
 using Syph.Core.Models;
 
@@ -34,7 +35,6 @@ namespace Syph.Core.Manager
                 {
                     Console.Write($"Enter Player{i + 1}'s name: ");
                     players[i] = new Player(Console.ReadLine(), i);
-                    ConsoleLogger.Print($"Player {players[i].Name} with ID {i} was created");
                 }
                 catch (Exception ex)
                 {
@@ -47,7 +47,7 @@ namespace Syph.Core.Manager
 
             ConsoleLogger.Print("", 1000);
 
-            var battleLogger = new FileLogger();
+            FileLogger battleLogger = new FileLogger();
 
             while (inGame)
             {
@@ -55,13 +55,12 @@ namespace Syph.Core.Manager
 
                 for (int i = 0; i < p; i++)
                 {
-                    Console.WriteLine($"{players[i].Name}'s turn: {players[i].Souls} souls");
+                    logger($"{players[i].Name}'s turn: {players[i].Souls} souls");
 
                     //JUST TESTING!!!
-                    Console.WriteLine("Press 1");
-                    Console.ReadKey();
-                    logger("You are pressing a key");
-                    players[0].TakeDamage(4000);
+                    ConsoleLogger.Print("Press a key or smth");
+                    logger(Console.ReadKey().Key.ToString());
+                    players[0].TakeDamage(2000);
                     if (players[i].Souls <= 0)
                     {
                         inGame = false;
@@ -71,13 +70,19 @@ namespace Syph.Core.Manager
                 }
             }
 
+            ConfirmWriteLog(battleLogger);
+        }
+
+        private static void ConfirmWriteLog(FileLogger logger)
+        {
             ConsoleLogger.Print($"{Environment.NewLine}Write BattleLog to file? (y/n): ");
             ConsoleKey choice = Console.ReadKey().Key;
             ConsoleLogger.Print(Environment.NewLine);
 
             if (choice == ConsoleKey.Y)
-                battleLogger.WriteLog();
+                logger.WriteLog();
             Console.Clear();
+
         }
 
         private static byte ValidateChoice(string str, int lowerLimit = 0, int upperLimit = 4)

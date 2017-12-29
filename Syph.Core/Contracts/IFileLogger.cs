@@ -2,7 +2,7 @@
 {
     interface IFileLogger
     {
-        void Log(string msg);
+        //void Log(string msg);
 
         void WriteLog();
     }
