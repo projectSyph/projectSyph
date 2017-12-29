@@ -1,8 +1,8 @@
 *****************Command format HELP instructions************************
 <help>									#
-dispalys this screen							#
+displays this screen							#
 
-<summon> <monster_type>							#
+<summon> <monster_type> <monster_name>					#
 adds a monster to your inventory					#
 
 <inventory> <player_name>						#
