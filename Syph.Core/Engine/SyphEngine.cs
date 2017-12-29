@@ -11,8 +11,6 @@ namespace Syph.Core
         private const string definition = "A project for Telerik Academy";
         //private const string mainMenu = "1. New Game\n2. Guide\n3. Credits\n4. About\n\n0. Exit";
 
-        //public delegate void 
-
         private static readonly SyphEngine engine = new SyphEngine();
 
         private SyphEngine()

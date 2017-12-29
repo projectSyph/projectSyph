@@ -10,7 +10,7 @@ namespace Syph.Core.Manager
 {
     public delegate void LoggerDelegate(string msg);
 
-    public class GameManager
+    public static class GameManager
     {
         //TODO
 
