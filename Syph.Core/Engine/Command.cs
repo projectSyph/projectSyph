@@ -68,6 +68,8 @@ namespace Syph.Core.Engine
             {
                 case "help":
                     return true;
+                case "surrender":
+                    return true;
                 default:
                     throw new NotImplementedException();
             }

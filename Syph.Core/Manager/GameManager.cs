@@ -12,7 +12,7 @@ namespace Syph.Core.Manager
     {
         //TODO
 
-        private static Player[] players;
+        private static IList<Player> players;
         private static bool inGame;
         private static IList<string> log;
         private static ulong turn;
@@ -22,8 +22,8 @@ namespace Syph.Core.Manager
             Console.Clear();
 
 
-            int p = ValidateChoice("Players: ", 2, 4);
-            players = new Player[p];
+            int p = ValidateChoice("Players: ", 2, 3); // FIXME add 2 vs 2 mode
+            players = new List<Player>();
             log = new List<string>();
             turn = 0;
 
@@ -32,7 +32,7 @@ namespace Syph.Core.Manager
                 try
                 {
                     Console.Write($"Enter Player{i + 1}'s name: ");
-                    players[i] = new Player(Console.ReadLine());
+                    players.Add(new Player(Console.ReadLine()));
                     ConsoleLogger.Print($"Player {players[i].Name} with ID {i} was created");
                 }
                 catch (Exception ex)
@@ -54,6 +54,10 @@ namespace Syph.Core.Manager
 
                 foreach (var player in players)
                 {
+                    if (!inGame)
+                    {
+                        break;
+                    }
                     battleLogger.Log($"{player.Name}'s turn: {player.Souls} souls");
                     bool stillPlayerTurn = true;
                     while (stillPlayerTurn)
@@ -77,6 +81,21 @@ namespace Syph.Core.Manager
                                 ConsoleLogger.PrintTextFile("help");
                                 break;
 
+                            case "surrender":
+                                if (players.Count== 2)
+                                {
+                                    inGame = false;
+                                    stillPlayerTurn = false;
+                                    battleLogger.Log($"Player {player.Name} has surrendered.");
+                                }
+                                else if (players.Count== 3)
+                                {
+                                    stillPlayerTurn = false;
+                                    battleLogger.Log($"Player {player.Name} has surrendered.");
+                                    players.Remove(player);
+                                }
+                                break;
+
                             case "attack":
                                 string opponentName = command.Parameters[0];
                                 string opponentMonsterType = command.Parameters[1];
@@ -86,9 +105,6 @@ namespace Syph.Core.Manager
                                 throw new NotImplementedException();
                                 break;
                             case "summon":
-                                throw new NotImplementedException();
-                                break;
-                            case "surrender":
                                 throw new NotImplementedException();
                                 break;
                             default:
@@ -139,7 +155,8 @@ namespace Syph.Core.Manager
                 */
             }
 
-            ConsoleLogger.Print($"{Environment.NewLine}Write BattleLog to file? (y/n): ");
+            ConsoleLogger.Print($"{Environment.NewLine}Game Over." +
+                                $"{Environment.NewLine}Write BattleLog to file? (y/n): ");
             ConsoleKey choice = Console.ReadKey().Key;
             ConsoleLogger.Print(Environment.NewLine);
 
