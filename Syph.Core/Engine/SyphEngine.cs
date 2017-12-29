@@ -76,10 +76,13 @@ namespace Syph.Core
         private static void MainMenu()
         {
             //ConsoleLogger.Print(mainMenu);
-            ConsoleLogger.PrintTextFile("logo", "menu");
 
             while (true)
             {
+                Console.Clear();
+
+                ConsoleLogger.PrintTextFile("logo", "menu");
+
                 switch (ValidateMainMenuChoice("Choice: "))
                 {
                     case 1:

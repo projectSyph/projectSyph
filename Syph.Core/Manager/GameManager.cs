@@ -7,6 +7,8 @@ using Syph.Core.Models;
 
 namespace Syph.Core.Manager
 {
+    public delegate void LoggerDelegate(string msg);
+
     public class GameManager
     {
         //TODO
@@ -23,6 +25,7 @@ namespace Syph.Core.Manager
             int p = ValidateChoice("Players: ", 2, 4);
             players = new Player[p];
             log = new List<string>();
+            LoggerDelegate logger = new LoggerDelegate(FileLogger.Log);
             turn = 0;
 
             for (int i = 0; i < p; i++)
@@ -54,7 +57,17 @@ namespace Syph.Core.Manager
                 {
                     Console.WriteLine($"{players[i].Name}'s turn: {players[i].Souls} souls");
 
-                    //COMMANDS
+                    //JUST TESTING!!!
+                    Console.WriteLine("Press 1");
+                    Console.ReadKey();
+                    logger("You are pressing a key");
+                    players[0].TakeDamage(4000);
+                    if (players[i].Souls <= 0)
+                    {
+                        inGame = false;
+                        break;
+                    }
+                    /////////////////
                 }
             }
 

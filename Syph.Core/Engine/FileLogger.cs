@@ -5,11 +5,11 @@ using Syph.Core.Contracts;
 
 namespace Syph.Core.Engine
 {
-    public sealed class FileLogger : IFileLogger
+    public sealed class FileLogger //: IFileLogger
     {
         private string fileName;
         private string file;
-        private IList<string> log;
+        private static IList<string> log;
 
         public FileLogger()
         {
@@ -17,14 +17,14 @@ namespace Syph.Core.Engine
 
             this.file = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\projectSyph\logs\{this.fileName}";
 
-            this.log = new List<string>();
+            log = new List<string>();
         }
 
-        public void Log(string msg)
+        public static void Log(string msg)
         {
             Console.WriteLine(msg);
 
-            this.log.Add($"{msg}");
+            log.Add($"{msg}");
         }
 
         public void WriteLog()
@@ -36,7 +36,7 @@ namespace Syph.Core.Engine
 
             using (StreamWriter Writer = File.AppendText(file))
             {
-                foreach (string line in this.log)
+                foreach (string line in log)
                 {
                     Writer.WriteLine(line);
                 }
