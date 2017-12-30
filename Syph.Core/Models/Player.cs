@@ -17,13 +17,13 @@ namespace Syph.Core.Models
         private Dictionary<SpawnRank, int> spawns;
         private int id;
 
-        public Player(string name, int id)
+        public Player(string name, int id, IList<IPlayer> team)
             : base(name, EntityType.Player)
         {
             this.souls = 8000;
 
             this.id = id;
-
+            this.Team = team;
             this.playerInventory = new List<ISpawn>();
 
             this.spawns = new Dictionary<SpawnRank, int>
@@ -44,7 +44,7 @@ namespace Syph.Core.Models
         public int Souls => this.souls;
 
         public int ID => this.id;
-
+        public IList<IPlayer> Team { get; private set; }
         public void TakeDamage(int d)
         {
             this.souls -= d;

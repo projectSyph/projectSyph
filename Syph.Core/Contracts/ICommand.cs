@@ -10,6 +10,9 @@ namespace Syph.Core.Contracts
 
         List<string> Parameters { get; }
 
+        /// <summary>
+        /// returns an explanation of why the command is invalid. Null when the command is valid 
+        /// </summary>
         string InvalidReason { get; }
 
         bool IsValid();

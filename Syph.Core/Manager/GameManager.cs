@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using Syph.Core.Contracts;
@@ -10,9 +11,7 @@ namespace Syph.Core.Manager
 {
     public static class GameManager
     {
-        //TODO
 
-        private static IList<Player> players;
         private static bool inGame;
         private static IList<string> log;
         private static ulong turn;
@@ -21,25 +20,52 @@ namespace Syph.Core.Manager
         {
             Console.Clear();
 
-            ///////
-            int p = ValidateChoice("Players: ", 2, 3); // FIXME add 2 vs 2 mode
-            players = new List<Player>();
-            ///////
-
             log = new List<string>();
             turn = 0;
 
-            for (int i = 0; i < p; i++)
+            int playerCount = ValidateChoice("Players: ", 2, 4);
+            int teamCount = 0;
+            int playersPerTeam = 0;
+            switch (playerCount)
             {
-                try
+                case 2:
+                case 4:
+                    teamCount = 2;
+                    break;
+                case 3:
+                    teamCount = 3;
+                    break;
+            }
+            playersPerTeam = playerCount / teamCount;
+            List<List<Player>> teams = new List<List<Player>>();
+            //TODO
+            //Dictionary<char, List<Player>> teams = new Dictionary<char, List<Player>>();
+            for (int teamIndex = 0; teamIndex < teamCount; teamIndex++)
+            {
+                teams.Add(new List<Player>());
+
+                for (int i = 0; i < playersPerTeam; i++)
                 {
-                    ConsoleLogger.Print($"Enter Player {i + 1}'s name: ");
-                    players.Add(new Player(Console.ReadLine(), i));
+                    try
+                    {
+                        Console.Write($"Team {teamIndex}, enter player {i + 1}'s name: ");
+                        teams[teamIndex].Add(new Player(Console.ReadLine(), teams[teamIndex]));
+                        ConsoleLogger.Print($"Player {teams[teamIndex][i].Name} was created");
+                    }
+                    catch (Exception ex)
+                    {
+                        ConsoleLogger.Print(ex.Message);
+                        i--;
+                    }
                 }
-                catch (Exception ex)
+            }
+            // players ordered by their turn, e.g. A1, B1, C1, A2, B2, ...
+            List<Player> turnOrder = new List<Player>();
+            for (int playerInd = 0; playerInd < playersPerTeam; playerInd++)
+            {
+                for (int teamInd = 0; teamInd < teamCount; teamInd++)
                 {
-                    ConsoleLogger.Print(ex.Message);
-                    i--;
+                    turnOrder.Add(teams[teamInd][playerInd]);
                 }
             }
 
@@ -53,7 +79,7 @@ namespace Syph.Core.Manager
             {
                 turn++;
 
-                foreach (var player in players)
+                foreach (var player in turnOrder)
                 {
                     if (!inGame)
                     {
@@ -85,18 +111,13 @@ namespace Syph.Core.Manager
                                 break;
 
                             case "surrender":
-                                if (players.Count== 2)
-                                {
-                                    inGame = false;
-                                    stillPlayerTurn = false;
-                                    FileLogger.Log($"Player {player.Name} has surrendered.");
-                                }
-                                else if (players.Count== 3)
-                                {
-                                    stillPlayerTurn = false;
-                                    FileLogger.Log($"Player {player.Name} has surrendered.");
-                                    players.Remove(player);
-                                }
+                                battleLogger.Log($"Player {player.Name} has surrendered.");
+
+                                player.Team.Remove(player);
+                                stillPlayerTurn = false;
+
+                                IEnumerable<List<Player>> nonEmptyTeams = teams.Where((team) => team.Count > 0);
+                                inGame = nonEmptyTeams.Count() > 1;
                                 break;
 
                             case "attack":
