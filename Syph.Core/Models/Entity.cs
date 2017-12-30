@@ -8,12 +8,13 @@ namespace Syph.Core.Models
     {
         private string name;
         private EntityType type;
+        public static readonly string invalidEntityName = "Entity name can't be less than 2 or more than 25 symbols long!";
 
         public Entity(string name, EntityType type)
         {
-            if (name.Length < 2 || name.Length > 25)
+            if (!IsValidName(name))
             {
-                throw new InvalidEntityNameException("Entity name can't be less than 2 or more than 25 symbols long!");
+                throw new InvalidEntityNameException(invalidEntityName);
             }
 
             this.name = name;
@@ -23,5 +24,11 @@ namespace Syph.Core.Models
         public string Name => this.name;
 
         public EntityType Type => this.type;
+
+        public static bool IsValidName(string name)
+        {
+            if (name.Length < 2 || name.Length > 25) return false;
+            return true;
+        }
     }
 }
