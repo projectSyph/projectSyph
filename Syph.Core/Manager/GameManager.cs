@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using Syph.Core.Contracts;
 using Syph.Core.Engine;
 using Syph.Core.Models;
+using Syph.Core.Factories;
 
 namespace Syph.Core.Manager
 {
@@ -12,7 +11,7 @@ namespace Syph.Core.Manager
     {
         //TODO
 
-        private static IList<Player> players;
+        private static IList<IPlayer> players;
         private static bool inGame;
         private static IList<string> log;
         private static ulong turn;
@@ -23,7 +22,7 @@ namespace Syph.Core.Manager
 
             ///////
             int p = ValidateChoice("Players: ", 2, 3); // FIXME add 2 vs 2 mode
-            players = new List<Player>();
+            players = new List<IPlayer>();
             ///////
 
             log = new List<string>();
@@ -34,7 +33,7 @@ namespace Syph.Core.Manager
                 try
                 {
                     ConsoleLogger.Print($"Enter Player {i + 1}'s name: ");
-                    players.Add(new Player(Console.ReadLine(), i));
+                    players.Add(PlayerFactory.CreateNewPlayer(Console.ReadLine(), i));
                 }
                 catch (Exception ex)
                 {
@@ -163,41 +162,14 @@ namespace Syph.Core.Manager
                 */
             }
 
-            ConfirmWriteLog();
+            FileLogger.ConfirmWriteLog();
         }
 
-        private static void ConfirmWriteLog()
-        {
-            while (true)
-            {
-                ConsoleLogger.Print($"{Environment.NewLine}Write BattleLog to file? (Yes/No): ");
-                string choice = Console.ReadLine().ToLower();
-
-                switch (choice)
-                {
-                    case "yes":
-                    case "y":
-                        FileLogger.WriteLog();
-                        Console.Clear();
-                        return;
-
-                    case "no":
-                    case "n":
-                        FileLogger.Clear();
-                        Console.Clear();
-                        return;
-
-                    default:
-                        ConsoleLogger.Print("Invalid choice. Try again!");
-                        break;
-                }
-            }
-        }
-
+        //Put this in its class
         private static ICommand ReadCommand()
         {
             ConsoleLogger.PrintNoNewLine("Enter command: ");
-            string playerInputLine = Console.ReadLine();
+            string playerInputLine = Console.ReadLine().ToLower();
             Command currentCommand = new Command(playerInputLine);
             return currentCommand;
         }

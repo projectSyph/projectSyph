@@ -71,7 +71,7 @@ namespace Syph.Core.Engine
                 case "surrender":
                     return true;
                 default:
-                    throw new NotImplementedException();
+                    return false;
             }            
         }
 
