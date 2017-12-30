@@ -71,7 +71,7 @@ namespace Syph.Core.Engine
                         string monsterName = Parameters[1];
                         if (!Entity.IsValidName(monsterName))
                         {
-                            this.InvalidReason = Entity.invalidEntityName;
+                            this.InvalidReason = Entity.InvalidEntityName;
                         }
                         return true;
                     }

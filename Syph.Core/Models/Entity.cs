@@ -8,7 +8,7 @@ namespace Syph.Core.Models
     {
         private string name;
         private EntityType type;
-        public static readonly string invalidEntityName = "Entity name can't be less than 2 or more than 25 symbols long!";
+        private static readonly string invalidEntityName = "Entity name can't be less than 2 or more than 25 symbols long!";
 
         public Entity(string name, EntityType type)
         {
@@ -20,6 +20,8 @@ namespace Syph.Core.Models
             this.name = name;
             this.type = type;
         }
+        public static string InvalidEntityName
+        { get { return invalidEntityName; } } 
 
         public string Name => this.name;
 
