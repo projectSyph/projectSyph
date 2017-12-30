@@ -44,7 +44,9 @@ namespace Syph.Core.Models
         public int Souls => this.souls;
 
         public int ID => this.id;
+
         public IList<IPlayer> Team { get; private set; }
+
         public void TakeDamage(int d)
         {
             this.souls -= d;

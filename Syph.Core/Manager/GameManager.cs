@@ -37,20 +37,19 @@ namespace Syph.Core.Manager
                     break;
             }
             playersPerTeam = playerCount / teamCount;
-            List<List<Player>> teams = new List<List<Player>>();
+            IList<IList<IPlayer>> teams = new List<IList<IPlayer>>();
             //TODO
             //Dictionary<char, List<Player>> teams = new Dictionary<char, List<Player>>();
             for (int teamIndex = 0; teamIndex < teamCount; teamIndex++)
             {
-                teams.Add(new List<Player>());
+                teams.Add(new List<IPlayer>());
 
                 for (int i = 0; i < playersPerTeam; i++)
                 {
                     try
                     {
                         Console.Write($"Team {teamIndex}, enter player {i + 1}'s name: ");
-                        teams[teamIndex].Add(new Player(Console.ReadLine(), teams[teamIndex]));
-                        ConsoleLogger.Print($"Player {teams[teamIndex][i].Name} was created");
+                        teams[teamIndex].Add(new Player(Console.ReadLine(), i, teams[teamIndex]));
                     }
                     catch (Exception ex)
                     {
@@ -60,7 +59,7 @@ namespace Syph.Core.Manager
                 }
             }
             // players ordered by their turn, e.g. A1, B1, C1, A2, B2, ...
-            List<Player> turnOrder = new List<Player>();
+            IList<IPlayer> turnOrder = new List<IPlayer>();
             for (int playerInd = 0; playerInd < playersPerTeam; playerInd++)
             {
                 for (int teamInd = 0; teamInd < teamCount; teamInd++)
@@ -111,12 +110,12 @@ namespace Syph.Core.Manager
                                 break;
 
                             case "surrender":
-                                battleLogger.Log($"Player {player.Name} has surrendered.");
+                                FileLogger.Log($"Player {player.Name} has surrendered.");
 
                                 player.Team.Remove(player);
                                 stillPlayerTurn = false;
 
-                                IEnumerable<List<Player>> nonEmptyTeams = teams.Where((team) => team.Count > 0);
+                                IEnumerable<IList<IPlayer>> nonEmptyTeams = teams.Where((team) => team.Count > 0);
                                 inGame = nonEmptyTeams.Count() > 1;
                                 break;
 

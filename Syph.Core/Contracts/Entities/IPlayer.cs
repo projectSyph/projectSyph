@@ -10,5 +10,7 @@ namespace Syph.Core.Contracts
         int Souls { get; }
 
         int ID { get; }
+
+        IList<IPlayer> Team { get; }
     }
 }
