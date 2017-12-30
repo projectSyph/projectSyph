@@ -8,7 +8,7 @@ namespace Syph.Core.Contracts
     {
         string Name { get; }
 
-        List<string> Parameters { get; }
+        IList<string> Parameters { get; }
 
         string InvalidReason { get; }
 

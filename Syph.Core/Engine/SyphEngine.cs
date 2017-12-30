@@ -10,7 +10,6 @@ namespace Syph.Core
         private const string title = "projectSyph";
         private const string definition = "A project for Telerik Academy";
         private const string hint = "Use F11 for Full-Screen mode";
-        //private const string mainMenu = "1. New Game\n2. Guide\n3. Credits\n4. About\n\n0. Exit";
 
         private static readonly SyphEngine engine = new SyphEngine();
 
@@ -43,9 +42,7 @@ namespace Syph.Core
         {
             while (true)
             {
-                Console.Clear();
-
-                ConsoleLogger.PrintTextFile("logo", "menu");
+                ConsoleLogger.PrintTextFile(true, "logo", "menu");
 
                 switch (ValidateMainMenuChoice("Choice: "))
                 {
@@ -53,15 +50,15 @@ namespace Syph.Core
                         GameManager.NewGame();
                         break;
                     case 2:
-                        ConsoleLogger.PrintTextFile("guide");
+                        ConsoleLogger.PrintTextFile(true, "guide");
                         ConsoleLogger.PrintReturnToMenu();
                         break;
                     case 3:
-                        ConsoleLogger.PrintTextFile("credits");
+                        ConsoleLogger.PrintTextFile(true, "credits");
                         ConsoleLogger.PrintReturnToMenu();
                         break;
                     case 4:
-                        ConsoleLogger.PrintTextFile("about");
+                        ConsoleLogger.PrintTextFile(true, "about");
                         ConsoleLogger.PrintReturnToMenu();
                         break;
 

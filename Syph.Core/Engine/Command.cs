@@ -9,7 +9,7 @@ namespace Syph.Core.Engine
     {
         private const char SplitBySpace = ' ';
         private string name;
-        private List<string> parameters;
+        private IList<string> parameters;
 
         public Command(string input)
         {
@@ -36,7 +36,7 @@ namespace Syph.Core.Engine
             }
         }
 
-        public List<string> Parameters
+        public IList<string> Parameters
         {
             get
             {
