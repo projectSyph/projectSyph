@@ -15,10 +15,10 @@ namespace Syph.Core.Models
         };
 
         private string name;
-
+        private List<Player> team;
         private int souls;
 
-        public Player(string name)
+        public Player(string name, List<Player> team)
         {
             //ADD VALIDATIONS
             if (string.IsNullOrEmpty(name) || name.Length < 4 || name.Length>15 )
@@ -26,7 +26,7 @@ namespace Syph.Core.Models
                 throw new ArgumentException("Name of player is invalid");
             }
             this.name = name;
-
+            this.team = team;
             this.souls = 8000;
         }
 
@@ -38,6 +38,7 @@ namespace Syph.Core.Models
         }
 
         public string Name { get { return this.name; } }
+        public List<Player> Team { get { return this.team; } }
         public int Souls  {get { return this.souls; } }
 
         public void TakeDamage(int d)
