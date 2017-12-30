@@ -126,63 +126,15 @@ namespace Syph.Core.Manager
                                 string myMonsterType = command.Parameters[3];
                                 string myMonsterID = command.Parameters[4];
                                 throw new NotImplementedException();
-                                //break;
                             case "summon":
                                 throw new NotImplementedException();
-                                //break;
                             default:
                                 //return string.Format(InvalidCommand, command.Name);
                                 throw new NotImplementedException();
                         }
-
                     }
-
                 }
-                /*
-                {
-                    //THIS IS JUST FOR TESTING. IT IS NOT TO BE INCLUDED IN THE FINAL RELEASE
-                    string command = Console.ReadLine().ToLower().Trim();
-                    if (command == "summon")
-                    {
-                        if (player.Souls >= Monster.Cost)
-                        {
-                            if (player.Monsters.Count < Monster.MaxCount)
-                            {
-                                player.Monsters.Add(new Monster());
-                                player.Souls -= Monster.Cost;
-                                battleLogger.Log("You have summoned a monster");
-                            }
-                            else
-                            {
-                                battleLogger.Log($"You can't have more than {Monster.MaxCount} monsters");
-                            }
-                        }
-                        else
-                        {
-                            battleLogger.Log($"You need at least {Monster.Cost} souls to summon a monster");
-                        }
-                    }
-                    else if (command == "surrender")
-
-                    {
-                        battleLogger.Log("You have surrendered. Game Over");
-                        inGame = false;
-                        break;
-                    }
-<<<<<<< HEAD
-                    /////////////////
-=======
-                    else
-                    {
-                        battleLogger.Log("Unrecognised command. Please try again");
-                        i--;
-                    }
-                    //////////////////////////////////////////////////////////////////////////
->>>>>>> master
-                }
-                */
             }
-
             ConfirmWriteLog();
         }
 
