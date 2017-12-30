@@ -59,12 +59,12 @@ namespace Syph.Core.Manager
                 }
             }
             // players ordered by their turn, e.g. A1, B1, C1, A2, B2, ...
-            IList<IPlayer> turnOrder = new List<IPlayer>();
+            IList<IPlayer> alivePlayers = new List<IPlayer>();
             for (int playerInd = 0; playerInd < playersPerTeam; playerInd++)
             {
                 for (int teamInd = 0; teamInd < teamCount; teamInd++)
                 {
-                    turnOrder.Add(teams[teamInd][playerInd]);
+                    alivePlayers.Add(teams[teamInd][playerInd]);
                 }
             }
 
@@ -78,7 +78,7 @@ namespace Syph.Core.Manager
             {
                 turn++;
 
-                foreach (var player in turnOrder)
+                foreach (var player in alivePlayers)
                 {
                     if (!inGame)
                     {
@@ -95,7 +95,7 @@ namespace Syph.Core.Manager
                         do
                         {
                             command = ReadCommand();
-                            commandIsValid = command.IsValid();
+                            commandIsValid = command.IsValid(alivePlayers);
                             if (!commandIsValid)
                             {
                                 ConsoleLogger.Print($"Invalid command: {command.InvalidReason}. Try again! ");
@@ -113,6 +113,7 @@ namespace Syph.Core.Manager
                                 FileLogger.Log($"Player {player.Name} has surrendered.");
 
                                 player.Team.Remove(player);
+                                alivePlayers.Remove(player);
                                 stillPlayerTurn = false;
 
                                 IEnumerable<IList<IPlayer>> nonEmptyTeams = teams.Where((team) => team.Count > 0);

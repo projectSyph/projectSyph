@@ -15,6 +15,6 @@ namespace Syph.Core.Contracts
         /// </summary>
         string InvalidReason { get; }
 
-        bool IsValid();
+        bool IsValid(IList<IPlayer> alivePlayers);
     }
 }
