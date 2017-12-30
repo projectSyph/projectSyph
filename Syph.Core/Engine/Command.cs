@@ -1,4 +1,5 @@
-﻿using Syph.Core.Contracts;
+﻿using Syph.Core.Common;
+using Syph.Core.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,7 +52,7 @@ namespace Syph.Core.Engine
 
         public string InvalidReason { get; private set; }
 
-        public bool IsValid(IList<IPlayer> alivePlayers)
+        public bool IsValid(IList<IPlayer> alivePlayers, IPlayer player)
         {
             switch (this.Name)
             {
@@ -80,7 +81,25 @@ namespace Syph.Core.Engine
                 case "attack":
                     throw new NotImplementedException();
                 case "sacrifice":
-                    throw new NotImplementedException();
+                    if (this.Parameters.Count != 2)
+                    {
+                        this.InvalidReason = "sacrifice requires two parameters";
+                        return false;
+                    }
+                    string monsterType = Parameters[0];
+                    SpawnRank rank;
+                    if (!(Enum.TryParse(monsterType, true, out rank) && Enum.IsDefined(typeof(SpawnRank), rank)))
+                    {
+                        this.InvalidReason = $"{monsterType} is not a valid monster type";
+                        return false;
+                    }
+                    string monsterName = Parameters[1];
+                    if (!player.Inventory.Any((ISpawn monster) => monster.Rank == rank && monster.Name == monsterName))
+                    {
+                        this.InvalidReason = $"you don't have a monster named {monsterName} of rank {rank}";
+                        return false;
+                    }
+                    return true;
                 case "surrender":
                     return true;
                 case "":

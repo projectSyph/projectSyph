@@ -95,7 +95,7 @@ namespace Syph.Core.Manager
                         do
                         {
                             command = ReadCommand();
-                            commandIsValid = command.IsValid(alivePlayers);
+                            commandIsValid = command.IsValid(alivePlayers, player);
                             if (!commandIsValid)
                             {
                                 ConsoleLogger.Print($"Invalid command: {command.InvalidReason}. Try again! ");
