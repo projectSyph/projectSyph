@@ -26,12 +26,6 @@ namespace Syph.Core.Engine
 
             private set
             {
-                if (string.IsNullOrEmpty(value))
-                {
-
-                    throw new ArgumentNullException("Name cannot be null or empty.");
-                }
-
                 this.name = value.ToLower();
             }
         }
@@ -54,13 +48,7 @@ namespace Syph.Core.Engine
             }
         }
 
-        public string InvalidReason
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public string InvalidReason { get; private set; }
 
         public bool IsValid()
         {
@@ -70,6 +58,9 @@ namespace Syph.Core.Engine
                     return true;
                 case "surrender":
                     return true;
+                case "":
+                    this.InvalidReason = "command must not be empty";
+                    return false;
                 default:
                     throw new NotImplementedException();
             }
@@ -79,7 +70,14 @@ namespace Syph.Core.Engine
         private void TranslateInput(string input)
         {
             string[] tokens = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            this.Name = tokens[0];
+            if (tokens.Length==0)
+            {
+                this.Name = string.Empty;
+            }
+            else
+            {
+                this.Name = tokens[0];
+            }
             if (tokens.Length > 1)
             {
                 for (int i = 1; i < tokens.Length; i++)
