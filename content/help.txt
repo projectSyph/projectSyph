@@ -1,19 +1,19 @@
-*****************Command format HELP instructions************************
-<help>									#
-displays this screen							#
+*****************Command format HELP instructions*********************************************
+<help>                                                                                       #
+displays this screen                                                                         #
 
-<summon> <monster_type> <monster_name>					#
-adds a monster to your inventory					#
+<summon> <monster_type> <monster_name>                                                       #
+adds a monster to your inventory                                                             #
 
-<inventory> <player_name>						#
-shows given player's stats and inventory				#
+<inventory> <player_name>						                     #
+shows given player's stats and inventory				                     #
 
-<attack> <opponent's_name> <monster_type> <ID> <my_monster_type> <ID>  	#
-attacks opponent's monster with your monster				#
+<attack> <opponent's_name> <monster_type> <monster_name> <my_monster_type> <my_monster_name> #
+attacks opponent's monster with your monster                                                 #
 
-<sacrifice> <monster_type> <ID> 					#
-sacrifices a monster to reclaim its souls to your stash			#
+<sacrifice> <monster_type> <monster_name>                                                    #
+sacrifices a monster to reclaim its souls to your stash                                      #
 
-<surrender>								#
-you surrender 								#
-*************************************************************************
+<surrender>                                                                                  #
+you surrender                                                                                #
+**********************************************************************************************
