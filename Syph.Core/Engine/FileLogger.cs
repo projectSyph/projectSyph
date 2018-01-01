@@ -45,7 +45,7 @@ namespace Syph.Core.Engine
         {
             while (true)
             {
-                ConsoleLogger.Print($"{Environment.NewLine}Write Log to file? (Yes/No): ");
+                ConsoleLogger.Print($"{Environment.NewLine}Write BattleLog to file? (Yes/No): ");
                 string choice = Console.ReadLine().ToLower();
 
                 switch (choice)

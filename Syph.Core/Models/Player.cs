@@ -12,18 +12,15 @@ namespace Syph.Core.Models
 {
     class Player : Entity, IPlayer
     {
-        private int souls;
         private IList<ISpawn> playerInventory;
         private Dictionary<SpawnRank, int> spawns;
         private int id;
 
-        public Player(string name, int id)
-            : base(name, EntityType.Player)
+        public Player(string name, int id, IList<IPlayer> team)
+            : base(name, 8000, EntityType.Player)
         {
-            this.souls = 8000;
-
             this.id = id;
-
+            this.Team = team;
             this.playerInventory = new List<ISpawn>();
 
             this.spawns = new Dictionary<SpawnRank, int>
@@ -36,18 +33,15 @@ namespace Syph.Core.Models
             FileLogger.Log($"Player {this.Name} with ID {this.id} entered the game.");
         }
 
-        public IList<ISpawn> Inventory
-        {
-            get => this.playerInventory;
-        }
-
-        public int Souls => this.souls;
+        public IList<ISpawn> Inventory => this.playerInventory;
 
         public int ID => this.id;
 
+        public IList<IPlayer> Team { get; private set; }
+
         public void TakeDamage(int d)
         {
-            this.souls -= d;
+            this.Souls -= d;
 
             FileLogger.Log($" -- Player {this.Name} takes {d} damage");
         }

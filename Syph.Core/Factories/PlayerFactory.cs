@@ -10,7 +10,7 @@ namespace Syph.Core.Factories
     {
         public static IPlayer CreateNewPlayer(string name, int id)
         {
-            return new Player(name, id);
+            return new Player(name, id, new List<IPlayer>());
         }
     }
 }

@@ -7,8 +7,12 @@ namespace Syph.Core.Contracts
     {
         IList<ISpawn> Inventory { get; }
 
-        int Souls { get; }
-
         int ID { get; }
+
+        IList<IPlayer> Team { get; }
+
+        void TakeDamage(int d);
+
+        void Summon(ISpawn spawn);
     }
 }

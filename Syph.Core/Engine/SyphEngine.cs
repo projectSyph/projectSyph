@@ -78,7 +78,6 @@ namespace Syph.Core
                 Console.Write($"{str}");
                 valid = byte.TryParse(Console.ReadLine(), out num);
 
-
                 if ((!valid) || (num < lowerLimit) || (num > upperLimit))
                 {
                     ConsoleLogger.Print("Invalid choice. Try again!", 1000);
