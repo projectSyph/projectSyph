@@ -36,13 +36,13 @@ namespace Syph.Core.Manager
             }
 
             playersPerTeam = playerCount / teamCount;
-            IList<IList<IPlayer>> teams = new List<IList<IPlayer>>();
+            //IList<IList<IPlayer>> teams = new List<IList<IPlayer>>();
             //TODO
-            //Dictionary<byte, List<IPlayer>> teams = new Dictionary<byte, List<IPlayer>>();
+            Dictionary<byte, List<IPlayer>> teams = new Dictionary<byte, List<IPlayer>>();
 
             for (byte teamIndex = 0; teamIndex < teamCount; teamIndex++)
             {
-                teams.Add(new List<IPlayer>());
+                teams.Add(teamIndex, new List<IPlayer>());
 
                 for (byte i = 0; i < playersPerTeam; i++)
                 {
@@ -121,9 +121,9 @@ namespace Syph.Core.Manager
 
                                 stillPlayerTurn = false;
 
-                                IEnumerable<IList<IPlayer>> nonEmptyTeams = teams.Where((team) => team.Count > 0);
-                                //int nonEmptyTeams = teams.Where(team => teams[team].Count > 0).Count();
-                                inGame = nonEmptyTeams.Count() > 1;
+                                //IEnumerable<IList<IPlayer>> nonEmptyTeams = teams.Where((team) => team.Count > 0);
+                                int nonEmptyTeams = teams.Keys.Where(team => teams[team].Count > 0).Count();
+                                inGame = nonEmptyTeams > 1;
 
                                 break;
 
