@@ -10,10 +10,11 @@ using Syph.Core.Engine;
 
 namespace Syph.Core.Models
 {
-    class Player : Entity, IPlayer
+    public class Player : Entity, IPlayer
     {
         private IList<ISpawn> playerInventory;
         private Dictionary<SpawnRank, int> spawns;
+        private IList<IPlayer> team;
         private int id;
         private bool isAlive;
 
@@ -21,7 +22,7 @@ namespace Syph.Core.Models
             : base(name, 8000, EntityType.Player)
         {
             this.id = id;
-            this.Team = team;
+            this.team = team;
             this.playerInventory = new List<ISpawn>();
             this.isAlive = true;
 
@@ -41,7 +42,7 @@ namespace Syph.Core.Models
 
         public bool IsAlive => this.isAlive;
 
-        public IList<IPlayer> Team { get; private set; }
+        public IList<IPlayer> Team { get; }
 
         public void TakeDamage(int d)
         {
