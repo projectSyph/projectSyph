@@ -44,7 +44,7 @@ namespace Syph.Core.Models
         {
             get => this.rank;
 
-            set => this.rank = value;
+            protected set => this.rank = value;
         }
 
         public override string ToString()

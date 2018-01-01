@@ -38,13 +38,13 @@ namespace Syph.Core.Manager
             playersPerTeam = playerCount / teamCount;
             IList<IList<IPlayer>> teams = new List<IList<IPlayer>>();
             //TODO
-            //Dictionary<char, List<Player>> teams = new Dictionary<char, List<Player>>();
+            //Dictionary<byte, List<IPlayer>> teams = new Dictionary<byte, List<IPlayer>>();
 
-            for (int teamIndex = 0; teamIndex < teamCount; teamIndex++)
+            for (byte teamIndex = 0; teamIndex < teamCount; teamIndex++)
             {
                 teams.Add(new List<IPlayer>());
 
-                for (int i = 0; i < playersPerTeam; i++)
+                for (byte i = 0; i < playersPerTeam; i++)
                 {
                     try
                     {
@@ -61,9 +61,9 @@ namespace Syph.Core.Manager
 
             // players ordered by their turn, e.g. A1, B1, C1, A2, B2, ...
             IList<IPlayer> playersInGame = new List<IPlayer>();
-            for (int playerIndex = 0; playerIndex < playersPerTeam; playerIndex++)
+            for (byte playerIndex = 0; playerIndex < playersPerTeam; playerIndex++)
             {
-                for (int teamInd = 0; teamInd < teamCount; teamInd++)
+                for (byte teamInd = 0; teamInd < teamCount; teamInd++)
                 {
                     playersInGame.Add(teams[teamInd][playerIndex]);
                 }
@@ -120,8 +120,9 @@ namespace Syph.Core.Manager
                                 player.Surrender();
 
                                 stillPlayerTurn = false;
-                                
+
                                 IEnumerable<IList<IPlayer>> nonEmptyTeams = teams.Where((team) => team.Count > 0);
+                                //int nonEmptyTeams = teams.Where(team => teams[team].Count > 0).Count();
                                 inGame = nonEmptyTeams.Count() > 1;
 
                                 break;

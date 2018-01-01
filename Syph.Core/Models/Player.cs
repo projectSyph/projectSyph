@@ -42,7 +42,7 @@ namespace Syph.Core.Models
 
         public bool IsAlive => this.isAlive;
 
-        public IList<IPlayer> Team { get; }
+        public IList<IPlayer> Team => this.team;
 
         public void TakeDamage(int d)
         {
