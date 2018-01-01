@@ -116,11 +116,14 @@ namespace Syph.Core.Manager
 
                             case "surrender":
                                 player.Team.Remove(player);
+
                                 player.Surrender();
+
                                 stillPlayerTurn = false;
                                 
                                 IEnumerable<IList<IPlayer>> nonEmptyTeams = teams.Where((team) => team.Count > 0);
                                 inGame = nonEmptyTeams.Count() > 1;
+
                                 break;
 
                             case "attack":
@@ -141,9 +144,11 @@ namespace Syph.Core.Manager
                                     case "junior":
                                         player.Summon(SpawnFactory.CreateJuniorSpawn(monsterName, soulOffering));
                                         break;
+
                                     case "regular":
                                         player.Summon(SpawnFactory.CreateRegularSpawn(monsterName, soulOffering));
                                         break;
+
                                     case "senior":
                                         player.Summon(SpawnFactory.CreateSeniorSpawn(monsterName, soulOffering));
                                         break;

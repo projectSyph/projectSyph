@@ -87,7 +87,10 @@ namespace Syph.Core.Engine
             switch (this.name)
             {
                 case "help":
+                    if (!CheckParameterCount(0)) { return false; }
+
                     return true;
+
                 case "summon":                    
                     if (!CheckParameterCount(3)) { return false; }
 
@@ -98,6 +101,7 @@ namespace Syph.Core.Engine
                     if (!Entity.IsValidName(monsterName)) { this.InvalidReason = Entity.InvalidEntityName; }
 
                     return true;
+
                 case "inventory":
                     if (!CheckParameterCount(1))
                     {
@@ -110,6 +114,7 @@ namespace Syph.Core.Engine
                         return false;
                     }
                     return true;
+
                 case "attack":
                     if (!CheckParameterCount(5))
                     {
@@ -178,22 +183,26 @@ namespace Syph.Core.Engine
                     }
                     */
                     return true;
-                case "sacrifice":
-                    {
-                        if (!CheckParameterCount(2))                               return false;
-                        monsterType = Parameters[0];
-                        monsterName = Parameters[1];
-                        if (!CheckMonsterType(monsterType))                        return false;
-                        if (!CheckMonsterExists(monsterName, monsterType, player)) return false;
-                        return true;
-                    }
+
+                case "sacrifice":                    
+                    if (!CheckParameterCount(2))                               return false;
+                    monsterType = Parameters[0];
+                    monsterName = Parameters[1];
+                    if (!CheckMonsterType(monsterType))                        return false;
+                    if (!CheckMonsterExists(monsterName, monsterType, player)) return false;
+                    return true;                    
+
                 case "surrender":
                     return true;
+
                 case "":
                     this.InvalidReason = "command must not be empty";
+
                     return false;
+
                 default:
                     this.InvalidReason = "command not recognised";
+
                     return false;
             }
         }
@@ -224,7 +233,7 @@ namespace Syph.Core.Engine
         {
             if (this.Parameters.Count != count)
             {
-                this.InvalidReason = $"{this.Name} requires {count} parameters";
+                this.InvalidReason = $"{this.Name} requires {(count == 0 ? "no" : count.ToString())} parameters";
                 return false;
             }
             return true;
