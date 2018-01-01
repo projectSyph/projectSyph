@@ -9,9 +9,15 @@ namespace Syph.Core.Contracts
 
         int ID { get; }
 
+        bool IsAlive { get; }
+
         IList<IPlayer> Team { get; }
 
         void TakeDamage(int d);
+
+        void Die();
+
+        void Surrender();
 
         void Summon(ISpawn spawn);
     }

@@ -11,11 +11,10 @@ namespace Syph.Core.Models
         private double damage;
         private double armour;
         private int energy;
-        private int souls;
         private SpawnRank rank;
 
         public Spawn(string name, int souls)
-            : base(name, EntityType.Spawn)
+            : base(name, (int)Math.Ceiling(0.2 * souls), EntityType.Spawn)
         {
             if (souls < 0 || souls > 4000) //NEED TO RECHECK FOR EXACT SOULS VALUES
             {
@@ -24,7 +23,6 @@ namespace Syph.Core.Models
 
             this.health = 0.4 * souls;
             this.armour = 0.2 * souls;
-            this.souls = (int)Math.Ceiling(0.2 * souls);
         }
 
         public double Health => this.health;
@@ -44,8 +42,6 @@ namespace Syph.Core.Models
 
             protected set => this.energy = value;
         }
-
-        public int Souls => this.souls;
 
         public SpawnRank Rank
         {

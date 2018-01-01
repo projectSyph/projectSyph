@@ -15,6 +15,7 @@ namespace Syph.Core.Models
         private IList<ISpawn> playerInventory;
         private Dictionary<SpawnRank, int> spawns;
         private int id;
+        private bool isAlive;
 
         public Player(string name, int id, IList<IPlayer> team)
             : base(name, 8000, EntityType.Player)
@@ -22,6 +23,7 @@ namespace Syph.Core.Models
             this.id = id;
             this.Team = team;
             this.playerInventory = new List<ISpawn>();
+            this.isAlive = true;
 
             this.spawns = new Dictionary<SpawnRank, int>
             {
@@ -37,6 +39,8 @@ namespace Syph.Core.Models
 
         public int ID => this.id;
 
+        public bool IsAlive => this.isAlive;
+
         public IList<IPlayer> Team { get; private set; }
 
         public void TakeDamage(int d)
@@ -44,6 +48,25 @@ namespace Syph.Core.Models
             this.Souls -= d;
 
             FileLogger.Log($" -- Player {this.Name} takes {d} damage");
+
+            if (this.Souls <= 0)
+            {
+                Die();
+            }
+        }
+
+        public void Die()
+        {
+            FileLogger.Log($" -- Player {this.Name} died.");
+
+            this.isAlive = false;
+        }
+
+        public void Surrender()
+        {
+            FileLogger.Log($" -- Player {this.Name} surrendered.");
+
+            this.isAlive = false;
         }
 
         public void Summon(ISpawn spawn)

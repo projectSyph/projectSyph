@@ -83,18 +83,18 @@ namespace Syph.Core.Engine
 
         public bool IsValid(IList<IPlayer> alivePlayers, IPlayer player)
         {
+            string monsterType = string.Empty, monsterName = string.Empty;
             switch (this.name)
             {
                 case "help":
                     return true;
-                case "summon":
-                    
+                case "summon":                    
                     if (!CheckParameterCount(3)) { return false; }
 
-                    string monsterType = Parameters[0];
+                    monsterType = Parameters[0];
                     if (!CheckMonsterType(monsterType)) { return false; }
 
-                    string monsterName = Parameters[1];
+                    monsterName = Parameters[1];
                     if (!Entity.IsValidName(monsterName)) { this.InvalidReason = Entity.InvalidEntityName; }
 
                     return true;
@@ -181,8 +181,8 @@ namespace Syph.Core.Engine
                 case "sacrifice":
                     {
                         if (!CheckParameterCount(2))                               return false;
-                        string monsterType = Parameters[0];
-                        string monsterName = Parameters[1];
+                        monsterType = Parameters[0];
+                        monsterName = Parameters[1];
                         if (!CheckMonsterType(monsterType))                        return false;
                         if (!CheckMonsterExists(monsterName, monsterType, player)) return false;
                         return true;

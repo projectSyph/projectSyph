@@ -48,7 +48,7 @@ namespace Syph.Core.Manager
                 {
                     try
                     {
-                        Console.Write($"Enter Team {teamIndex + 1} Player {i + 1}'s name: ");
+                        ConsoleLogger.Print($"Enter Team {teamIndex + 1} Player {i + 1}'s name: ");
                         teams[teamIndex].Add(new Player(Console.ReadLine(), i, teams[teamIndex]));
                     }
                     catch (Exception ex)
@@ -58,13 +58,14 @@ namespace Syph.Core.Manager
                     }
                 }
             }
+
             // players ordered by their turn, e.g. A1, B1, C1, A2, B2, ...
-            IList<IPlayer> alivePlayers = new List<IPlayer>();
+            IList<IPlayer> playersInGame = new List<IPlayer>();
             for (int playerIndex = 0; playerIndex < playersPerTeam; playerIndex++)
             {
                 for (int teamInd = 0; teamInd < teamCount; teamInd++)
                 {
-                    alivePlayers.Add(teams[teamInd][playerIndex]);
+                    playersInGame.Add(teams[teamInd][playerIndex]);
                 }
             }
 
@@ -78,11 +79,15 @@ namespace Syph.Core.Manager
             {
                 turn++;
 
-                foreach (var player in alivePlayers)
+                foreach (var player in playersInGame)
                 {
                     if (!inGame)
                     {
                         break;
+                    }
+                    if (!player.IsAlive)
+                    {
+                        continue;
                     }
 
                     FileLogger.Log($"{player.Name}'s turn: {player.Souls} souls");
@@ -96,7 +101,7 @@ namespace Syph.Core.Manager
                         do
                         {
                             command = Command.ReadCommand();
-                            commandIsValid = command.IsValid(alivePlayers, player);
+                            commandIsValid = command.IsValid(playersInGame, player);
                             if (!commandIsValid)
                             {
                                 ConsoleLogger.Print($"Invalid command: {command.InvalidReason}. Try again! ");
@@ -110,12 +115,10 @@ namespace Syph.Core.Manager
                                 break;
 
                             case "surrender":
-                                FileLogger.Log($"TURN {turn}: Player {player.Name} has surrendered.");
-
                                 player.Team.Remove(player);
-                                alivePlayers.Remove(player);
+                                player.Surrender();
                                 stillPlayerTurn = false;
-
+                                
                                 IEnumerable<IList<IPlayer>> nonEmptyTeams = teams.Where((team) => team.Count > 0);
                                 inGame = nonEmptyTeams.Count() > 1;
                                 break;
@@ -129,8 +132,25 @@ namespace Syph.Core.Manager
                                 throw new NotImplementedException();
 
                             case "summon":
-                                //throw new NotImplementedException();
-                                //player.Summon();
+                                string monsterType = command.Parameters[0];
+                                string monsterName = command.Parameters[1];
+                                int soulOffering = int.Parse(command.Parameters[2]);
+
+                                switch (monsterType)
+                                {
+                                    case "junior":
+                                        player.Summon(SpawnFactory.CreateJuniorSpawn(monsterName, soulOffering));
+                                        break;
+                                    case "regular":
+                                        player.Summon(SpawnFactory.CreateRegularSpawn(monsterName, soulOffering));
+                                        break;
+                                    case "senior":
+                                        player.Summon(SpawnFactory.CreateSeniorSpawn(monsterName, soulOffering));
+                                        break;
+                                }
+
+                                stillPlayerTurn = false;
+                                break;
 
                             default:
                                 //return string.Format(InvalidCommand, command.Name);
