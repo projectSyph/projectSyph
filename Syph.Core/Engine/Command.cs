@@ -220,7 +220,8 @@ namespace Syph.Core.Engine
 
         private bool CheckMonsterExists(string name, string type, IPlayer player)
         {
-            SpawnRank rank = (SpawnRank)Enum.Parse(typeof(SpawnRank), type);
+            SpawnRank rank;
+            Enum.TryParse(type, true, out rank);
             if (!player.Inventory.Any((ISpawn monster) => monster.Rank == rank && monster.Name == name))
             {
                 this.InvalidReason = $"{player.Name} doesn't have a monster named {name} of rank {rank}";
