@@ -6,7 +6,7 @@ namespace Syph.Core.Common
 {
     public enum SpawnRank
     {
-        Junior = 1,
+        Junior,
         Regular,
         Senior
     }

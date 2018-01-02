@@ -40,5 +40,33 @@ namespace Syph.Core.Engine
                 }
             }
         }
+
+        public static void ConfirmWriteLog()
+        {
+            while (true)
+            {
+                ConsoleLogger.Print($"{Environment.NewLine}Write BattleLog to file? (Yes/No): ");
+                string choice = Console.ReadLine().ToLower();
+
+                switch (choice)
+                {
+                    case "yes":
+                    case "y":
+                        FileLogger.WriteLog();
+                        Console.Clear();
+                        return;
+
+                    case "no":
+                    case "n":
+                        FileLogger.Clear();
+                        Console.Clear();
+                        return;
+
+                    default:
+                        ConsoleLogger.Print("Invalid choice. Try again!");
+                        break;
+                }
+            }
+        }
     }
 }

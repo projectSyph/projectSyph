@@ -5,50 +5,48 @@ using System.Text;
 using System.Threading;
 using Syph.Core.Contracts;
 using Syph.Core.Engine;
+using Syph.Core.Factories;
 using Syph.Core.Models;
 
 namespace Syph.Core.Manager
 {
     public static class GameManager
     {
-
         private static bool inGame;
-        private static IList<string> log;
         private static ulong turn;
 
         public static void NewGame()
         {
             Console.Clear();
-
-            log = new List<string>();
+            
             turn = 0;
 
             int playerCount = ValidateChoice("Players: ", 2, 4);
             int teamCount = 0;
             int playersPerTeam = 0;
+
             switch (playerCount)
             {
-                case 2:
-                case 4:
+                case 2: case 4:
                     teamCount = 2;
                     break;
                 case 3:
                     teamCount = 3;
                     break;
             }
-            playersPerTeam = playerCount / teamCount;
-            IList<IList<IPlayer>> teams = new List<IList<IPlayer>>();
-            //TODO
-            //Dictionary<char, List<Player>> teams = new Dictionary<char, List<Player>>();
-            for (int teamIndex = 0; teamIndex < teamCount; teamIndex++)
-            {
-                teams.Add(new List<IPlayer>());
 
-                for (int i = 0; i < playersPerTeam; i++)
+            playersPerTeam = playerCount / teamCount;
+            Dictionary<byte, List<IPlayer>> teams = new Dictionary<byte, List<IPlayer>>();
+
+            for (byte teamIndex = 0; teamIndex < teamCount; teamIndex++)
+            {
+                teams.Add(teamIndex, new List<IPlayer>());
+
+                for (byte i = 0; i < playersPerTeam; i++)
                 {
                     try
                     {
-                        Console.Write($"Team {teamIndex}, enter player {i + 1}'s name: ");
+                        ConsoleLogger.Print($"Enter Team {teamIndex + 1} Player {i + 1}'s name: ");
                         teams[teamIndex].Add(new Player(Console.ReadLine(), i, teams[teamIndex]));
                     }
                     catch (Exception ex)
@@ -58,13 +56,13 @@ namespace Syph.Core.Manager
                     }
                 }
             }
-            // players ordered by their turn, e.g. A1, B1, C1, A2, B2, ...
-            IList<IPlayer> alivePlayers = new List<IPlayer>();
-            for (int playerInd = 0; playerInd < playersPerTeam; playerInd++)
+            
+            IList<IPlayer> playersInGame = new List<IPlayer>();
+            for (byte playerIndex = 0; playerIndex < playersPerTeam; playerIndex++)
             {
-                for (int teamInd = 0; teamInd < teamCount; teamInd++)
+                for (byte teamInd = 0; teamInd < teamCount; teamInd++)
                 {
-                    alivePlayers.Add(teams[teamInd][playerInd]);
+                    playersInGame.Add(teams[teamInd][playerIndex]);
                 }
             }
 
@@ -78,11 +76,15 @@ namespace Syph.Core.Manager
             {
                 turn++;
 
-                foreach (var player in alivePlayers)
+                foreach (var player in playersInGame)
                 {
                     if (!inGame)
                     {
                         break;
+                    }
+                    if (!player.IsAlive)
+                    {
+                        continue;
                     }
 
                     FileLogger.Log($"{player.Name}'s turn: {player.Souls} souls");
@@ -92,17 +94,17 @@ namespace Syph.Core.Manager
                     {
                         ICommand command;
                         bool commandIsValid;
+
                         do
                         {
-                            command = ReadCommand();
-                            commandIsValid = command.IsValid(alivePlayers, player);
+                            command = Command.ReadCommand();
+                            commandIsValid = command.IsValid(playersInGame, player);
                             if (!commandIsValid)
                             {
                                 ConsoleLogger.Print($"Invalid command: {command.InvalidReason}. Try again! ");
                             }
                         } while (!commandIsValid);
-
-                        //ProcessCommand(command);
+                        
                         switch (command.Name)
                         {
                             case "help":
@@ -110,14 +112,15 @@ namespace Syph.Core.Manager
                                 break;
 
                             case "surrender":
-                                FileLogger.Log($"Player {player.Name} has surrendered.");
-
                                 player.Team.Remove(player);
-                                alivePlayers.Remove(player);
-                                stillPlayerTurn = false;
 
-                                IEnumerable<IList<IPlayer>> nonEmptyTeams = teams.Where((team) => team.Count > 0);
-                                inGame = nonEmptyTeams.Count() > 1;
+                                player.Surrender();
+
+                                stillPlayerTurn = false;
+                                
+                                int nonEmptyTeams = teams.Keys.Where(team => teams[team].Count > 0).Count();
+                                inGame = nonEmptyTeams > 1;
+
                                 break;
 
                             case "attack":
@@ -126,53 +129,42 @@ namespace Syph.Core.Manager
                                 string opponentMonsterID = command.Parameters[2];
                                 string myMonsterType = command.Parameters[3];
                                 string myMonsterID = command.Parameters[4];
+
+                                //STILL NOT IMPLEMENTED
                                 throw new NotImplementedException();
+
                             case "summon":
-                                throw new NotImplementedException();
+                                string monsterType = command.Parameters[0];
+                                string monsterName = command.Parameters[1];
+                                int soulOffering = int.Parse(command.Parameters[2]);
+
+                                switch (monsterType)
+                                {
+                                    case "junior":
+                                        player.Summon(SpawnFactory.CreateJuniorSpawn(monsterName, soulOffering));
+                                        break;
+
+                                    case "regular":
+                                        player.Summon(SpawnFactory.CreateRegularSpawn(monsterName, soulOffering));
+                                        break;
+
+                                    case "senior":
+                                        player.Summon(SpawnFactory.CreateSeniorSpawn(monsterName, soulOffering));
+                                        break;
+                                }
+
+                                stillPlayerTurn = false;
+                                break;
+
                             default:
-                                //return string.Format(InvalidCommand, command.Name);
+                                //STILL NOT IMPLEMENTED
                                 throw new NotImplementedException();
                         }
                     }
                 }
             }
-            ConfirmWriteLog();
-        }
 
-        private static void ConfirmWriteLog()
-        {
-            while (true)
-            {
-                ConsoleLogger.Print($"{Environment.NewLine}Write BattleLog to file? (Yes/No): ");
-                string choice = Console.ReadLine().ToLower();
-
-                switch (choice)
-                {
-                    case "yes":
-                    case "y":
-                        FileLogger.WriteLog();
-                        Console.Clear();
-                        return;
-
-                    case "no":
-                    case "n":
-                        FileLogger.Clear();
-                        Console.Clear();
-                        return;
-
-                    default:
-                        ConsoleLogger.Print("Invalid choice. Try again!");
-                        break;
-                }
-            }
-        }
-
-        private static ICommand ReadCommand()
-        {
-            ConsoleLogger.PrintNoNewLine("Enter command: ");
-            string playerInputLine = Console.ReadLine();
-            Command currentCommand = new Command(playerInputLine);
-            return currentCommand;
+            FileLogger.ConfirmWriteLog();
         }
 
         private static byte ValidateChoice(string str, int lowerLimit = 0, int upperLimit = 4)

@@ -13,8 +13,6 @@ namespace Syph.Core.Contracts
 
         int Energy { get; }
 
-        int Souls { get; }
-
         SpawnRank Rank { get; }
     }
 }

@@ -10,21 +10,24 @@ using Syph.Core.Engine;
 
 namespace Syph.Core.Models
 {
-    class Player : Entity, IPlayer
+    public delegate void PlayerJoin();
+
+    public class Player : Entity, IPlayer
     {
-        private int souls;
         private IList<ISpawn> playerInventory;
         private Dictionary<SpawnRank, int> spawns;
+        private IList<IPlayer> team;
         private int id;
+        private bool isAlive;
 
         public Player(string name, int id, IList<IPlayer> team)
-            : base(name, EntityType.Player)
+            : base(name, 8000, EntityType.Player)
         {
-            this.souls = 8000;
-
             this.id = id;
-            this.Team = team;
+            this.team = team;
             this.playerInventory = new List<ISpawn>();
+            this.isAlive = true;
+            this.PlayerJoin += new PlayerJoin(WelcomeUser);
 
             this.spawns = new Dictionary<SpawnRank, int>
             {
@@ -32,26 +35,49 @@ namespace Syph.Core.Models
                 { SpawnRank.Regular, 5},
                 { SpawnRank.Senior, 3}
             };
-            
-            FileLogger.Log($"Player {this.Name} with ID {this.id} entered the game.");
+
+            PlayerJoin();
         }
 
-        public IList<ISpawn> Inventory
-        {
-            get => this.playerInventory;
-        }
-
-        public int Souls => this.souls;
+        public IList<ISpawn> Inventory => this.playerInventory;
 
         public int ID => this.id;
 
-        public IList<IPlayer> Team { get; private set; }
+        public bool IsAlive => this.isAlive;
+
+        public IList<IPlayer> Team => this.team;
+
+        event PlayerJoin PlayerJoin;
+
+        public void WelcomeUser()
+        {
+            FileLogger.Log($"Player {this.Name} with ID {this.id} entered the game.");
+        }
 
         public void TakeDamage(int d)
         {
-            this.souls -= d;
+            this.Souls -= d;
 
             FileLogger.Log($" -- Player {this.Name} takes {d} damage");
+
+            if (this.Souls <= 0)
+            {
+                Die();
+            }
+        }
+
+        public void Die()
+        {
+            FileLogger.Log($" -- Player {this.Name} died.");
+
+            this.isAlive = false;
+        }
+
+        public void Surrender()
+        {
+            FileLogger.Log($" -- Player {this.Name} surrendered.");
+
+            this.isAlive = false;
         }
 
         public void Summon(ISpawn spawn)

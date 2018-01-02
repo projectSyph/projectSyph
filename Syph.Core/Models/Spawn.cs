@@ -7,56 +7,54 @@ namespace Syph.Core.Models
 {
     public abstract class Spawn : Entity, ISpawn
     {
-        private double health;
-        private double damage;
-        private double armour;
-        private int energy;
-        private int souls;
+        private SpawnStats stats;
         private SpawnRank rank;
 
         public Spawn(string name, int souls)
-            : base(name, EntityType.Spawn)
+            : base(name, (int)Math.Ceiling(0.2 * souls), EntityType.Spawn)
         {
-            if (souls < 0 || souls > 4000) //NEED TO RECHECK FOR EXACT SOULS VALUES
+            if (souls < 0 || souls > 4000)
             {
                 throw new InvalidSpawnSummonException("You must use between 0 and 4000 souls to summon a Spawn!");
             }
 
-            this.health = 0.4 * souls;
-            this.armour = 0.2 * souls;
-            this.souls = (int)Math.Ceiling(0.2 * souls);
+            this.stats.health = 0.4 * souls;
+            this.stats.armour = 0.2 * souls;
         }
 
-        public double Health => this.health;
+        public double Health => this.stats.health;
+
+        public double Armour => this.stats.armour;
 
         public double Damage
         {
-            get => this.damage;
+            get => this.stats.damage;
 
-            protected set => this.damage = value;
+            protected set => this.stats.damage = value;
         }
-
-        public double Armour => this.armour;
 
         public int Energy
         {
-            get => this.energy;
+            get => this.stats.energy;
 
-            protected set => this.energy = value;
+            protected set => this.stats.energy = value;
         }
-
-        public int Souls => this.souls;
 
         public SpawnRank Rank
         {
             get => this.rank;
 
-            set => this.rank = value;
+            protected set => this.rank = value;
         }
 
         public override string ToString()
         {
             return $"{this.rank} {this.Type} {this.Name}";
+        }
+
+        public string Stats()
+        {
+            return $"{this.ToString()}: {this.stats.ToString()}";
         }
     }
 }
