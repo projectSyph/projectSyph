@@ -3,7 +3,7 @@
 
 Project Syph is an open-source turn-based game written in C# with support for 2 (1v1),  3 (everyone for themselves) or 4 (2v2) players. It is developed as the first  team project for Telerik Academy Alpha. 
 
-##Credits 
+## Credits 
  - Iovoslav Iovchev - Engine functionality
  - Kiril Kirov - Commands and GameManager functionality
  - Stefan Veselinov - Menu and Project Design  
@@ -15,7 +15,7 @@ written in C# with support for 2 (1v1),
 					 
 It is developed as the first team project for Telerik Academy Alpha. 
 
-##Guide
+## Guide
 When you start a new game, you have to enter your 
 username, which will be used for the period of 
 the game.  There can be 2, 3 or 4 players. 
