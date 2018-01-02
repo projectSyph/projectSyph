@@ -27,7 +27,7 @@ namespace Syph.Core
 
         public void Start()
         {
-            Intro();            
+            //Intro();            
             MainMenu();
         }
 
@@ -47,7 +47,15 @@ namespace Syph.Core
                 switch (ValidateMainMenuChoice("Choice: "))
                 {
                     case 1:
-                        GameManager.NewGame();
+                        try
+                        {
+                            GameManager.NewGame();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                            //continue;
+                        }
                         break;
                     case 2:
                         ConsoleLogger.PrintTextFile(true, "guide");

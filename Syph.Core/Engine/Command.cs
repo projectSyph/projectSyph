@@ -1,5 +1,6 @@
 ﻿using Syph.Core.Common;
 using Syph.Core.Contracts;
+using Syph.Core.Manager;
 using Syph.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -86,7 +87,7 @@ namespace Syph.Core.Engine
             string monsterType = string.Empty, monsterName = string.Empty;
             switch (this.name)
             {
-                case "help":
+                case "help": case "skip": case "surrender":
                     if (!CheckParameterCount(0)) { return false; }
 
                     return true;
@@ -103,14 +104,20 @@ namespace Syph.Core.Engine
                     return true;
 
                 case "inventory":
-                    if (!CheckParameterCount(1))
+                    if (!CheckParameterCount(2))
                     {
                         return false;
                     }
-                    string playerName = Parameters[0];
-                    if (!alivePlayers.Any((p) => p.Name == playerName))
+                    int teamID = int.Parse(Parameters[0]) - 1;
+                    if (teamID < 0 || teamID > GameManager.teamCount)
                     {
-                        this.InvalidReason = $"{playerName} is not a valid player name";
+                        this.InvalidReason = $"{teamID} is not a valid team ID";
+                        return false;
+                    }
+                    int playerID = int.Parse(Parameters[1]);
+                    if (!alivePlayers.Any((p) => p.ID == playerID))
+                    {
+                        this.InvalidReason = $"{playerID} is not a valid player ID";
                         return false;
                     }
                     return true;
@@ -148,40 +155,6 @@ namespace Syph.Core.Engine
                     if (!CheckMonsterType(myMonsterType))                            return false;
                     if (!CheckMonsterExists(myMonsterName, myMonsterType, player))   return false;
 
-                    /*
-                    //oppo monster type 
-                    string opponentMonsterType = Parameters[1];
-                    SpawnRank opponentMonsterRank;
-                    if (!(Enum.TryParse(opponentMonsterType, true, out opponentMonsterRank) && Enum.IsDefined(typeof(SpawnRank), opponentMonsterRank)))
-                    {
-                        this.InvalidReason = $"{opponentMonsterType} is not a valid monster type";
-                        return false;
-                    }
-
-                    //oppo monster type and name
-                    string opponentMonsterName = Parameters[2];
-                    if (!opponent.Inventory.Any((ISpawn monster) => monster.Rank == opponentMonsterRank && monster.Name == opponentMonsterName))
-                    {
-                        this.InvalidReason = $"you don't have a monster named {opponentMonsterName} of rank {opponentMonsterRank}";
-                        return false;
-                    }
-
-                    //my monster type
-                    string myMonsterType = Parameters[3];
-                    SpawnRank myMonsterRank;
-                    if (!(Enum.TryParse(myMonsterType, true, out myMonsterRank) && Enum.IsDefined(typeof(SpawnRank), myMonsterRank)))
-                    {
-                        this.InvalidReason = $"{myMonsterType} is not a valid monster type";
-                        return false;
-                    }
-                    //my monster type and name
-                    string myMonsterName = Parameters[4];
-                    if (!player.Inventory.Any((ISpawn monster) => monster.Rank == myMonsterRank && monster.Name == myMonsterName))
-                    {
-                        this.InvalidReason = $"you don't have a monster named {myMonsterName} of rank {myMonsterRank}";
-                        return false;
-                    }
-                    */
                     return true;
 
                 case "sacrifice":                    
@@ -190,10 +163,7 @@ namespace Syph.Core.Engine
                     monsterName = Parameters[1];
                     if (!CheckMonsterType(monsterType))                        return false;
                     if (!CheckMonsterExists(monsterName, monsterType, player)) return false;
-                    return true;                    
-
-                case "surrender":
-                    return true;
+                    return true; 
 
                 case "":
                     this.InvalidReason = "command must not be empty";

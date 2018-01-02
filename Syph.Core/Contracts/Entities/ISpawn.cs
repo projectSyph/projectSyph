@@ -14,5 +14,7 @@ namespace Syph.Core.Contracts
         int Energy { get; }
 
         SpawnRank Rank { get; }
+
+        string Stats();
     }
 }

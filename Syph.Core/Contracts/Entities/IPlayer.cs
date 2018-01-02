@@ -20,5 +20,7 @@ namespace Syph.Core.Contracts
         void Surrender();
 
         void Summon(ISpawn spawn);
+
+        void ListInventory();
     }
 }

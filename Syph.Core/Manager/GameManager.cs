@@ -14,6 +14,7 @@ namespace Syph.Core.Manager
     {
         private static bool inGame;
         private static ulong turn;
+        public static int teamCount;
 
         public static void NewGame()
         {
@@ -22,7 +23,7 @@ namespace Syph.Core.Manager
             turn = 0;
 
             int playerCount = ValidateChoice("Players: ", 2, 4);
-            int teamCount = 0;
+            teamCount = 0;
             int playersPerTeam = 0;
 
             switch (playerCount)
@@ -36,7 +37,7 @@ namespace Syph.Core.Manager
             }
 
             playersPerTeam = playerCount / teamCount;
-            Dictionary<byte, List<IPlayer>> teams = new Dictionary<byte, List<IPlayer>>();
+            Dictionary<int, List<IPlayer>> teams = new Dictionary<int, List<IPlayer>>();
 
             for (byte teamIndex = 0; teamIndex < teamCount; teamIndex++)
             {
@@ -47,7 +48,7 @@ namespace Syph.Core.Manager
                     try
                     {
                         ConsoleLogger.Print($"Enter Team {teamIndex + 1} Player {i + 1}'s name: ");
-                        teams[teamIndex].Add(new Player(Console.ReadLine(), i, teams[teamIndex]));
+                        teams[teamIndex].Add(PlayerFactory.CreateNewPlayer(Console.ReadLine(), i, teams[teamIndex]));
                     }
                     catch (Exception ex)
                     {
@@ -111,6 +112,11 @@ namespace Syph.Core.Manager
                                 ConsoleLogger.PrintTextFile(false, "help");
                                 break;
 
+                            case "skip":
+                                FileLogger.Log($" -- Player {player.Name} skipped their turn");
+                                stillPlayerTurn = false;
+                                break;
+
                             case "surrender":
                                 player.Team.Remove(player);
 
@@ -118,8 +124,7 @@ namespace Syph.Core.Manager
 
                                 stillPlayerTurn = false;
                                 
-                                int nonEmptyTeams = teams.Keys.Where(team => teams[team].Count > 0).Count();
-                                inGame = nonEmptyTeams > 1;
+                                inGame = teams.Keys.Where(team => teams[team].Count > 0).Count() > 1;
 
                                 break;
 
@@ -138,6 +143,8 @@ namespace Syph.Core.Manager
                                 string monsterName = command.Parameters[1];
                                 int soulOffering = int.Parse(command.Parameters[2]);
 
+                                stillPlayerTurn = false;
+
                                 switch (monsterType)
                                 {
                                     case "junior":
@@ -149,16 +156,33 @@ namespace Syph.Core.Manager
                                         break;
 
                                     case "senior":
+                                        if (turn < 15)
+                                        {
+                                            FileLogger.Log($"Player {player.Name} is trying to summon a Senior. You cannot summon a Senior Spawn before the 15th turn!");
+                                            stillPlayerTurn = true;
+                                            break;
+                                        }
                                         player.Summon(SpawnFactory.CreateSeniorSpawn(monsterName, soulOffering));
                                         break;
                                 }
 
-                                stillPlayerTurn = false;
+                                break;
+
+                            case "inventory":
+                                int teamID = int.Parse(command.Parameters[0]) - 1;
+                                int playerID = int.Parse(command.Parameters[1]);
+                                if (teams[teamID][playerID].IsAlive)
+                                {
+                                    teams[teamID][playerID].ListInventory();
+                                }
+                                else
+                                {
+                                    ConsoleLogger.Print($"Player {teams[teamID][playerID].Name} is not alive!");
+                                }
                                 break;
 
                             default:
-                                //STILL NOT IMPLEMENTED
-                                throw new NotImplementedException();
+                                break;
                         }
                     }
                 }

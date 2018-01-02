@@ -8,9 +8,9 @@ namespace Syph.Core.Factories
 {
     public class PlayerFactory
     {
-        public static IPlayer CreateNewPlayer(string name, int id)
+        public static IPlayer CreateNewPlayer(string name, int id, IList<IPlayer> team)
         {
-            return new Player(name, id, new List<IPlayer>());
+            return new Player(name, id, team);
         }
     }
 }

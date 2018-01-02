@@ -1,19 +1,22 @@
 *****************Command format HELP instructions**********************************************
-#<help>                                                                                       #
+#help                                                                                         #
 # displays this screen                                                                        #
 #                                                                                             #
-#<summon> <monster_type> <monster_name> <souls_for_monster>                                   #
+#skip                                                                                         #
+# skips current turn                                                                          #
+#                                                                                             #
+#summon <monster_type> <monster_name> <souls_for_monster>                                     #
 # adds a monster to your inventory                                                            #
 #                                                                                             #
-#<inventory> <player_name>                                                                    #
+#inventory <team_id> <player_id>                                                              #
 # shows given player's stats and inventory                                                    #
 #                                                                                             #
-#<attack> <opponent's_name> <monster_type> <monster_name> <my_monster_type> <my_monster_name> #
+#attack <opponent's_name> <monster_type> <monster_name> <my_monster_type> <my_monster_name>   #
 # attacks opponent's monster with your monster                                                #
 #                                                                                             #
-#<sacrifice> <monster_type> <monster_name>                                                    #
+#sacrifice <monster_type> <monster_name>                                                      #
 # sacrifices a monster to reclaim its souls to your stash                                     #
 #                                                                                             #
-#<surrender>                                                                                  #
+#surrender                                                                                    #
 # you surrender                                                                               #
 ***********************************************************************************************

@@ -7,6 +7,7 @@ using Syph.Core.Common;
 using Syph.Core.Engine.Exceptions;
 using Syph.Core.Manager;
 using Syph.Core.Engine;
+using System.Linq;
 
 namespace Syph.Core.Models
 {
@@ -92,6 +93,21 @@ namespace Syph.Core.Models
             this.spawns[spawn.Rank]--;
 
             FileLogger.Log($" -- Player {this.Name} has summoned {spawn.Rank} {spawn.Type} {spawn.Name}!");
+        }
+
+        public void ListInventory()
+        {
+            if (this.Inventory.Count == 0)
+            {
+                Console.WriteLine($"Player {this.Name}'s inventory is empty!");
+                return;
+            }
+
+            ConsoleLogger.Print($"Player {this.Name}'s inventory:");
+            foreach (ISpawn spawn in Inventory.OrderBy(x => x.Rank))
+            {
+                ConsoleLogger.Print($" - {spawn.Stats()}");
+            }
         }
     }
 }
