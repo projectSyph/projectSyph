@@ -13,7 +13,7 @@ namespace Syph.Core.Models
         public Spawn(string name, int souls)
             : base(name, (int)Math.Ceiling(0.2 * souls), EntityType.Spawn)
         {
-            if (souls < 0 || souls > 4000) //NEED TO RECHECK FOR EXACT SOULS VALUES
+            if (souls < 0 || souls > 4000)
             {
                 throw new InvalidSpawnSummonException("You must use between 0 and 4000 souls to summon a Spawn!");
             }

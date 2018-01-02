@@ -10,6 +10,8 @@ using Syph.Core.Engine;
 
 namespace Syph.Core.Models
 {
+    public delegate void PlayerJoin();
+
     public class Player : Entity, IPlayer
     {
         private IList<ISpawn> playerInventory;
@@ -25,6 +27,7 @@ namespace Syph.Core.Models
             this.team = team;
             this.playerInventory = new List<ISpawn>();
             this.isAlive = true;
+            this.PlayerJoin += new PlayerJoin(WelcomeUser);
 
             this.spawns = new Dictionary<SpawnRank, int>
             {
@@ -32,8 +35,8 @@ namespace Syph.Core.Models
                 { SpawnRank.Regular, 5},
                 { SpawnRank.Senior, 3}
             };
-            
-            FileLogger.Log($"Player {this.Name} with ID {this.id} entered the game.");
+
+            PlayerJoin();
         }
 
         public IList<ISpawn> Inventory => this.playerInventory;
@@ -43,6 +46,13 @@ namespace Syph.Core.Models
         public bool IsAlive => this.isAlive;
 
         public IList<IPlayer> Team => this.team;
+
+        event PlayerJoin PlayerJoin;
+
+        public void WelcomeUser()
+        {
+            FileLogger.Log($"Player {this.Name} with ID {this.id} entered the game.");
+        }
 
         public void TakeDamage(int d)
         {

@@ -36,8 +36,6 @@ namespace Syph.Core.Manager
             }
 
             playersPerTeam = playerCount / teamCount;
-            //IList<IList<IPlayer>> teams = new List<IList<IPlayer>>();
-            //TODO
             Dictionary<byte, List<IPlayer>> teams = new Dictionary<byte, List<IPlayer>>();
 
             for (byte teamIndex = 0; teamIndex < teamCount; teamIndex++)
@@ -58,8 +56,7 @@ namespace Syph.Core.Manager
                     }
                 }
             }
-
-            // players ordered by their turn, e.g. A1, B1, C1, A2, B2, ...
+            
             IList<IPlayer> playersInGame = new List<IPlayer>();
             for (byte playerIndex = 0; playerIndex < playersPerTeam; playerIndex++)
             {
@@ -120,8 +117,7 @@ namespace Syph.Core.Manager
                                 player.Surrender();
 
                                 stillPlayerTurn = false;
-
-                                //IEnumerable<IList<IPlayer>> nonEmptyTeams = teams.Where((team) => team.Count > 0);
+                                
                                 int nonEmptyTeams = teams.Keys.Where(team => teams[team].Count > 0).Count();
                                 inGame = nonEmptyTeams > 1;
 
@@ -133,6 +129,8 @@ namespace Syph.Core.Manager
                                 string opponentMonsterID = command.Parameters[2];
                                 string myMonsterType = command.Parameters[3];
                                 string myMonsterID = command.Parameters[4];
+
+                                //STILL NOT IMPLEMENTED
                                 throw new NotImplementedException();
 
                             case "summon":
@@ -159,7 +157,7 @@ namespace Syph.Core.Manager
                                 break;
 
                             default:
-                                //return string.Format(InvalidCommand, command.Name);
+                                //STILL NOT IMPLEMENTED
                                 throw new NotImplementedException();
                         }
                     }
