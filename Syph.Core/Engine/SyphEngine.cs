@@ -27,7 +27,7 @@ namespace Syph.Core
 
         public void Start()
         {
-            //Intro();            
+            Intro();            
             MainMenu();
         }
 
@@ -81,7 +81,7 @@ namespace Syph.Core
                 if ((!valid) || (num < lowerLimit) || (num > upperLimit))
                 {
                     ConsoleLogger.Print("Invalid choice. Try again!", 1000);
-                    ConsoleLogger.PrintTextFile("logo", "menu");
+                    ConsoleLogger.PrintTextFile(false, "logo", "menu");
                 }
             } while (!valid);
 

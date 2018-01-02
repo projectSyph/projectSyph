@@ -23,21 +23,6 @@ namespace Syph.Core.Engine
             Console.Clear();
         }
 
-        public static void PrintTextFile(params string[] filenames)
-        {
-            foreach (var file in filenames)
-            {
-                if (!File.Exists($"./../content/{file}.txt"))
-                {
-                    throw new ArgumentException("File doesnt exist");
-                }
-
-                string text = File.ReadAllText($"./../content/{file}.txt");
-
-                Print(text);
-            }
-        }
-
         public static void PrintTextFile(bool clear, params string[] filenames)
         {
             if (clear)
@@ -63,7 +48,7 @@ namespace Syph.Core.Engine
             Print("\nPress any key to go back to Main Menu..");
             Console.ReadKey();
             Console.Clear();
-            PrintTextFile("logo", "menu");
+            PrintTextFile(false, "logo", "menu");
         }
     }
 }

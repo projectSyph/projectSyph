@@ -108,7 +108,7 @@ namespace Syph.Core.Manager
                         switch (command.Name)
                         {
                             case "help":
-                                ConsoleLogger.PrintTextFile("help");
+                                ConsoleLogger.PrintTextFile(false, "help");
                                 break;
 
                             case "surrender":
