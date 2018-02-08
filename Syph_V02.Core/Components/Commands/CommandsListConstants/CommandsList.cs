@@ -30,7 +30,9 @@ namespace Syph_V02.Core.Components.Commands
               "skip",
               "add player",
               "Player <name> ",
-              "2<how many[2-4]> players game"
+              "new game",
+              "2<how many[2-4]> players game",
+              "exit"
         };
     }
 }

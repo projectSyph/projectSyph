@@ -20,7 +20,8 @@ namespace Syph.CLI.InjectionConfig
 
             builder.RegisterType<SyphEngine>().As<IEngine>().SingleInstance();
 
-            builder.RegisterType<StartNewGame>().Named<ICommand>("add");
+            builder.RegisterType<StartNewGame>().Named<ICommand>("new");
+            builder.RegisterType<ExitGame>().Named<ICommand>("exit");
 
             builder.RegisterType<CommandsFactory>().As<ICommandsFactory>().SingleInstance();
         }

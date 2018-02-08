@@ -1,0 +1,5 @@
+class Player
+class Spawn
+class Disaster
+class BattleField
+class Log

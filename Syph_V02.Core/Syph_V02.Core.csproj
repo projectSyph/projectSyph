@@ -74,12 +74,14 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Components\Commands\CommandsListConstants\CommandsList.cs" />
     <Compile Include="Components\Commands\Contracts\ICommand.cs" />
+    <Compile Include="Components\Commands\ExitGame.cs" />
     <Compile Include="Components\Commands\StartNewGame.cs" />
     <Compile Include="Components\Engine\ConsoleClient\ConsoleRenderer.cs" />
-    <Compile Include="Components\Engine\ConsoleClient\Contracts\IConsoleHandle.cs" />
+    <Compile Include="Components\Engine\ConsoleClient\ConsoleVisualizer.cs" />
     <Compile Include="Components\Engine\Contracts\ICommandsFactory.cs" />
     <Compile Include="Components\Engine\Contracts\IEngine.cs" />
-    <Compile Include="Components\Engine\Contracts\IRenderer.cs" />
+    <Compile Include="Components\Engine\ConsoleClient\Contracts\IRenderer.cs" />
+    <Compile Include="Components\Engine\ConsoleClient\Contracts\IVisualizer.cs" />
     <Compile Include="Components\Engine\Factories\CommandsFactory.cs" />
     <Compile Include="Components\Engine\SyphEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

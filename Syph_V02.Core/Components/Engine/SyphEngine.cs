@@ -12,13 +12,16 @@ namespace Syph_V02.Core.Components.Engine
         private readonly IRenderer renderer;
         private readonly ICommandsFactory factory;
 
+        private readonly IVisualizer visuzlizer;
+
         /// <summary>
         /// Initialize fields
         /// </summary>
-        public SyphEngine(IRenderer renderer, ICommandsFactory factory)
+        public SyphEngine(IRenderer renderer, ICommandsFactory factory, IVisualizer visuzlizer)
         {
             this.renderer = renderer;
             this.factory = factory;
+            this.visuzlizer = visuzlizer;
         }
 
         /// <summary>
@@ -26,12 +29,18 @@ namespace Syph_V02.Core.Components.Engine
         /// </summary>
         public void Start()
         {
+            //TODO GET THIS THINGS OUT OF HERE!!
+            this.visuzlizer.ScreanRender("logo");
+            this.visuzlizer.ScreanRender("menu");
+
             try
             {
+              
                 foreach (var currentCommandLine in this.renderer.Input())
                 {
                     // Testing
                     var testStartingCommand = this.CommandsProcessor(currentCommandLine);
+
                     this.renderer.Output(testStartingCommand);
                 }
                
@@ -39,9 +48,9 @@ namespace Syph_V02.Core.Components.Engine
             }
             catch (Exception ex)
             {
-                // Throw something .....   
                 this.renderer.Output(ex.Message);
             }
+           
         }
 
         private string CommandsProcessor(string currentCommandLine)
