@@ -41,11 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Components\Engine\Contracts\IEngine.cs" />
+    <Compile Include="Components\Engine\SyphEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\Commands\" />
-    <Folder Include="Components\Engine\Contracts\" />
     <Folder Include="Components\Engine\Factories\" />
     <Folder Include="Models\Entities\" />
   </ItemGroup>
