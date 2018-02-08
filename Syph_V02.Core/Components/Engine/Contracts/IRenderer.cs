@@ -6,6 +6,7 @@ namespace Syph_V02.Core.Components.Engine.Contracts
     {
         IEnumerable<string> Input();
 
-        void Output(IEnumerable<string> output);
+        //void Output(IEnumerable<string> output);
+       
     }
 }

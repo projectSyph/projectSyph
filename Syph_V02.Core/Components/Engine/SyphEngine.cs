@@ -27,8 +27,10 @@ namespace Syph_V02.Core.Components.Engine
             {
                 foreach (var item in this.renderer.Input())
                 {
-
+                    Console.WriteLine(item);
                 }
+               
+               
             }
             catch (Exception ex)
             {

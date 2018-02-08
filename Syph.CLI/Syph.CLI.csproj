@@ -48,5 +48,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Syph_V02.Core\Syph_V02.Core.csproj">
+      <Project>{b12f9ff5-a0d9-4344-8e71-a0cc8de1613f}</Project>
+      <Name>Syph_V02.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
