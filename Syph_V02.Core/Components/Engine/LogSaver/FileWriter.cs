@@ -12,7 +12,7 @@ namespace Syph_V02.Core.Components.Engine.LogSaver
     {
         public void WriteToFile(IEnumerable<string> info)
         {
-            string fileName = $"{DateTime.Now.ToString("ddMMyyyyHHmmss")}.txt";
+            string fileName = $"{DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss")}.txt";
 
             string file = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\projectSyph\logs\{fileName}";
 

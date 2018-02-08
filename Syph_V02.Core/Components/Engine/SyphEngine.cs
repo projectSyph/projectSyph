@@ -1,4 +1,5 @@
 ﻿using Syph_V02.Core.Components.Engine.Contracts;
+using Syph_V02.Core.Components.Engine.LogSaver;
 using Syph_V02.Core.Components.Engine.LogSaver.Contracts;
 using System;
 using System.Collections.Generic;
@@ -15,18 +16,20 @@ namespace Syph_V02.Core.Components.Engine
         private readonly ICommandsFactory factory;
         private readonly IFileRenderer fileRenderer;
 
+        private readonly ILogSaveData savedData;
+
         private readonly IVisualizer visuzlizer;
 
         /// <summary>
         /// Initialize fields
         /// </summary>
-        public SyphEngine(IRenderer renderer, ICommandsFactory factory, IVisualizer visuzlizer, IFileRenderer fileRenderer)
+        public SyphEngine(IRenderer renderer, ICommandsFactory factory, IVisualizer visuzlizer, IFileRenderer fileRenderer, ILogSaveData savedData)
         {
             this.renderer = renderer;
             this.factory = factory;
             this.visuzlizer = visuzlizer;
             this.fileRenderer= fileRenderer;
-            
+            this.savedData = savedData;
         }
 
         /// <summary>
@@ -37,9 +40,7 @@ namespace Syph_V02.Core.Components.Engine
             //TODO: Find bether way to do this action -> print menu !!
             var firstRunMessage = this.visuzlizer.ReadTextFile("menu");
             renderer.Output(firstRunMessage);
-
-            var safeLogg = new List<string>();
-
+         
             try
             {
               
@@ -48,19 +49,10 @@ namespace Syph_V02.Core.Components.Engine
                    
                     var testStartingCommand = this.CommandsProcessor(currentCommandLine);
 
-                    safeLogg.Add(testStartingCommand);
+                    savedData.AddLog(testStartingCommand);
+                   
                     renderer.Output(testStartingCommand);
-
-                    //Testing new functionality Save to File
-                    if (testStartingCommand == "exit")
-                    {
-                        fileRenderer.WriteToFile(safeLogg);
-                    }
-                    else
-                    {
-                        Console.WriteLine("ELSE");
-                    }
-                    
+                  
                 }
                               
             }
@@ -69,6 +61,7 @@ namespace Syph_V02.Core.Components.Engine
                 this.renderer.Output(ex.Message);
             }
 
+            fileRenderer.WriteToFile(savedData.GetGameLog);
         }
 
         private string CommandsProcessor(string currentCommandLine)

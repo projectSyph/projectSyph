@@ -94,9 +94,11 @@
     <Compile Include="Components\Engine\GameManager\NewGame.cs" />
     <Compile Include="Components\Engine\LogSaver\Contracts\IDataStore.cs" />
     <Compile Include="Components\Engine\LogSaver\Contracts\IFileRenderer.cs" />
+    <Compile Include="Components\Engine\LogSaver\Contracts\LogSave.cs" />
     <Compile Include="Components\Engine\LogSaver\DataStore.cs" />
     <Compile Include="Components\Engine\GameManager\Contracts\ISpawnFactory.cs" />
     <Compile Include="Components\Engine\LogSaver\FileWriter.cs" />
+    <Compile Include="Components\Engine\LogSaver\Contracts\ILogSaveData.cs" />
     <Compile Include="Components\Engine\SyphEngine.cs" />
     <Compile Include="Models\Contracts\IPlayer.cs" />
     <Compile Include="Models\Contracts\ISpawn.cs" />
