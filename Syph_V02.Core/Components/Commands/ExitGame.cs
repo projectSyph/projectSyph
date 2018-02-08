@@ -10,9 +10,9 @@ namespace Syph_V02.Core.Components.Commands
 
         public string Execute(IList<string> parameters)
         {
-            Environment.Exit(0);
+            //Environment.Exit(0);
 
-            return string.Empty;
+            return "exit";
         }
     }
 }

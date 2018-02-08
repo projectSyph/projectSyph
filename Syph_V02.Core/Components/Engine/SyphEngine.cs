@@ -1,5 +1,7 @@
 ﻿using Syph_V02.Core.Components.Engine.Contracts;
+using Syph_V02.Core.Components.Engine.LogSaver.Contracts;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Syph_V02.Core.Components.Engine
@@ -11,17 +13,20 @@ namespace Syph_V02.Core.Components.Engine
     {
         private readonly IRenderer renderer;
         private readonly ICommandsFactory factory;
+        private readonly IFileRenderer fileRenderer;
 
         private readonly IVisualizer visuzlizer;
 
         /// <summary>
         /// Initialize fields
         /// </summary>
-        public SyphEngine(IRenderer renderer, ICommandsFactory factory, IVisualizer visuzlizer)
+        public SyphEngine(IRenderer renderer, ICommandsFactory factory, IVisualizer visuzlizer, IFileRenderer fileRenderer)
         {
             this.renderer = renderer;
             this.factory = factory;
             this.visuzlizer = visuzlizer;
+            this.fileRenderer= fileRenderer;
+            
         }
 
         /// <summary>
@@ -33,6 +38,8 @@ namespace Syph_V02.Core.Components.Engine
             var firstRunMessage = this.visuzlizer.ReadTextFile("menu");
             renderer.Output(firstRunMessage);
 
+            var safeLogg = new List<string>();
+
             try
             {
               
@@ -40,7 +47,20 @@ namespace Syph_V02.Core.Components.Engine
                 {
                    
                     var testStartingCommand = this.CommandsProcessor(currentCommandLine);
+
+                    safeLogg.Add(testStartingCommand);
                     renderer.Output(testStartingCommand);
+
+                    //Testing new functionality Save to File
+                    if (testStartingCommand == "exit")
+                    {
+                        fileRenderer.WriteToFile(safeLogg);
+                    }
+                    else
+                    {
+                        Console.WriteLine("ELSE");
+                    }
+                    
                 }
                               
             }
@@ -48,7 +68,7 @@ namespace Syph_V02.Core.Components.Engine
             {
                 this.renderer.Output(ex.Message);
             }
-           
+
         }
 
         private string CommandsProcessor(string currentCommandLine)

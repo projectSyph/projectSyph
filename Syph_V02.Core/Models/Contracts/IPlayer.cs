@@ -8,6 +8,8 @@ namespace Syph_V02.Core.Models.Contracts
 {
     public interface IPlayer
     {
+        string Name { get; }
+
         IList<ISpawn> Inventory { get; }
 
         int ID { get; }

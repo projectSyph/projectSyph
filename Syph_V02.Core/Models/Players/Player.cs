@@ -28,6 +28,8 @@ namespace Syph_V02.Core.Models
 
         public IList<ISpawn> Team => throw new NotImplementedException();
 
+        public string Name =>  this.name;
+
         public void Die()
         {
             throw new NotImplementedException();

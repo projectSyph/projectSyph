@@ -83,6 +83,7 @@
     <Compile Include="Components\Commands\StartNewGame.cs" />
     <Compile Include="Components\Engine\ConsoleClient\ConsoleRenderer.cs" />
     <Compile Include="Components\Engine\ConsoleClient\ConsoleVisualizer.cs" />
+    <Compile Include="Components\Engine\Constants.cs" />
     <Compile Include="Components\Engine\Contracts\ICommandsFactory.cs" />
     <Compile Include="Components\Engine\Contracts\IEngine.cs" />
     <Compile Include="Components\Engine\ConsoleClient\Contracts\IRenderer.cs" />
@@ -92,8 +93,10 @@
     <Compile Include="Components\Engine\Factories\CommandsFactory.cs" />
     <Compile Include="Components\Engine\GameManager\NewGame.cs" />
     <Compile Include="Components\Engine\LogSaver\Contracts\IDataStore.cs" />
+    <Compile Include="Components\Engine\LogSaver\Contracts\IFileRenderer.cs" />
     <Compile Include="Components\Engine\LogSaver\DataStore.cs" />
     <Compile Include="Components\Engine\GameManager\Contracts\ISpawnFactory.cs" />
+    <Compile Include="Components\Engine\LogSaver\FileWriter.cs" />
     <Compile Include="Components\Engine\SyphEngine.cs" />
     <Compile Include="Models\Contracts\IPlayer.cs" />
     <Compile Include="Models\Contracts\ISpawn.cs" />

@@ -32,6 +32,7 @@ namespace Syph.CLI.InjectionConfig
 
             builder.RegisterType<PlayerFactory>().As<IPlayerFactory>().SingleInstance();
             builder.RegisterType<DataStore>().As<IDataStore>().SingleInstance();
+            builder.RegisterType<Constants>().AsSelf().SingleInstance();
 
             //builder.RegisterType<Player>().As<IPlayer>();
 

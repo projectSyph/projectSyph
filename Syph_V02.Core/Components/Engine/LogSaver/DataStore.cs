@@ -23,7 +23,7 @@ namespace Syph_V02.Core.Components.Engine.LogSaver
 
         public void AddPlayer(IPlayer player)
         {
-            System.Console.WriteLine("PLAYER ADDED");
+            System.Console.WriteLine("OK");
         }
 
         public void AddSpawn(ISpawn spawn)
