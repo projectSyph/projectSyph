@@ -41,7 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Components\Engine\ConsoleClient\ConsoleRenderer.cs" />
     <Compile Include="Components\Engine\Contracts\IEngine.cs" />
+    <Compile Include="Components\Engine\Contracts\IRenderer.cs" />
     <Compile Include="Components\Engine\SyphEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

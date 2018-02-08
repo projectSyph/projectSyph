@@ -8,6 +8,15 @@ namespace Syph_V02.Core.Components.Engine
     /// </summary>
     public sealed class SyphEngine : IEngine
     {
+        private readonly IRenderer renderer;
+
+        /// <summary>
+        /// Initialize fields
+        /// </summary>
+        public SyphEngine(IRenderer renderer)
+        {
+            this.renderer = renderer;
+        }
 
         /// <summary>
         /// Start point of the engine.
@@ -16,7 +25,7 @@ namespace Syph_V02.Core.Components.Engine
         {
             try
             {
-                foreach (var item in collection)
+                foreach (var item in this.renderer.Input())
                 {
 
                 }
