@@ -1,8 +1,9 @@
 ﻿using Syph_V02.Core.Components.Engine.Contracts;
 using System.Collections.Generic;
 using HinterLib;
-using System;
 using Syph_V02.Core.Components.Commands;
+using System.Text;
+using System;
 
 namespace Syph_V02.Core.Components.Engine.ConsoleClient
 {
@@ -21,9 +22,10 @@ namespace Syph_V02.Core.Components.Engine.ConsoleClient
 
         }
 
-        public void Output(IEnumerable<string> output)
+        public void Output(string output)
         {
-            throw new NotImplementedException();
+
+            Console.WriteLine(output);
         }
     }
 }

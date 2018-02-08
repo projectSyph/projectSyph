@@ -25,18 +25,24 @@ namespace Syph_V02.Core.Components.Engine
         {
             try
             {
-                foreach (var item in this.renderer.Input())
+                foreach (var currentCommandLine in this.renderer.Input())
                 {
-                    Console.WriteLine(item);
+                    // DO somthing with commands
+                    this.CommandsProcessor(currentCommandLine);
                 }
                
                
             }
             catch (Exception ex)
             {
-
-                throw;
+                // Throw something .....   
+                this.renderer.Output(ex.Message);
             }
+        }
+
+        private string CommandsProcessor(string currentCommandLine)
+        {
+            return string.Empty;
         }
     }
 }
