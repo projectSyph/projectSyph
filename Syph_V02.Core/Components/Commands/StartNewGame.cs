@@ -7,7 +7,7 @@ namespace Syph_V02.Core.Components.Commands
     {
         public string Execute(IList<string> parameters)
         {
-            throw new System.NotImplementedException();
+            return "NEW GAME IS STARTED";
         }
     }
 }

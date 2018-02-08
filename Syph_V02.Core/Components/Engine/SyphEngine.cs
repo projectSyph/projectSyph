@@ -29,8 +29,9 @@ namespace Syph_V02.Core.Components.Engine
             {
                 foreach (var currentCommandLine in this.renderer.Input())
                 {
-                    // DO somthing with commands
-                    this.CommandsProcessor(currentCommandLine);
+                    // Testing
+                    var testStartingCommand = this.CommandsProcessor(currentCommandLine);
+                    this.renderer.Output(testStartingCommand);
                 }
                
                
