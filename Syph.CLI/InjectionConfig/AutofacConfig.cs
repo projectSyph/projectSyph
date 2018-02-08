@@ -23,7 +23,6 @@ namespace Syph.CLI.InjectionConfig
             builder.RegisterType<StartNewGame>().Named<ICommand>("new");
 
             builder.RegisterType<Guide>().Named<ICommand>("guide");
-
             builder.RegisterType<Credits>().Named<ICommand>("credits");
             builder.RegisterType<About>().Named<ICommand>("about");
             builder.RegisterType<HelpMenu>().Named<ICommand>("help");

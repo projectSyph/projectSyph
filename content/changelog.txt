@@ -1,8 +1,0 @@
-##################################################
-$            v0.0.0 - Initial release            $
-$						 $
-$                Base engine works.              $
-$               Classes to be added.             $
-$              Methods to be written.            $
-##################################################
-

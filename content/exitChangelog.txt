@@ -1,0 +1,10 @@
+##################################################
+           Thank's for playing Syph v02
+##################################################
+$            v2.0.1 - Initial release            $
+$						 $
+$                Base engine works.              $
+$               Classes to be added.             $
+$              Methods to be written.            $
+##################################################
+

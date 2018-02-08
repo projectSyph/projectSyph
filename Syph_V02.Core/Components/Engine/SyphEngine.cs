@@ -43,8 +43,7 @@ namespace Syph_V02.Core.Components.Engine
 
                     this.renderer.Output(testStartingCommand);
                 }
-               
-               
+                              
             }
             catch (Exception ex)
             {
