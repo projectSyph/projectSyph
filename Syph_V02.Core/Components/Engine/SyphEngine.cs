@@ -29,19 +29,18 @@ namespace Syph_V02.Core.Components.Engine
         /// </summary>
         public void Start()
         {
-            
-          // this.visuzlizer.ScreanRender("logo");
-           //this.visuzlizer.ScreanRender("menu");
+            //TODO: Find bether way to do this action -> print menu !!
+            var firstRunMessage = this.visuzlizer.ReadTextFile("menu");
+            renderer.Output(firstRunMessage);
 
             try
             {
               
                 foreach (var currentCommandLine in this.renderer.Input())
                 {
-                    // Testing
+                   
                     var testStartingCommand = this.CommandsProcessor(currentCommandLine);
-
-                    this.renderer.Output(testStartingCommand);
+                    
                 }
                               
             }
@@ -56,11 +55,16 @@ namespace Syph_V02.Core.Components.Engine
         {
             var command = currentCommandLine.Split(' ').ToList();
 
+            //Main command link
             var commandName = command[0];
+
+            //Command parameters
             var commandParameters = command.Skip(1).ToList();
 
+            //Action on current command
             var currentCommand = this.factory.GetCommand(commandName.ToLower());
 
+            //Print command descripsion on console
             var message = this.visuzlizer.ReadTextFile(commandName);
             renderer.Output(message);
 

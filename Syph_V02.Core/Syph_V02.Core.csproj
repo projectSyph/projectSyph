@@ -71,6 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppConfigurations\Constants\IOConsoleSettings.cs" />
     <Compile Include="Components\Commands\About.cs" />
     <Compile Include="Components\Commands\CommandsListConstants\CommandsList.cs" />
     <Compile Include="Components\Commands\Contracts\ICommand.cs" />

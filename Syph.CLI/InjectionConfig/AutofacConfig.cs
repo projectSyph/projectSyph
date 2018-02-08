@@ -5,6 +5,8 @@ using Syph_V02.Core.Components.Engine.Contracts;
 using Syph_V02.Core.Components.Engine.Factories;
 using Syph_V02.Core.Components.Commands;
 using Syph_V02.Core.Components.Commands.Contracts;
+using Syph_V02.Core.Components.Engine.ConsoleClient;
+using Syph_V02.Core.AppConfigurations.Constants;
 
 namespace Syph.CLI.InjectionConfig
 {
@@ -20,7 +22,8 @@ namespace Syph.CLI.InjectionConfig
 
             builder.RegisterType<SyphEngine>().As<IEngine>().SingleInstance();
 
-           
+            builder.RegisterType<IOConsoleSettings>().AsSelf().SingleInstance(); 
+
             builder.RegisterType<StartNewGame>().Named<ICommand>("new");
 
             builder.RegisterType<Guide>().Named<ICommand>("guide");
