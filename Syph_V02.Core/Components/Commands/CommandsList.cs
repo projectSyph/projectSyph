@@ -6,24 +6,20 @@ using System.Threading.Tasks;
 
 namespace Syph_V02.Core.Components.Commands
 {
-    /// <summary>
-    /// Initialize Commands 
-    /// TODO : Find other way to do this
-    /// </summary>
-    public static class Commands
+    public static class CommandsList
     {
-        public static string[] CommandsList
+        public static string[] CommandsLibrary
         {
             get
             {
-                return commandsList;
+                return commandsLibrary;
             }
         }
 
         /// <summary>
         /// Some of the commands are set for testing
         /// </summary>
-        private  static string[] commandsList = new[]
+        private static string[] commandsLibrary = new[]
         {
               "help => commands help",
               "surrender",
@@ -36,7 +32,5 @@ namespace Syph_V02.Core.Components.Commands
               "Player <name> ",
               "2<how many[2-4]> players game"
         };
-
-
     }
 }
