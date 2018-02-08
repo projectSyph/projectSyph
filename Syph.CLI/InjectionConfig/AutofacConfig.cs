@@ -26,7 +26,7 @@ namespace Syph.CLI.InjectionConfig
 
             builder.RegisterType<Credits>().Named<ICommand>("credits");
             builder.RegisterType<About>().Named<ICommand>("about");
-            builder.RegisterType<HelpMeny>().Named<ICommand>("help");
+            builder.RegisterType<HelpMenu>().Named<ICommand>("help");
 
             builder.RegisterType<ExitGame>().Named<ICommand>("exit");
 

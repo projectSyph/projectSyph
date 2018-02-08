@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Syph_V02.Core.Components.Commands
 {
-    public class HelpMeny : ICommand
+    public class HelpMenu : ICommand
     {
         
             public string Execute(IList<string> parameters)
