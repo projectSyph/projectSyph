@@ -17,7 +17,15 @@ namespace Syph_V02.Core.Components.Engine.ConsoleClient
             
             while (!string.IsNullOrEmpty(input))
             {
-                yield return input;
+                if (CommandsList.CommandsLibrary.Contains(input))
+                {
+                    yield return input;                 
+                }
+                else
+                {
+                    Output("BAD INPUT");
+                }
+
                 input = Hinter.ReadHintedLine(CommandsList.CommandsLibrary, d => d);
             }
 

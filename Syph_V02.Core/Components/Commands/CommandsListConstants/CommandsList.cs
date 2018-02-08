@@ -8,7 +8,7 @@ namespace Syph_V02.Core.Components.Commands
 {
     public static class CommandsList
     {
-        public static string[] CommandsLibrary
+        public static List<string>  CommandsLibrary
         {
             get
             {
@@ -19,7 +19,7 @@ namespace Syph_V02.Core.Components.Commands
         /// <summary>
         /// Some of the commands are set for testing
         /// </summary>
-        private static string[] commandsLibrary = new[]
+        private static List<string> commandsLibrary = new List<string>()
         {
               "help => commands help",
               "guide",
