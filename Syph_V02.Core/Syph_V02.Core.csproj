@@ -71,7 +71,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Components\Commands\About.cs" />
     <Compile Include="Components\Commands\CommandsListConstants\CommandsList.cs" />
     <Compile Include="Components\Commands\Contracts\ICommand.cs" />
@@ -86,12 +85,23 @@
     <Compile Include="Components\Engine\Contracts\IEngine.cs" />
     <Compile Include="Components\Engine\ConsoleClient\Contracts\IRenderer.cs" />
     <Compile Include="Components\Engine\ConsoleClient\Contracts\IVisualizer.cs" />
+    <Compile Include="Models\Contracts\IPlayerFactory.cs" />
     <Compile Include="Components\Engine\Factories\CommandsFactory.cs" />
+    <Compile Include="Models\Contracts\ISpawnFactory.cs" />
+    <Compile Include="Models\Factories\PlayerFactory.cs" />
     <Compile Include="Components\Engine\SyphEngine.cs" />
+    <Compile Include="Models\Contracts\IPlayer.cs" />
+    <Compile Include="Models\Contracts\ISpawn.cs" />
+    <Compile Include="Models\Factories\SpawnFactory.cs" />
+    <Compile Include="Models\Players\Player.cs" />
+    <Compile Include="Models\Spawns\JuniorSpawn.cs" />
+    <Compile Include="Models\Spawns\RegularSpawn.cs" />
+    <Compile Include="Models\Spawns\SeniorSpawn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\Entities\" />
+    <Folder Include="Components\Engine\BattleManager\" />
+    <Folder Include="Components\Engine\LogSaver\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
