@@ -23,8 +23,9 @@ namespace Syph_V02.Core.Components.Engine.ConsoleClient
                 }
                 else
                 {
+
                     Output("BAD INPUT");
-                }
+                } 
 
                 input = Hinter.ReadHintedLine(CommandsList.CommandsLibrary, d => d);
             }
