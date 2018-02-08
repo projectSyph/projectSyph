@@ -9,7 +9,7 @@ namespace Syph_V02.Core.Components.Commands
     {
         public string Execute(IList<string> parameters)
         {
-            ConsoleVisualizer.PrintTextFile(true, "exitChangelog");
+            
 
             return string.Empty;
         }

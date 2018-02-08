@@ -9,35 +9,24 @@ using System.Threading.Tasks;
 namespace Syph_V02.Core.Components.Engine.ConsoleClient
 {
     public class ConsoleVisualizer : IVisualizer
-    {
-        public void ScreanRender(string component)
-        {
-            PrintTextFile(false, component);
-        }
-
-        public static void PrintTextFile(bool clear, params string[] filenames)
-        {
+    {    
+        public string ReadTextFile(string filenames, bool clear = true)
+        {          
             if (clear)
             {
                 Console.Clear();
             }
 
-            foreach (var file in filenames)
-            {
-                if (!File.Exists($"./../../../content/{file}.txt"))
-                {
-                    throw new ArgumentException("File doesnt exist");
-                }
+           if (!File.Exists($"./../../../content/{filenames}.txt"))
+           {
+               throw new ArgumentException("File doesnt exist");
+           }
 
-                string text = File.ReadAllText($"./../../../content/{file}.txt");
+           string text = File.ReadAllText($"./../../../content/{filenames}.txt");
 
-                Print(text);
-            }
+           return text;
         }
 
-        public static void Print(string msg)
-        {
-            Console.WriteLine(msg);
-        }
+      
     }
 }

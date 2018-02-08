@@ -6,7 +6,24 @@ using System.Threading.Tasks;
 
 namespace Syph_V02.Core.Models.Contracts
 {
-    class IPlayer
+    public interface IPlayer
     {
+        IList<ISpawn> Inventory { get; }
+
+        int ID { get; }
+
+        bool IsAlive { get; }
+
+        IList<IPlayer> Team { get; }
+
+        void TakeDamage(int d);
+
+        void Die();
+
+        void Surrender();
+
+        void Summon(ISpawn spawn);
+
+        void ListInventory();
     }
 }

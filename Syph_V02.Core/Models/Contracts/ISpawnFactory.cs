@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Syph_V02.Core.Models.Contracts
 {
-    interface ISpawnFactory
+    public interface ISpawnFactory
     {
+        ISpawn CreateJuniorSpawn(string name, int souls);
+
+        ISpawn CreateRegularSpawn(string name, int souls);
+
+        ISpawn CreateSeniorSpawn(string name, int souls);
+       
     }
 }

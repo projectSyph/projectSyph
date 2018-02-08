@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Syph_V02.Core.Components.Engine.Contracts
 {
     public interface IVisualizer
-    {
-        void ScreanRender(string component);
+    {      
+        string ReadTextFile( string filenames, bool clear = true );
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Syph_V02.Core.Models.Contracts
 {
-    interface ISpawn
+    public interface ISpawn
     {
     }
 }

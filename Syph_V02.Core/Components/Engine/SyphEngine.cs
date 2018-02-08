@@ -29,9 +29,9 @@ namespace Syph_V02.Core.Components.Engine
         /// </summary>
         public void Start()
         {
-            //TODO GET THIS THINGS OUT OF HERE!!
-            this.visuzlizer.ScreanRender("logo");
-            this.visuzlizer.ScreanRender("menu");
+            
+          // this.visuzlizer.ScreanRender("logo");
+           //this.visuzlizer.ScreanRender("menu");
 
             try
             {
@@ -60,6 +60,9 @@ namespace Syph_V02.Core.Components.Engine
             var commandParameters = command.Skip(1).ToList();
 
             var currentCommand = this.factory.GetCommand(commandName.ToLower());
+
+            var message = this.visuzlizer.ReadTextFile(commandName);
+            renderer.Output(message);
 
             return currentCommand.Execute(commandParameters);
         }

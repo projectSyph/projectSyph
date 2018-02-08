@@ -1,12 +1,11 @@
-﻿using System;
+﻿using Syph_V02.Core.Models.Contracts;
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Syph_V02.Core.Components.Engine.Contracts
 {
-    class IPlayerFactory
+    public interface IPlayerFactory
     {
+        IPlayer CreateNewPlayer(string name, int id, IList<IPlayer> team);
     }
 }
