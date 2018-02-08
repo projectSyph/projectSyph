@@ -87,14 +87,17 @@
     <Compile Include="Components\Engine\Contracts\IEngine.cs" />
     <Compile Include="Components\Engine\ConsoleClient\Contracts\IRenderer.cs" />
     <Compile Include="Components\Engine\ConsoleClient\Contracts\IVisualizer.cs" />
-    <Compile Include="Models\Contracts\IPlayerFactory.cs" />
+    <Compile Include="Components\Engine\GameManager\Contracts\IPlayerFactory.cs" />
+    <Compile Include="Components\Engine\GameManager\Factories\PlayerFactory.cs" />
     <Compile Include="Components\Engine\Factories\CommandsFactory.cs" />
-    <Compile Include="Models\Contracts\ISpawnFactory.cs" />
-    <Compile Include="Models\Factories\PlayerFactory.cs" />
+    <Compile Include="Components\Engine\GameManager\NewGame.cs" />
+    <Compile Include="Components\Engine\LogSaver\Contracts\IDataStore.cs" />
+    <Compile Include="Components\Engine\LogSaver\DataStore.cs" />
+    <Compile Include="Components\Engine\GameManager\Contracts\ISpawnFactory.cs" />
     <Compile Include="Components\Engine\SyphEngine.cs" />
     <Compile Include="Models\Contracts\IPlayer.cs" />
     <Compile Include="Models\Contracts\ISpawn.cs" />
-    <Compile Include="Models\Factories\SpawnFactory.cs" />
+    <Compile Include="Components\Engine\GameManager\Factories\SpawnFactory.cs" />
     <Compile Include="Models\Players\Player.cs" />
     <Compile Include="Models\Spawns\JuniorSpawn.cs" />
     <Compile Include="Models\Spawns\RegularSpawn.cs" />
@@ -102,8 +105,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Components\Engine\BattleManager\" />
-    <Folder Include="Components\Engine\LogSaver\" />
+    <Folder Include="Models\Factories\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

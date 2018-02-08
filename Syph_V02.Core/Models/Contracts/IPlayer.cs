@@ -14,7 +14,7 @@ namespace Syph_V02.Core.Models.Contracts
 
         bool IsAlive { get; }
 
-        IList<IPlayer> Team { get; }
+        IList<ISpawn> Team { get; }
 
         void TakeDamage(int d);
 

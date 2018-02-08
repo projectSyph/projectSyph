@@ -11,9 +11,9 @@ namespace Syph_V02.Core.Models
     {
         private string name;
         private int id;
-        private IList<IPlayer> team;
+        private IList<ISpawn> team;
 
-        public Player(string name, int id, IList<IPlayer> team)
+        public Player(string name, int id, IList<ISpawn> team)
         {
             this.name = name;
             this.id = id;
@@ -26,7 +26,7 @@ namespace Syph_V02.Core.Models
 
         public bool IsAlive => throw new NotImplementedException();
 
-        public IList<IPlayer> Team => throw new NotImplementedException();
+        public IList<ISpawn> Team => throw new NotImplementedException();
 
         public void Die()
         {

@@ -7,6 +7,12 @@ using Syph_V02.Core.Components.Commands;
 using Syph_V02.Core.Components.Commands.Contracts;
 using Syph_V02.Core.Components.Engine.ConsoleClient;
 using Syph_V02.Core.AppConfigurations.Constants;
+using Syph_V02.Core.Components.Engine.GameManager.Factories;
+using Syph_V02.Core.Components.Engine.GameManager.Contracts;
+using Syph_V02.Core.Models;
+using Syph_V02.Core.Models.Contracts;
+using Syph_V02.Core.Components.Engine.LogSaver;
+using Syph_V02.Core.Components.Engine.LogSaver.Contracts;
 
 namespace Syph.CLI.InjectionConfig
 {
@@ -22,7 +28,12 @@ namespace Syph.CLI.InjectionConfig
 
             builder.RegisterType<SyphEngine>().As<IEngine>().SingleInstance();
 
-            builder.RegisterType<IOConsoleSettings>().AsSelf().SingleInstance(); 
+            builder.RegisterType<IOConsoleSettings>().AsSelf().SingleInstance();
+
+            builder.RegisterType<PlayerFactory>().As<IPlayerFactory>().SingleInstance();
+            builder.RegisterType<DataStore>().As<IDataStore>().SingleInstance();
+
+            //builder.RegisterType<Player>().As<IPlayer>();
 
             builder.RegisterType<StartNewGame>().Named<ICommand>("new");
             builder.RegisterType<Menu>().Named<ICommand>("menu");
@@ -30,8 +41,9 @@ namespace Syph.CLI.InjectionConfig
             builder.RegisterType<Credits>().Named<ICommand>("credits");
             builder.RegisterType<About>().Named<ICommand>("about");
             builder.RegisterType<HelpMenu>().Named<ICommand>("help");
-
             builder.RegisterType<ExitGame>().Named<ICommand>("exit");
+
+            
 
             builder.RegisterType<CommandsFactory>().As<ICommandsFactory>().SingleInstance();
         }

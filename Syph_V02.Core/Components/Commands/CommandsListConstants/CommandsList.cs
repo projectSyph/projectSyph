@@ -33,10 +33,9 @@ namespace Syph_V02.Core.Components.Commands
               "summon <monster_type> <monster_name> <souls_for_monster>",
               "skip",
               "add player",
-              "Player <name> ",
+              "Player <name>",
               "new game",
-              "new game <players_count>",
-              "2<how many[2-4]> players game",
+              "new game <players count[2]> <player_one_Name> <player_two_Name>",           
               "exit"
         };
     }

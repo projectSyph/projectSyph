@@ -40,7 +40,7 @@ namespace Syph_V02.Core.Components.Engine
                 {
                    
                     var testStartingCommand = this.CommandsProcessor(currentCommandLine);
-                    
+                    renderer.Output(testStartingCommand);
                 }
                               
             }
