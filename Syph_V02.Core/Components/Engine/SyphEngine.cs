@@ -1,5 +1,6 @@
 ﻿using Syph_V02.Core.Components.Engine.Contracts;
 using System;
+using System.Linq;
 
 namespace Syph_V02.Core.Components.Engine
 {
@@ -9,6 +10,7 @@ namespace Syph_V02.Core.Components.Engine
     public sealed class SyphEngine : IEngine
     {
         private readonly IRenderer renderer;
+        private readonly ICommandsFactory factory;
 
         /// <summary>
         /// Initialize fields
@@ -42,7 +44,14 @@ namespace Syph_V02.Core.Components.Engine
 
         private string CommandsProcessor(string currentCommandLine)
         {
-            return string.Empty;
+            var command = currentCommandLine.Split(' ').ToList();
+
+            var commandName = command[0];
+            var commandParameters = command.Skip(1).ToList();
+
+            var currentCommand = this.factory.GetCommand(commandName.ToLower());
+
+            return currentCommand.Execute(commandParameters);
         }
     }
 }
