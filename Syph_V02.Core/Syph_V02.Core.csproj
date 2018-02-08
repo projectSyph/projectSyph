@@ -72,9 +72,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Components\Commands\About.cs" />
     <Compile Include="Components\Commands\CommandsListConstants\CommandsList.cs" />
     <Compile Include="Components\Commands\Contracts\ICommand.cs" />
+    <Compile Include="Components\Commands\Credits.cs" />
     <Compile Include="Components\Commands\ExitGame.cs" />
+    <Compile Include="Components\Commands\Guide.cs" />
+    <Compile Include="Components\Commands\HelpMeny.cs" />
     <Compile Include="Components\Commands\StartNewGame.cs" />
     <Compile Include="Components\Engine\ConsoleClient\ConsoleRenderer.cs" />
     <Compile Include="Components\Engine\ConsoleClient\ConsoleVisualizer.cs" />

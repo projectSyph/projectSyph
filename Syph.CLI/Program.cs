@@ -13,8 +13,10 @@
         {
             //This is just for fun .. ignored !!
             Console.Title = "SYPH V02";
-            Console.SetWindowSize(59, 26);         
-            Console.SetBufferSize(60, 26);
+            Console.SetWindowSize(59, 26);
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.CursorSize = 30;
+            //Console.SetBufferSize(60, 26);
 
             var builder = new ContainerBuilder();
             builder.RegisterModule(new AutofacConfig());

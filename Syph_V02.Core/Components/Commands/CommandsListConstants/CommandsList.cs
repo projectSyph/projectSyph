@@ -22,7 +22,10 @@ namespace Syph_V02.Core.Components.Commands
         private static string[] commandsLibrary = new[]
         {
               "help => commands help",
+              "guide",
               "surrender",
+              "credits",
+              "about",
               "sacrifice <monster_type> <monster_name>",
               "attack <opponent's_name> <monster_type> <monster_name> <my_monster_type> <my_monster_name>",
               "inventory <team_id> <player_id>",
@@ -31,6 +34,7 @@ namespace Syph_V02.Core.Components.Commands
               "add player",
               "Player <name> ",
               "new game",
+              "new game <players_count>",
               "2<how many[2-4]> players game",
               "exit"
         };
