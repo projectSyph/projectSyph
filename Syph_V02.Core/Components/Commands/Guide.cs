@@ -13,7 +13,6 @@ namespace Syph_V02.Core.Components.Commands
         public string Execute(IList<string> parameters)
         {
             
-
             return string.Empty;
         }
     }

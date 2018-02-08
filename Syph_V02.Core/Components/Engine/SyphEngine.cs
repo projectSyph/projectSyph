@@ -23,7 +23,14 @@ namespace Syph_V02.Core.Components.Engine
         /// <summary>
         /// Initialize fields
         /// </summary>
-        public SyphEngine(IRenderer renderer, ICommandsFactory factory, IVisualizer visuzlizer, IFileRenderer fileRenderer, ILogSaveData savedData)
+        public SyphEngine
+            (
+                IRenderer renderer, 
+                ICommandsFactory factory, 
+                IVisualizer visuzlizer, 
+                IFileRenderer fileRenderer, 
+                ILogSaveData savedData
+            )
         {
             this.renderer = renderer;
             this.factory = factory;
@@ -61,6 +68,7 @@ namespace Syph_V02.Core.Components.Engine
                 this.renderer.Output(ex.Message);
             }
 
+            renderer.Output("Strange but this is OUTOSAVE LOG... CHANGE ME!");
             fileRenderer.WriteToFile(savedData.GetGameLog);
         }
 
