@@ -15,9 +15,10 @@ namespace Syph_V02.Core.Components.Engine
         /// <summary>
         /// Initialize fields
         /// </summary>
-        public SyphEngine(IRenderer renderer)
+        public SyphEngine(IRenderer renderer, ICommandsFactory factory)
         {
             this.renderer = renderer;
+            this.factory = factory;
         }
 
         /// <summary>
