@@ -79,6 +79,7 @@
     <Compile Include="Components\Commands\ExitGame.cs" />
     <Compile Include="Components\Commands\Guide.cs" />
     <Compile Include="Components\Commands\HelpMenu.cs" />
+    <Compile Include="Components\Commands\Menu.cs" />
     <Compile Include="Components\Commands\StartNewGame.cs" />
     <Compile Include="Components\Engine\ConsoleClient\ConsoleRenderer.cs" />
     <Compile Include="Components\Engine\ConsoleClient\ConsoleVisualizer.cs" />

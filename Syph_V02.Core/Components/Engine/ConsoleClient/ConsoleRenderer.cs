@@ -1,9 +1,9 @@
 ﻿using Syph_V02.Core.Components.Engine.Contracts;
 using System.Collections.Generic;
-using Syph_V02.Core.Components.Commands;
 using System.Text;
 using System;
 using HinterLib;
+using Syph_V02.Core.Components.Commands;
 
 namespace Syph_V02.Core.Components.Engine.ConsoleClient
 {
@@ -23,7 +23,6 @@ namespace Syph_V02.Core.Components.Engine.ConsoleClient
                 }
                 else
                 {
-
                     Output("BAD INPUT");
                 } 
 

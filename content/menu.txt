@@ -8,8 +8,10 @@
  |_|           |__/                      |___/|_|version 02
 
 ###########################################################
-#               Enter Some of the commands	 	  #
+#                  Welcome to Syph v02                    #
+           Enter some of the commands at any time.	 	 
 ###########################################################
+# 		    	    Menu 		          #
 # 		    	  New Game		          #
 # 		    	   Guide		          #	
 # 		    	  Credits                         #

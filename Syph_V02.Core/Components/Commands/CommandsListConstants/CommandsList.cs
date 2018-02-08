@@ -22,6 +22,7 @@ namespace Syph_V02.Core.Components.Commands
         private static List<string> commandsLibrary = new List<string>()
         {
               "help => commands help",
+              "menu",
               "guide",
               "surrender",
               "credits",

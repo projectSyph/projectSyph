@@ -25,7 +25,7 @@ namespace Syph.CLI.InjectionConfig
             builder.RegisterType<IOConsoleSettings>().AsSelf().SingleInstance(); 
 
             builder.RegisterType<StartNewGame>().Named<ICommand>("new");
-
+            builder.RegisterType<Menu>().Named<ICommand>("menu");
             builder.RegisterType<Guide>().Named<ICommand>("guide");
             builder.RegisterType<Credits>().Named<ICommand>("credits");
             builder.RegisterType<About>().Named<ICommand>("about");
