@@ -13,12 +13,8 @@ namespace Syph_V02.Core.Components.Engine.LogSaver.Contracts
 
         IDictionary<string, IPlayer> Players { get; }
 
-        //IDictionary<ITeam, ISpawn> Enemy { get; }
-
         void AddPlayer(IPlayer player);
 
         void AddSpawn(ISpawn spawn);
-
-        // void AddEnemy(ISpawn enemy);
     }
 }

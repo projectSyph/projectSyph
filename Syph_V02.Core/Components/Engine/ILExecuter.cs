@@ -13,7 +13,7 @@ namespace Syph_V02.Core.Components.Engine
         private readonly ICommandsFactory factory;
         private readonly IFileRenderer fileRenderer;
         private readonly ILogSaveData savedData;
-        private readonly IVisualizer visuzlizer;
+        private readonly IVisualizer visualizer;
         private readonly IOConsoleSettings consoleSettings;
 
         public ILExecuter
@@ -28,7 +28,7 @@ namespace Syph_V02.Core.Components.Engine
         {
             this.renderer = renderer;
             this.factory = factory;
-            this.visuzlizer = visualizer;
+            this.visualizer = visualizer;
             this.fileRenderer = fileRenderer;
             this.savedData = savedData;
             this.consoleSettings = consoleSettings;
@@ -36,7 +36,7 @@ namespace Syph_V02.Core.Components.Engine
 
         public void InputExecuter(string dirrection)
         {
-            var firstRunMessage = this.visuzlizer.ReadTextFile(dirrection);
+            var firstRunMessage = this.visualizer.ReadTextFile(dirrection);
             renderer.Output(firstRunMessage);
 
             try
@@ -73,7 +73,7 @@ namespace Syph_V02.Core.Components.Engine
             var currentCommand = this.factory.GetCommand(commandName.ToLower());
 
             //Print command descripsion on console
-            var message = this.visuzlizer.ReadTextFile(commandName);
+            var message = this.visualizer.ReadTextFile(commandName);
             renderer.Output(message);
 
             return currentCommand.Execute(commandParameters);

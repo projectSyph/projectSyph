@@ -14,18 +14,18 @@ namespace Syph_V02.Core.Components.Engine.GameManager
 {
     public class NewGame : IGameManager
     {
-        private  readonly IBattleField battleField;
+        private readonly IBattleField battleField;
         private readonly IBattleCalculator battleCalculator;
         private readonly IInputLineExecuter inputExecutor;
         private readonly IRenderer renderer;
         private readonly BattleConstants constants;
 
-        private readonly IDataStore data;        
+        private readonly IDataStore data;
 
         public NewGame
             (
                 IBattleField battleField,
-                IBattleCalculator battleCalculator, 
+                IBattleCalculator battleCalculator,
                 IInputLineExecuter inputExecutor,
                 IRenderer renderer,
                 IDataStore data,
@@ -46,7 +46,7 @@ namespace Syph_V02.Core.Components.Engine.GameManager
             //IN THE FUTURE THIS PART IS GOING TO BE DIFFERENT
 
             inputExecutor.InputExecuter(this.constants.BattleMenuCommand);
-            
+
             Console.WriteLine("PLAYER IS DEAD");
             return "BATTLE BEGINS";
         }

@@ -13,7 +13,7 @@ namespace Syph_V02.Core.Components.Commands
 {
     public class StartNewGame : ICommand
     {
-        private readonly IDataStore data;      
+        private readonly IDataStore data;
         private readonly IPlayerFactory playerFactory;
         private readonly Constants constants;
         private readonly IRenderer renderer;
@@ -22,54 +22,65 @@ namespace Syph_V02.Core.Components.Commands
         public StartNewGame
             (
             IDataStore data,
-            IPlayerFactory playerFactory, 
-            Constants constants, 
+            IPlayerFactory playerFactory,
+            Constants constants,
             IRenderer renderer,
-            IGameManager newGameManager
+            IGameManager gameManager
             )
         {
-            this.data = data;           
+            this.data = data;
             this.playerFactory = playerFactory;
             this.constants = constants;
             this.renderer = renderer;
-            this.gameManager = newGameManager;
+            this.gameManager = gameManager;
         }
 
         public string Execute(IList<string> parameters)
         {
-            this.renderer.SameLineOutput("Number of players: ");
+            int playersCount = 2;
+            bool parsed = false;
 
-            int playersCount = int.Parse(this.renderer.LineReader());
+            while (!parsed)
+            {
+                this.renderer.SameLineOutput("Number of players: ");
+                parsed = int.TryParse(this.renderer.LineReader(), out playersCount);
+
+                if (!parsed || (playersCount < 2 || playersCount > 4))
+                {
+                    this.renderer.Output("Please, enter a number between 2 and 4!");
+                    parsed = false;
+                }
+            }
 
             var resultBuilder = new StringBuilder();
 
             for (int i = 0; i < playersCount; i++)
             {
                 renderer.SameLineOutput(string.Format(this.constants.PlayerNamePrompt, i + 1));
-               
+
                 var playerName = renderer.LineReader();
-                var id = i;
-                var team = new List<IPlayer>();
 
                 if (this.data.Players.Any(x => x.Key == playerName))
                 {
-                    var msg = string.Format(this.constants.PlayerFailsToBelAdded, playerName);
+                    var error = string.Format(this.constants.PlayerFailsToBelAdded, playerName);
 
-                    renderer.Output(msg);
-                    resultBuilder.AppendLine(msg);
+                    renderer.Output(error);
+                    resultBuilder.AppendLine(error);
 
-                    i--;                   
+                    i--;
+                    continue;
                 }
-                else
-                {
-                    var player = this.playerFactory.CreateNewPlayer(playerName, id, team);
-                    data.AddPlayer(player);
 
-                    var msg = string.Format(this.constants.PlayerSuccessfullAdded, playerName);
+                var id = i;
+                var team = new List<IPlayer>();
 
-                    renderer.Output(msg);
-                    resultBuilder.AppendLine(msg);                    
-                }                             
+                var player = this.playerFactory.CreateNewPlayer(playerName, id, team);
+                data.AddPlayer(player);
+
+                var msg = string.Format(this.constants.PlayerSuccessfullAdded, playerName);
+
+                renderer.Output(msg);
+                resultBuilder.AppendLine(msg);
             }
 
             //DEMO VERSION BATTLE INITIALIZER 
@@ -78,7 +89,6 @@ namespace Syph_V02.Core.Components.Commands
             var battleResults = gameManager.ExecuteBattle();
 
             return resultBuilder.AppendLine(battleResults).ToString();
-            
         }
     }
 }

@@ -1,8 +1,6 @@
 ####################################
-#   WELCOME TO SYPH BATTLE FIELD   #
+# WELCOME TO THE SYPH BATTLE FIELD #
            DEMO VERSION
-####################################
-Player 1	|	   Player 2
 ------------------------------------
- use command attack to hit opponent
+
 ------------------------------------
