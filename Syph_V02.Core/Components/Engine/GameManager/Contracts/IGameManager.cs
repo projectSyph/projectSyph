@@ -9,6 +9,6 @@ namespace Syph_V02.Core.Components.Engine.GameManager.Contracts
 {
     public interface IGameManager
     {
-        string Battle(IDataStore data);
+        string ExecuteBattle(IDataStore data);
     }
 }

@@ -12,31 +12,35 @@ namespace Syph_V02.Core.Components.Engine
     /// </summary>
     public sealed class SyphEngine : IEngine
     {
-        private readonly IRenderer renderer;
-        private readonly ICommandsFactory factory;
-        private readonly IFileRenderer fileRenderer;
+        //private readonly IRenderer renderer;
+        //private readonly ICommandsFactory factory;
+        //private readonly IFileRenderer fileRenderer;
 
-        private readonly ILogSaveData savedData;
+        //private readonly ILogSaveData savedData;
 
-        private readonly IVisualizer visuzlizer;
+        //private readonly IVisualizer visuzlizer;
 
+
+        private readonly IInputLineExecuter executer;
         /// <summary>
         /// Initialize fields
         /// </summary>
         public SyphEngine
             (
-                IRenderer renderer, 
-                ICommandsFactory factory, 
-                IVisualizer visuzlizer, 
-                IFileRenderer fileRenderer, 
-                ILogSaveData savedData
+                //IRenderer renderer, 
+                //ICommandsFactory factory, 
+                //IVisualizer visuzlizer, 
+                //IFileRenderer fileRenderer, 
+               // ILogSaveData savedData
+            IInputLineExecuter executer
             )
         {
-            this.renderer = renderer;
-            this.factory = factory;
-            this.visuzlizer = visuzlizer;
-            this.fileRenderer= fileRenderer;
-            this.savedData = savedData;
+            this.executer = executer;
+            //this.renderer = renderer;
+            //this.factory = factory;
+            //this.visuzlizer = visuzlizer;
+            // this.fileRenderer= fileRenderer;
+            //this.savedData = savedData;
         }
 
         /// <summary>
@@ -44,52 +48,56 @@ namespace Syph_V02.Core.Components.Engine
         /// </summary>
         public void Start()
         {
-            //TODO: Find bether way to do this action -> print menu !!
-            var firstRunMessage = this.visuzlizer.ReadTextFile("menu");
-            renderer.Output(firstRunMessage);
+            string displayProvider = "menu";
+
+            executer.InputExecuter(displayProvider);
+        }
+        //    //TODO: Find bether way to do this action -> print menu !!
+        //    var firstRunMessage = this.visuzlizer.ReadTextFile("menu");
+        //    renderer.Output(firstRunMessage);
          
-            try
-            {
+        //    try
+        //    {
               
-                foreach (var currentCommandLine in this.renderer.Input())
-                {
+        //        foreach (var currentCommandLine in this.renderer.Input())
+        //        {
                    
-                    var testStartingCommand = this.CommandsProcessor(currentCommandLine);
+        //            var testStartingCommand = this.CommandsProcessor(currentCommandLine);
 
-                    savedData.AddLog(testStartingCommand);
+        //            savedData.AddLog(testStartingCommand);
                    
-                    //renderer.Output(testStartingCommand);
+        //            //renderer.Output(testStartingCommand);
                   
-                }
+        //        }
                               
-            }
-            catch (Exception ex)
-            {
-                this.renderer.Output(ex.Message);
-            }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        this.renderer.Output(ex.Message);
+        //    }
 
-            renderer.Output("Strange but this is OUTOSAVE LOG... CHANGE ME!");
-            fileRenderer.WriteToFile(savedData.GetGameLog);
-        }
+        //    renderer.Output("Strange but this is OUTOSAVE LOG... CHANGE ME!");
+        //    fileRenderer.WriteToFile(savedData.GetGameLog);
+        //}
 
-        private string CommandsProcessor(string currentCommandLine)
-        {
-            var command = currentCommandLine.Split(' ').ToList();
+        //private string CommandsProcessor(string currentCommandLine)
+        //{
+        //    var command = currentCommandLine.Split(' ').ToList();
 
-            //Main command link
-            var commandName = command[0];
+        //    //Main command link
+        //    var commandName = command[0];
 
-            //Command parameters
-            var commandParameters = command.Skip(1).ToList();
+        //    //Command parameters
+        //    var commandParameters = command.Skip(1).ToList();
 
-            //Action on current command
-            var currentCommand = this.factory.GetCommand(commandName.ToLower());
+        //    //Action on current command
+        //    var currentCommand = this.factory.GetCommand(commandName.ToLower());
 
-            //Print command descripsion on console
-            var message = this.visuzlizer.ReadTextFile(commandName);
-            renderer.Output(message);
+        //    //Print command descripsion on console
+        //    var message = this.visuzlizer.ReadTextFile(commandName);
+        //    renderer.Output(message);
 
-            return currentCommand.Execute(commandParameters);
-        }
+        //    return currentCommand.Execute(commandParameters);
+        //}
     }
 }

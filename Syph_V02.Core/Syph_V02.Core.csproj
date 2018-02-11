@@ -88,6 +88,7 @@
     <Compile Include="Components\Engine\Contracts\IEngine.cs" />
     <Compile Include="Components\Engine\ConsoleClient\Contracts\IRenderer.cs" />
     <Compile Include="Components\Engine\ConsoleClient\Contracts\IVisualizer.cs" />
+    <Compile Include="Components\Engine\Contracts\IInputLineExecuter.cs" />
     <Compile Include="Components\Engine\GameManager\Contracts\IGameManager.cs" />
     <Compile Include="Components\Engine\GameManager\Contracts\IPlayerFactory.cs" />
     <Compile Include="Components\Engine\GameManager\Factories\PlayerFactory.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Components\Engine\GameManager\NewGameComponents\BattleField.cs" />
     <Compile Include="Components\Engine\GameManager\NewGameComponents\Contracts\IBattleCalculator.cs" />
     <Compile Include="Components\Engine\GameManager\NewGameComponents\Contracts\IBattleField.cs" />
+    <Compile Include="Components\Engine\ILExecutor.cs" />
     <Compile Include="Components\Engine\LogSaver\Contracts\IDataStore.cs" />
     <Compile Include="Components\Engine\LogSaver\Contracts\IFileRenderer.cs" />
     <Compile Include="Components\Engine\LogSaver\Contracts\LogSave.cs" />

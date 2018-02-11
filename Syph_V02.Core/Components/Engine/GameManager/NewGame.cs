@@ -21,7 +21,7 @@ namespace Syph_V02.Core.Components.Engine.GameManager
         }
 
 
-        public string Battle(IDataStore data)
+        public string ExecuteBattle(IDataStore data)
         {
             return "BATTLE BEGINS";
         }
