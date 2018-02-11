@@ -1,6 +1,6 @@
-########################################################
-		                  credits
-########################################################
+###########################################################
+                          credits
+###########################################################
  - Iovoslav Iovchev - Engine functionality
  - Kiril Kirov - Commands and GameManager functionality
  - Stefan Veselinov - Menu Design  

@@ -11,10 +11,11 @@
 #                  Welcome to Syph v02                    #
            Enter some of the commands at any time.	 	 
 ###########################################################
-# 		    	  New Game		          #
-# 		    	   Guide		          #	
-# 		    	  Credits                         #
-# 		    	   About                          #
+#                         Menu                            #
+#                         New Game                        #
+#                         Guide                           #	
+#                         Credits                         #
+#                         About                           #
 # --------------------------------------------------------#
-#                   	   Exit                           #
+#                   	  Exit                            #
 ###########################################################
