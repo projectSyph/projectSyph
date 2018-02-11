@@ -8,6 +8,7 @@ using Syph_V02.Core.Components.Engine.LogSaver.Contracts;
 using Syph_V02.Core.Components.Engine.GameManager.NewGameComponents.Contracts;
 using Syph_V02.Core.Components.Engine.Contracts;
 using Syph_V02.Core.Components.Engine.GameManager.NewGameComponents.Constants;
+using Syph_V02.Core.Components.Engine.GameManager.NewGameComponents.Commands;
 
 namespace Syph_V02.Core.Components.Engine.GameManager
 {
@@ -19,12 +20,17 @@ namespace Syph_V02.Core.Components.Engine.GameManager
         private readonly IRenderer renderer;
         private readonly BattleConstants constants;
 
+        private readonly IDataStore data;
+
+        
+
         public NewGame
             (
                 IBattleField battleField,
                 IBattleCalculator battleCalculator, 
                 IInputLineExecuter inputExecutor,
                 IRenderer renderer,
+                IDataStore data,
                 BattleConstants constants
             )
         {
@@ -32,46 +38,17 @@ namespace Syph_V02.Core.Components.Engine.GameManager
             this.battleCalculator = battleCalculator;
             this.inputExecutor = inputExecutor;
             this.renderer = renderer;
+            this.data = data;
             this.constants = constants;
         }
 
 
-        public string ExecuteBattle(IDataStore data)
+        public string ExecuteBattle()
         {
-            //DEMO VERSION WORKS WITH TWO PLAYERS
+       
             //IN THE FUTURE THIS PART IS GOING TO BE DIFFERENT
-
             inputExecutor.InputExecuter(this.constants.BattleMenuCommand);
-
-            var players = data.Players.Values;
-
-            var playerOne = players.First();
-            var playerTwo = players.Last();
-
-            while (playerOne.IsAlive && playerTwo.IsAlive)
-            {
-                playerOne.TakeDamage(2000);
-
-                Console.WriteLine($"PLAYER {playerOne.Name} TAKES DAMAGE IS ALIVE");
-                Console.WriteLine(playerOne.Souls);
-               
-            }                               
-                
-
-  
-                // 2.2. Attack commands display - Using BattleFiel class and ConsoleVisualizer
-
-                //3. Make attack - using taken command ADD NEW COMMAND 
-
-                //4. Display attack - - Using BattleFiel class and ConsoleVisualizer
-
-                //5. Calculate Attack - using taken command  ADD NEW COMMAND 
-
-                //6. Display results - from return of point 3 and 5 - Using BattleFiel class and ConsoleVisualizer
-
-                //7. next player turn - loop till player isAlive
             
-
             Console.WriteLine("PLAYER IS DEATH");
             return "BATTLE BEGINS";
         }

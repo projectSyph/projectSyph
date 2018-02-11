@@ -76,7 +76,7 @@ namespace Syph_V02.Core.Components.Commands
             //DEMO VERSION BATTLE INITIALIZER 
             //RETURNS -> DISPLAYS -> DO BATTLE ACTIONS
             //TO MANY THING FOR THIS VARIABLE !!
-            var battleResults = newGameManager.ExecuteBattle(data);
+            var battleResults = newGameManager.ExecuteBattle();
 
             return resultBuilder.AppendLine(battleResults).ToString();
             
