@@ -14,6 +14,8 @@ namespace Syph_V02.Core.Models.Contracts
 
         int ID { get; }
 
+        int Souls { get; }
+
         bool IsAlive { get; }
 
         IList<ISpawn> Team { get; }

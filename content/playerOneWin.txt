@@ -1,0 +1,10 @@
+   DEMO BATTLE ATTACK
+=========================
+x----x            x XXXX x            
+|    |            X  xx   X
+| P1 |   P1 WIN    X xx X
+|    |            X  xx  X
+x----x            x XXXX x  
+=========================  
+   exit <-> or new game 
+=========================

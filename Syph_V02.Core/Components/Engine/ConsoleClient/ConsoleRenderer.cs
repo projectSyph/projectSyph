@@ -33,8 +33,19 @@ namespace Syph_V02.Core.Components.Engine.ConsoleClient
 
         public void Output(string output)
         {
-
             Console.WriteLine(output);
+        }
+
+        public string LineReader()
+        {
+            var readedLine = Console.ReadLine();
+
+            return readedLine;
+        }
+
+        public void SameLineOutput(string output)
+        {
+            Console.Write(output);
         }
     }
 }

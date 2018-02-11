@@ -1,12 +1,56 @@
-﻿using System;
+﻿using Syph_V02.Core.Components.Engine.GameManager.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Syph_V02.Core.Components.Engine.LogSaver.Contracts;
+using Syph_V02.Core.Components.Engine.GameManager.NewGameComponents.Contracts;
+using Syph_V02.Core.Components.Engine.Contracts;
+using Syph_V02.Core.Components.Engine.GameManager.NewGameComponents.Constants;
+using Syph_V02.Core.Components.Engine.GameManager.NewGameComponents.Commands;
 
 namespace Syph_V02.Core.Components.Engine.GameManager
 {
-    public class NewGame  
+    public class NewGame : IGameManager
     {
+        private  readonly IBattleField battleField;
+        private readonly IBattleCalculator battleCalculator;
+        private readonly IInputLineExecuter inputExecutor;
+        private readonly IRenderer renderer;
+        private readonly BattleConstants constants;
+
+        private readonly IDataStore data;
+
+        
+
+        public NewGame
+            (
+                IBattleField battleField,
+                IBattleCalculator battleCalculator, 
+                IInputLineExecuter inputExecutor,
+                IRenderer renderer,
+                IDataStore data,
+                BattleConstants constants
+            )
+        {
+            this.battleField = battleField;
+            this.battleCalculator = battleCalculator;
+            this.inputExecutor = inputExecutor;
+            this.renderer = renderer;
+            this.data = data;
+            this.constants = constants;
+        }
+
+
+        public string ExecuteBattle()
+        {
+       
+            //IN THE FUTURE THIS PART IS GOING TO BE DIFFERENT
+            inputExecutor.InputExecuter(this.constants.BattleMenuCommand);
+            
+            Console.WriteLine("PLAYER IS DEATH");
+            return "BATTLE BEGINS";
+        }
     }
 }

@@ -7,10 +7,12 @@ namespace Syph_V02.Core.Components.Engine.LogSaver
     public class DataStore : IDataStore
     {
         private readonly IDictionary<IPlayer, ISpawn> game;
+        private readonly IDictionary<string,IPlayer> players;
 
         public DataStore()
         {
             this.game = new Dictionary<IPlayer, ISpawn>();
+            this.players = new Dictionary<string, IPlayer>();
         }
 
         public IDictionary<IPlayer, ISpawn> Game
@@ -21,9 +23,17 @@ namespace Syph_V02.Core.Components.Engine.LogSaver
             }
         }
 
+        public IDictionary<string,IPlayer> Players
+        {
+            get
+            {
+                return new Dictionary<string,IPlayer>(this.players);
+            }
+        }
+
         public void AddPlayer(IPlayer player)
         {
-            System.Console.WriteLine("OK");
+            this.players.Add(player.Name, player);
         }
 
         public void AddSpawn(ISpawn spawn)
