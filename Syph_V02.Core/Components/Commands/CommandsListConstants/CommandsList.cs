@@ -34,7 +34,7 @@ namespace Syph_V02.Core.Components.Commands
               "skip",
               "add player",
               "Player <name>",
-              "new game",                        
+              "new game 2 players ( DEMO EDITION )",                        
               "exit"
         };
     }

@@ -58,7 +58,7 @@ namespace Syph_V02.Core.Components.Engine
 
                     savedData.AddLog(testStartingCommand);
                    
-                    renderer.Output(testStartingCommand);
+                    //renderer.Output(testStartingCommand);
                   
                 }
                               

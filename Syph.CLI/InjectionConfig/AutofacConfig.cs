@@ -13,6 +13,9 @@ using Syph_V02.Core.Models;
 using Syph_V02.Core.Models.Contracts;
 using Syph_V02.Core.Components.Engine.LogSaver;
 using Syph_V02.Core.Components.Engine.LogSaver.Contracts;
+using Syph_V02.Core.Components.Engine.GameManager;
+using Syph_V02.Core.Components.Engine.GameManager.NewGameComponents;
+using Syph_V02.Core.Components.Engine.GameManager.NewGameComponents.Contracts;
 
 namespace Syph.CLI.InjectionConfig
 {
@@ -32,6 +35,7 @@ namespace Syph.CLI.InjectionConfig
 
             builder.RegisterType<PlayerFactory>().As<IPlayerFactory>().SingleInstance();
             builder.RegisterType<DataStore>().As<IDataStore>().SingleInstance();
+
             builder.RegisterType<Constants>().AsSelf().SingleInstance();
 
             //builder.RegisterType<Player>().As<IPlayer>();
@@ -44,8 +48,10 @@ namespace Syph.CLI.InjectionConfig
             builder.RegisterType<HelpMenu>().Named<ICommand>("help");
             builder.RegisterType<ExitGame>().Named<ICommand>("exit");
 
-            
 
+            builder.RegisterType<NewGame>().As<IGameManager>();
+            builder.RegisterType<BattleField>().As<IBattleField>().SingleInstance();
+            builder.RegisterType<BattleCalculator>().As<IBattleCalculator>().SingleInstance();
             builder.RegisterType<CommandsFactory>().As<ICommandsFactory>().SingleInstance();
         }
     }
