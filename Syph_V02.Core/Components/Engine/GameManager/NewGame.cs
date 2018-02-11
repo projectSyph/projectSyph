@@ -16,7 +16,7 @@ namespace Syph_V02.Core.Components.Engine.GameManager
     {
         private readonly IBattleField battleField;
         private readonly IBattleCalculator battleCalculator;
-        private readonly IInputLineExecuter inputExecutor;
+        private readonly IExecute inputExecutor;
         private readonly IRenderer renderer;
         private readonly BattleConstants constants;
 
@@ -26,7 +26,7 @@ namespace Syph_V02.Core.Components.Engine.GameManager
             (
                 IBattleField battleField,
                 IBattleCalculator battleCalculator,
-                IInputLineExecuter inputExecutor,
+                IExecute inputExecutor,
                 IRenderer renderer,
                 IDataStore data,
                 BattleConstants constants
@@ -45,7 +45,7 @@ namespace Syph_V02.Core.Components.Engine.GameManager
             //TODO: ADD WHILE LOOP
             //IN THE FUTURE THIS PART IS GOING TO BE DIFFERENT
 
-            inputExecutor.InputExecuter(this.constants.BattleMenuCommand);
+            inputExecutor.Execute(this.constants.BattleMenuCommand);
 
             Console.WriteLine("PLAYER IS DEAD");
             return "BATTLE BEGINS";

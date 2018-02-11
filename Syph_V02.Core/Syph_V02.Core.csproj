@@ -88,7 +88,7 @@
     <Compile Include="Components\Engine\Contracts\IEngine.cs" />
     <Compile Include="Components\Engine\ConsoleClient\Contracts\IRenderer.cs" />
     <Compile Include="Components\Engine\ConsoleClient\Contracts\IVisualizer.cs" />
-    <Compile Include="Components\Engine\Contracts\IInputLineExecuter.cs" />
+    <Compile Include="Components\Engine\Contracts\IInputExecuter.cs" />
     <Compile Include="Components\Engine\GameManager\Contracts\IGameManager.cs" />
     <Compile Include="Components\Engine\GameManager\Contracts\IPlayerFactory.cs" />
     <Compile Include="Components\Engine\GameManager\Factories\PlayerFactory.cs" />

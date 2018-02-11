@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Syph_V02.Core.Components.Engine.Contracts
 {
-    public interface IInputLineExecuter
+    public interface IExecute
     {
-        void InputExecuter(string dirrection);
+        void Execute(string dirrection);
 
         string CommandsProcessor(string currentCommandLine);
     }

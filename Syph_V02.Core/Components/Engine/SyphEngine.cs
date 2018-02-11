@@ -7,9 +7,9 @@ namespace Syph_V02.Core.Components.Engine
     /// </summary>
     public sealed class SyphEngine : IEngine
     {     
-        private readonly IInputLineExecuter executer;
+        private readonly IExecute executer;
         
-        public SyphEngine(IInputLineExecuter executer)
+        public SyphEngine(IExecute executer)
         {
             this.executer = executer;        
         }
@@ -21,7 +21,7 @@ namespace Syph_V02.Core.Components.Engine
         {
             string displayProvider = "menu";
 
-            executer.InputExecuter(displayProvider);
+            executer.Execute(displayProvider);
         }
     }
 }

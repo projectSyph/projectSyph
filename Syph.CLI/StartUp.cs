@@ -1,10 +1,10 @@
-﻿namespace Syph.CLI
-{
-    using Autofac;
-    using Syph.CLI.InjectionConfig;
-    using Syph_V02.Core.Components.Engine.Contracts;
-    using System;
+﻿using Autofac;
+using Syph.CLI.InjectionConfig;
+using Syph_V02.Core.Components.Engine.Contracts;
+using System;
 
+namespace Syph.CLI
+{
     public class StartUp
     {
         public static void Main()
@@ -22,7 +22,7 @@
             var container = builder.Build();
 
             var engine = container.Resolve<IEngine>();
-            engine.Start();           
+            engine.Start();
         }
     }
 }

@@ -10,11 +10,11 @@ namespace Syph_V02.Core.Components.Engine.ConsoleClient
     {
         public IEnumerable<string> Input()
         {
-            var input = Hinter.ReadHintedLine(CommandsList.CommandsLibrary, d => d);
+            var input = Hinter.ReadHintedLine(CommandsList.BasicCommandsLibrary, d => d);
 
             while (!string.IsNullOrEmpty(input))
             {
-                if (CommandsList.CommandsLibrary.Contains(input))
+                if (CommandsList.BasicCommandsLibrary.Contains(input))
                 {
                     yield return input;
                 }
@@ -23,7 +23,7 @@ namespace Syph_V02.Core.Components.Engine.ConsoleClient
                     Output("BAD INPUT");
                 }
 
-                input = Hinter.ReadHintedLine(CommandsList.CommandsLibrary, d => d);
+                input = Hinter.ReadHintedLine(CommandsList.BasicCommandsLibrary, d => d);
             }
         }
 

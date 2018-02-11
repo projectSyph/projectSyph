@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Syph_V02.Core.Components.Engine
 {
-    public class ILExecuter : IInputLineExecuter
+    public class ILExecuter : IExecute
     {
         private readonly IRenderer renderer;
         private readonly ICommandsFactory factory;
@@ -34,7 +34,7 @@ namespace Syph_V02.Core.Components.Engine
             this.consoleSettings = consoleSettings;
         }
 
-        public void InputExecuter(string dirrection)
+        public void Execute(string dirrection)
         {
             var firstRunMessage = this.visualizer.ReadTextFile(dirrection);
             renderer.Output(firstRunMessage);
