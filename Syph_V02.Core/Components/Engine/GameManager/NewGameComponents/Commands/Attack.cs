@@ -1,4 +1,6 @@
 ﻿using Syph_V02.Core.Components.Commands.Contracts;
+using Syph_V02.Core.Components.Engine.GameManager.NewGameComponents.Constants;
+using Syph_V02.Core.Components.Engine.GameManager.NewGameComponents.Contracts;
 using Syph_V02.Core.Components.Engine.LogSaver.Contracts;
 using Syph_V02.Core.Models.Contracts;
 using System;
@@ -12,10 +14,14 @@ namespace Syph_V02.Core.Components.Engine.GameManager.NewGameComponents.Commands
     public class Attack : ICommand
     {
         private readonly IDataStore data;
+        private readonly IBattleVisualizer visualizer;
+        private readonly BattleConstants constants;
 
-        public Attack(IDataStore data)
+        public Attack(IDataStore data, IBattleVisualizer visualizer, BattleConstants constants)
         {
             this.data = data;
+            this.visualizer = visualizer;
+            this.constants = constants;
         }
      
         public string Execute(IList<string> parameters)
@@ -25,14 +31,19 @@ namespace Syph_V02.Core.Components.Engine.GameManager.NewGameComponents.Commands
             var playerOne = players.First();
             var playerTwo = players.Last();
 
-            while (playerOne.IsAlive && playerTwo.IsAlive)
+            //TESTING ATTACK
+            //THIS IS HARD CODED TO KILL SECOND OPPONENT
+            while (playerTwo.IsAlive)
             {
-                playerOne.TakeDamage(2000);
+                playerTwo.TakeDamage(2000);
 
-                Console.WriteLine($"PLAYER {playerOne.Name} TAKES DAMAGE => IS ALIVE");
-                Console.WriteLine(playerOne.Souls);
+                this.visualizer.FieldOutputer(this.constants.FirstPlayerAttackDisplay);
+
+                Console.WriteLine($"PLAYER {playerTwo.Name} TAKES DAMAGE => IS ALIVE");
+                Console.WriteLine($"PLAYER {playerTwo.Name} SOULS {playerTwo.Souls}");
 
             }
+            this.visualizer.FieldOutputer(this.constants.FirstPlayerWinsGamekDisplay);
 
             return string.Empty;
         }

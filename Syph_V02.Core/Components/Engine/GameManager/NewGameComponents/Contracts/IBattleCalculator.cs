@@ -8,5 +8,6 @@ namespace Syph_V02.Core.Components.Engine.GameManager.NewGameComponents.Contract
 {
     public interface IBattleCalculator
     {
+
     }
 }

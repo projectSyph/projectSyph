@@ -9,5 +9,6 @@ namespace Syph_V02.Core.Components.Engine.GameManager.NewGameComponents
 {
     public class BattleField:IBattleField
     {
+
     }
 }

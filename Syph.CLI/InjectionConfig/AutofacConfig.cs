@@ -54,6 +54,7 @@ namespace Syph.CLI.InjectionConfig
             builder.RegisterType<BattleMenu>().Named<ICommand>("battleMenu");
             builder.RegisterType<Attack>().Named<ICommand>("attack");
             builder.RegisterType<BattleConstants>().AsSelf().SingleInstance();
+            builder.RegisterType<BattleVisualizer>().As<IBattleVisualizer>().SingleInstance();
 
             builder.RegisterType<NewGame>().As<IGameManager>();
             builder.RegisterType<BattleField>().As<IBattleField>().SingleInstance();
