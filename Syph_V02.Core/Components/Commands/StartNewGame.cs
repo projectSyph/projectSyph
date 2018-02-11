@@ -37,11 +37,9 @@ namespace Syph_V02.Core.Components.Commands
 
         public string Execute(IList<string> parameters)
         {
-            //var newGame = parameters[0];
-
             this.renderer.SameLineOutput("Number of players: ");
 
-            var playersCount = int.Parse(this.renderer.LineReader());
+            int playersCount = int.Parse(this.renderer.LineReader());
 
             var resultBuilder = new StringBuilder();
 
@@ -50,7 +48,7 @@ namespace Syph_V02.Core.Components.Commands
                 renderer.SameLineOutput(string.Format(this.constants.PlayerNamePrompt, i + 1));
                
                 var playerName = renderer.LineReader();
-                var id = i; // TODO: This option is not use in demo version, IMPLEMENT IN FUTURE!!
+                var id = i;
                 var team = new List<IPlayer>();
 
                 if (this.data.Players.Any(x => x.Key == playerName))
@@ -70,10 +68,8 @@ namespace Syph_V02.Core.Components.Commands
                     var msg = string.Format(this.constants.PlayerSuccessfullAdded, playerName);
 
                     renderer.Output(msg);
-                    resultBuilder.AppendLine(msg);
-                    
-                }
-                             
+                    resultBuilder.AppendLine(msg);                    
+                }                             
             }
 
             //DEMO VERSION BATTLE INITIALIZER 
