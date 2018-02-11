@@ -25,13 +25,14 @@ namespace Syph_V02.Core.Components.Commands
               "surrender",
               "credits",
               "about",            
-              "new game 2 players ( DEMO EDITION )",                        
+              "new game 2 players ( DEMO EDITION )",
+              "attack",
               "exit"
         };
 
         /* NOT IMPLEMENTED COMMANDS
          * 
-              "attack",
+              
               "sacrifice <monster_type> <monster_name>",
               "attack <opponent's_name> <monster_type> <monster_name> <my_monster_type> <my_monster_name>",
               "inventory <team_id> <player_id>",

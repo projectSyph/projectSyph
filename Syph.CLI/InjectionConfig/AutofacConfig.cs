@@ -16,6 +16,8 @@ using Syph_V02.Core.Components.Engine.LogSaver.Contracts;
 using Syph_V02.Core.Components.Engine.GameManager;
 using Syph_V02.Core.Components.Engine.GameManager.NewGameComponents;
 using Syph_V02.Core.Components.Engine.GameManager.NewGameComponents.Contracts;
+using Syph_V02.Core.Components.Engine.GameManager.NewGameComponents.Commands;
+using Syph_V02.Core.Components.Engine.GameManager.NewGameComponents.Constants;
 
 namespace Syph.CLI.InjectionConfig
 {
@@ -49,6 +51,9 @@ namespace Syph.CLI.InjectionConfig
             builder.RegisterType<HelpMenu>().Named<ICommand>("help");
             builder.RegisterType<ExitGame>().Named<ICommand>("exit");
 
+            builder.RegisterType<BattleMenu>().Named<ICommand>("battleMenu");
+            builder.RegisterType<Attack>().Named<ICommand>("attack");
+            builder.RegisterType<BattleConstants>().AsSelf().SingleInstance();
 
             builder.RegisterType<NewGame>().As<IGameManager>();
             builder.RegisterType<BattleField>().As<IBattleField>().SingleInstance();

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Syph_V02.Core.Components.Engine.LogSaver.Contracts;
 using Syph_V02.Core.Components.Engine.GameManager.NewGameComponents.Contracts;
 using Syph_V02.Core.Components.Engine.Contracts;
+using Syph_V02.Core.Components.Engine.GameManager.NewGameComponents.Constants;
 
 namespace Syph_V02.Core.Components.Engine.GameManager
 {
@@ -16,25 +17,32 @@ namespace Syph_V02.Core.Components.Engine.GameManager
         private readonly IBattleCalculator battleCalculator;
         private readonly IInputLineExecuter inputExecutor;
         private readonly IRenderer renderer;
+        private readonly BattleConstants constants;
 
         public NewGame
             (
                 IBattleField battleField,
                 IBattleCalculator battleCalculator, 
                 IInputLineExecuter inputExecutor,
-                IRenderer renderer
+                IRenderer renderer,
+                BattleConstants constants
             )
         {
             this.battleField = battleField;
             this.battleCalculator = battleCalculator;
             this.inputExecutor = inputExecutor;
             this.renderer = renderer;
+            this.constants = constants;
         }
 
 
         public string ExecuteBattle(IDataStore data)
         {
-            //TEST SCENARIO
+            //DEMO VERSION WORKS WITH TWO PLAYERS
+            //IN THE FUTURE THIS PART IS GOING TO BE DIFFERENT
+
+            inputExecutor.InputExecuter(this.constants.BattleMenuCommand);
+
             var players = data.Players.Values;
 
             var playerOne = players.First();
@@ -48,12 +56,9 @@ namespace Syph_V02.Core.Components.Engine.GameManager
                 Console.WriteLine(playerOne.Souls);
                
             }                               
-                //1. Battle start message display - Using BattleFiel class and ConsoleVisualizer
+                
 
-                // 1.2. Battle keys and rlz - Using BattleFiel class and ConsoleVisualizer
-
-                // 2. Player ? turn - based on the while loop we are in
-
+  
                 // 2.2. Attack commands display - Using BattleFiel class and ConsoleVisualizer
 
                 //3. Make attack - using taken command ADD NEW COMMAND 

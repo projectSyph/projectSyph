@@ -96,6 +96,9 @@
     <Compile Include="Components\Engine\GameManager\NewGame.cs" />
     <Compile Include="Components\Engine\GameManager\NewGameComponents\BattleCalculator.cs" />
     <Compile Include="Components\Engine\GameManager\NewGameComponents\BattleField.cs" />
+    <Compile Include="Components\Engine\GameManager\NewGameComponents\Commands\Attack.cs" />
+    <Compile Include="Components\Engine\GameManager\NewGameComponents\Commands\BattleMenu.cs" />
+    <Compile Include="Components\Engine\GameManager\NewGameComponents\Constants\BattleConstants.cs" />
     <Compile Include="Components\Engine\GameManager\NewGameComponents\Contracts\IBattleCalculator.cs" />
     <Compile Include="Components\Engine\GameManager\NewGameComponents\Contracts\IBattleField.cs" />
     <Compile Include="Components\Engine\GameManager\NewGameComponents\Contracts\IBattleVisualizer.cs" />
