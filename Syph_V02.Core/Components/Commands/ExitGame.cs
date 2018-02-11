@@ -7,7 +7,6 @@ namespace Syph_V02.Core.Components.Commands
 {
     public class ExitGame : ICommand
     {
-
         public string Execute(IList<string> parameters)
         {
             //Environment.Exit(0);

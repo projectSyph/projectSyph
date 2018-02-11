@@ -30,7 +30,7 @@ namespace Syph.CLI.InjectionConfig
             builder.RegisterAssemblyTypes(currentAssembly).AsImplementedInterfaces();
 
             builder.RegisterType<SyphEngine>().As<IEngine>().SingleInstance();
-            builder.RegisterType<ILExecutor>().As<IInputLineExecuter>().SingleInstance();
+            builder.RegisterType<ILExecuter>().As<IInputLineExecuter>().SingleInstance();
 
             builder.RegisterType<IOConsoleSettings>().AsSelf().SingleInstance();
 

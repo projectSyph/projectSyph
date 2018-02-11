@@ -20,7 +20,6 @@ namespace Syph_V02.Core.Components.Engine.ConsoleClient
 
         public string ReadTextFile(string filenames, bool clear = true)
         {
-
             var currentFile = string.Format(ioSettings.ReadFileLocation, filenames);
 
             if (clear)
@@ -36,8 +35,6 @@ namespace Syph_V02.Core.Components.Engine.ConsoleClient
            string text = File.ReadAllText(currentFile);
 
            return text;
-        }
-
-      
+        }      
     }
 }

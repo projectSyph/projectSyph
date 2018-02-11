@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Syph_V02.Core.Components.Engine
 {
-    public class ILExecutor : IInputLineExecuter
+    public class ILExecuter : IInputLineExecuter
     {
         private readonly IRenderer renderer;
         private readonly ICommandsFactory factory;
@@ -16,7 +16,7 @@ namespace Syph_V02.Core.Components.Engine
         private readonly IVisualizer visuzlizer;
         private readonly IOConsoleSettings consoleSettings;
 
-        public ILExecutor
+        public ILExecuter
             (
                 IRenderer renderer,
                 ICommandsFactory factory,

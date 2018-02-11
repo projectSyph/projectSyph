@@ -23,6 +23,5 @@ namespace Syph_V02.Core.Components.Engine
 
             executer.InputExecuter(displayProvider);
         }
-      
     }
 }

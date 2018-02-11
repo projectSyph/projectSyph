@@ -103,7 +103,7 @@
     <Compile Include="Components\Engine\GameManager\NewGameComponents\Contracts\IBattleCalculator.cs" />
     <Compile Include="Components\Engine\GameManager\NewGameComponents\Contracts\IBattleField.cs" />
     <Compile Include="Components\Engine\GameManager\NewGameComponents\Contracts\IBattleVisualizer.cs" />
-    <Compile Include="Components\Engine\ILExecutor.cs" />
+    <Compile Include="Components\Engine\ILExecuter.cs" />
     <Compile Include="Components\Engine\LogSaver\Contracts\IDataStore.cs" />
     <Compile Include="Components\Engine\LogSaver\Contracts\IFileRenderer.cs" />
     <Compile Include="Components\Engine\LogSaver\LogSave.cs" />
