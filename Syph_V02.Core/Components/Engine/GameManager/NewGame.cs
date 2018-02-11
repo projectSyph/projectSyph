@@ -20,9 +20,7 @@ namespace Syph_V02.Core.Components.Engine.GameManager
         private readonly IRenderer renderer;
         private readonly BattleConstants constants;
 
-        private readonly IDataStore data;
-
-        
+        private readonly IDataStore data;        
 
         public NewGame
             (
@@ -42,14 +40,14 @@ namespace Syph_V02.Core.Components.Engine.GameManager
             this.constants = constants;
         }
 
-
         public string ExecuteBattle()
         {
-       
+            //TODO: ADD WHILE LOOP
             //IN THE FUTURE THIS PART IS GOING TO BE DIFFERENT
+
             inputExecutor.InputExecuter(this.constants.BattleMenuCommand);
             
-            Console.WriteLine("PLAYER IS DEATH");
+            Console.WriteLine("PLAYER IS DEAD");
             return "BATTLE BEGINS";
         }
     }

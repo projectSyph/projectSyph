@@ -17,7 +17,7 @@ namespace Syph_V02.Core.Components.Commands
         private readonly IPlayerFactory playerFactory;
         private readonly Constants constants;
         private readonly IRenderer renderer;
-        private readonly IGameManager newGameManager;
+        private readonly IGameManager gameManager;
 
         public StartNewGame
             (
@@ -32,20 +32,22 @@ namespace Syph_V02.Core.Components.Commands
             this.playerFactory = playerFactory;
             this.constants = constants;
             this.renderer = renderer;
-            this.newGameManager = newGameManager;
+            this.gameManager = newGameManager;
         }
 
         public string Execute(IList<string> parameters)
         {
             //var newGame = parameters[0];
 
-            var playersCount = int.Parse(parameters[1]);
+            this.renderer.SameLineOutput("Number of players: ");
+
+            var playersCount = int.Parse(this.renderer.LineReader());
 
             var resultBuilder = new StringBuilder();
 
             for (int i = 0; i < playersCount; i++)
             {
-                renderer.SameLineOutput(string.Format(this.constants.PlayerNamePrompt, i));
+                renderer.SameLineOutput(string.Format(this.constants.PlayerNamePrompt, i + 1));
                
                 var playerName = renderer.LineReader();
                 var id = i; // TODO: This option is not use in demo version, IMPLEMENT IN FUTURE!!
@@ -77,7 +79,7 @@ namespace Syph_V02.Core.Components.Commands
             //DEMO VERSION BATTLE INITIALIZER 
             //RETURNS -> DISPLAYS -> DO BATTLE ACTIONS
             //TO MANY THING FOR THIS VARIABLE !!
-            var battleResults = newGameManager.ExecuteBattle();
+            var battleResults = gameManager.ExecuteBattle();
 
             return resultBuilder.AppendLine(battleResults).ToString();
             

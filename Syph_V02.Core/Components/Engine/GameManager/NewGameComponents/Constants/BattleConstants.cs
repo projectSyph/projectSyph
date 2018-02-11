@@ -11,6 +11,7 @@ namespace Syph_V02.Core.Components.Engine.GameManager.NewGameComponents.Constant
         public virtual string BattleMenuCommand => "battleMenu";
 
         public virtual string FirstPlayerAttackDisplay => "damage";
+        
         public virtual string FirstPlayerWinsGamekDisplay => "playerOneWin";
     }
 }

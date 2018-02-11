@@ -10,13 +10,13 @@ namespace Syph_V02.Core.Components.Commands
     {
         private static List<string> commandsLibrary = new List<string>()
         {
-              "help => commands help",
+              "help",
               "menu",
               "guide",
               "surrender",
               "credits",
               "about",            
-              "new game 2 players ( DEMO EDITION )",
+              "new game",
               "attack",
               "exit",
 

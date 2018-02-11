@@ -31,14 +31,12 @@ namespace Syph.CLI.InjectionConfig
 
             builder.RegisterType<SyphEngine>().As<IEngine>().SingleInstance();
             builder.RegisterType<ILExecuter>().As<IInputLineExecuter>().SingleInstance();
-
             builder.RegisterType<IOConsoleSettings>().AsSelf().SingleInstance();
+            builder.RegisterType<Constants>().AsSelf().SingleInstance();
 
             builder.RegisterType<PlayerFactory>().As<IPlayerFactory>().SingleInstance();
             builder.RegisterType<DataStore>().As<IDataStore>().SingleInstance();
-
-            builder.RegisterType<Constants>().AsSelf().SingleInstance();
-
+            
             //builder.RegisterType<Player>().As<IPlayer>();
 
             builder.RegisterType<StartNewGame>().Named<ICommand>("new");

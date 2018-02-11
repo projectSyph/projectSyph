@@ -13,8 +13,6 @@ namespace Syph_V02.Core.Components.Engine.GameManager.NewGameComponents
         private readonly IVisualizer battleVisualizer;
         private readonly IRenderer renderer;
 
-
-
         public BattleVisualizer(IVisualizer battleVisualizer, IRenderer renderer)
         {
             this.battleVisualizer = battleVisualizer;

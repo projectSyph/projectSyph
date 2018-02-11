@@ -23,28 +23,28 @@ namespace Syph_V02.Core.Components.Engine.GameManager.NewGameComponents.Commands
             this.visualizer = visualizer;
             this.constants = constants;
         }
-     
+
         public string Execute(IList<string> parameters)
         {
-            var players = data.Players.Values;
-
-            var playerOne = players.First();
-            var playerTwo = players.Last();
-
-            //TESTING ATTACK
-            //THIS IS HARD CODED TO KILL SECOND OPPONENT
-            while (playerTwo.IsAlive)
-            {
-                playerTwo.TakeDamage(2000);
-
-                this.visualizer.FieldOutputer(this.constants.FirstPlayerAttackDisplay);
-
-                Console.WriteLine($"PLAYER {playerTwo.Name} TAKES DAMAGE => IS ALIVE");
-                Console.WriteLine($"PLAYER {playerTwo.Name} SOULS {playerTwo.Souls}");
-
-            }
-            this.visualizer.FieldOutputer(this.constants.FirstPlayerWinsGamekDisplay);
-
+            //    var players = data.Players.Values;
+            //
+            //    var playerOne = players.First();
+            //    var playerTwo = players.Last();
+            //
+            //    //TESTING ATTACK
+            //    //THIS IS HARD CODED TO KILL SECOND OPPONENT
+            //    while (playerTwo.IsAlive)
+            //    {
+            //        playerTwo.TakeDamage(2000);
+            //
+            //        this.visualizer.FieldOutputer(this.constants.FirstPlayerAttackDisplay);
+            //
+            //        Console.WriteLine($"PLAYER {playerTwo.Name} TAKES DAMAGE => IS ALIVE");
+            //        Console.WriteLine($"PLAYER {playerTwo.Name} SOULS {playerTwo.Souls}");
+            //
+            //    }
+            //    this.visualizer.FieldOutputer(this.constants.FirstPlayerWinsGamekDisplay);
+            //
             return string.Empty;
         }
     }
