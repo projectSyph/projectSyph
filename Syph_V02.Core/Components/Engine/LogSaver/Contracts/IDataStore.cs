@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 namespace Syph_V02.Core.Components.Engine.LogSaver.Contracts
 {
     public interface IDataStore
-    {
-        
+    {        
         IDictionary<IPlayer, ISpawn> Game { get; }
 
         IDictionary<string, IPlayer> Players { get; }

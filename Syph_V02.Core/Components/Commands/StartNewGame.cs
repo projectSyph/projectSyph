@@ -19,7 +19,9 @@ namespace Syph_V02.Core.Components.Commands
         private readonly IRenderer renderer;
         private readonly IGameManager newGameManager;
 
-        public StartNewGame(IDataStore data,
+        public StartNewGame
+            (
+            IDataStore data,
             IPlayerFactory playerFactory, 
             Constants constants, 
             IRenderer renderer,
@@ -35,18 +37,18 @@ namespace Syph_V02.Core.Components.Commands
 
         public string Execute(IList<string> parameters)
         {
-            var newGame = parameters[0];
+            //var newGame = parameters[0];
 
             var playersCount = int.Parse(parameters[1]);
 
             var resultBuilder = new StringBuilder();
 
-            for (int i = 1; i <= playersCount; i++)
+            for (int i = 0; i < playersCount; i++)
             {
                 renderer.SameLineOutput(string.Format(this.constants.PlayerNamePrompt, i));
                
                 var playerName = renderer.LineReader();
-                var id = 1; // TODO: This option is not use in demo version, IMPLEMENT IN FUTURE!!
+                var id = i; // TODO: This option is not use in demo version, IMPLEMENT IN FUTURE!!
                 var team = new List<IPlayer>();
 
                 if (this.data.Players.Any(x => x.Key == playerName))

@@ -3,10 +3,7 @@ using Syph_V02.Core.Components.Engine.Contracts;
 using Syph_V02.Core.Components.Engine.LogSaver;
 using Syph_V02.Core.Components.Engine.LogSaver.Contracts;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Syph_V02.Core.Components.Engine
 {
@@ -21,9 +18,9 @@ namespace Syph_V02.Core.Components.Engine
 
         public ILExecutor
             (
-                IRenderer renderer, 
-                ICommandsFactory factory, 
-                IVisualizer visuzlizer, 
+                IRenderer renderer,
+                ICommandsFactory factory,
+                IVisualizer visualizer,
                 IFileRenderer fileRenderer,
                 ILogSaveData savedData,
                 IOConsoleSettings consoleSettings
@@ -31,31 +28,27 @@ namespace Syph_V02.Core.Components.Engine
         {
             this.renderer = renderer;
             this.factory = factory;
-            this.visuzlizer = visuzlizer;
+            this.visuzlizer = visualizer;
             this.fileRenderer = fileRenderer;
             this.savedData = savedData;
             this.consoleSettings = consoleSettings;
         }
 
         public void InputExecuter(string dirrection)
-        {           
+        {
             var firstRunMessage = this.visuzlizer.ReadTextFile(dirrection);
             renderer.Output(firstRunMessage);
 
             try
             {
-
                 foreach (var currentCommandLine in this.renderer.Input())
                 {
-
                     var testStartingCommand = this.CommandsProcessor(currentCommandLine);
 
                     savedData.AddLog(testStartingCommand);
 
                     //renderer.Output(testStartingCommand);
-
                 }
-
             }
             catch (Exception ex)
             {
@@ -85,7 +78,5 @@ namespace Syph_V02.Core.Components.Engine
 
             return currentCommand.Execute(commandParameters);
         }
-
-      
     }
 }

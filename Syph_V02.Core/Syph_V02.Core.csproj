@@ -106,7 +106,7 @@
     <Compile Include="Components\Engine\ILExecutor.cs" />
     <Compile Include="Components\Engine\LogSaver\Contracts\IDataStore.cs" />
     <Compile Include="Components\Engine\LogSaver\Contracts\IFileRenderer.cs" />
-    <Compile Include="Components\Engine\LogSaver\Contracts\LogSave.cs" />
+    <Compile Include="Components\Engine\LogSaver\LogSave.cs" />
     <Compile Include="Components\Engine\LogSaver\DataStore.cs" />
     <Compile Include="Components\Engine\GameManager\Contracts\ISpawnFactory.cs" />
     <Compile Include="Components\Engine\LogSaver\FileWriter.cs" />

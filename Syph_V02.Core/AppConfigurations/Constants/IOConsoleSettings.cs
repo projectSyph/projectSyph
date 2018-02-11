@@ -10,6 +10,6 @@ namespace Syph_V02.Core.AppConfigurations.Constants
     {
         public virtual string ReadFileLocation => "./../../../content/{0}.txt";
 
-        public virtual string SaveLogFileLocationMessage => "OUTOSAVUNG TO LOG FILE: C:\\MyDocuments\\projectSyph\\logs";
+        public virtual string SaveLogFileLocationMessage => "AUTOSAVING TO LOG FILE: C:\\MyDocuments\\projectSyph\\logs";
     }
 }

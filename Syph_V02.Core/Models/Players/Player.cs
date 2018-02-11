@@ -23,7 +23,9 @@ namespace Syph_V02.Core.Models
         {
             this.name = name;
             this.id = id;
+            this.souls = 8000;
             this.team = team;
+            this.inventory = new List<ISpawn>();
 
             this.isAlive = true;
         }

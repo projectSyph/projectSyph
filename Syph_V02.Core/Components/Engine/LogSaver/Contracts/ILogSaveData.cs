@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Syph_V02.Core.Components.Engine.LogSaver
 {
-    public  interface ILogSaveData
+    public interface ILogSaveData
     {
          IList<string> GetGameLog { get; }
 

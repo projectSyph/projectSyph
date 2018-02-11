@@ -22,8 +22,7 @@ namespace Syph_V02.Core.Components.Engine.LogSaver
             }
 
             using (StreamWriter Writer = File.AppendText(file))
-            {
-               
+            {               
                 foreach (string line in info)
                 {
                     Writer.WriteLine(line);
