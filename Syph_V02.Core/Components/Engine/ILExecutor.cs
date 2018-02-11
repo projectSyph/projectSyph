@@ -1,4 +1,5 @@
-﻿using Syph_V02.Core.Components.Engine.Contracts;
+﻿using Syph_V02.Core.AppConfigurations.Constants;
+using Syph_V02.Core.Components.Engine.Contracts;
 using Syph_V02.Core.Components.Engine.LogSaver;
 using Syph_V02.Core.Components.Engine.LogSaver.Contracts;
 using System;
@@ -14,27 +15,30 @@ namespace Syph_V02.Core.Components.Engine
         private readonly IRenderer renderer;
         private readonly ICommandsFactory factory;
         private readonly IFileRenderer fileRenderer;
-
-       private readonly ILogSaveData savedData;
-
+        private readonly ILogSaveData savedData;
         private readonly IVisualizer visuzlizer;
+        private readonly IOConsoleSettings consoleSettings;
 
-        public ILExecutor(IRenderer renderer, 
-            ICommandsFactory factory, 
-            IVisualizer visuzlizer, 
-            IFileRenderer fileRenderer,
-            ILogSaveData savedData)
+        public ILExecutor
+            (
+                IRenderer renderer, 
+                ICommandsFactory factory, 
+                IVisualizer visuzlizer, 
+                IFileRenderer fileRenderer,
+                ILogSaveData savedData,
+                IOConsoleSettings consoleSettings
+            )
         {
             this.renderer = renderer;
             this.factory = factory;
             this.visuzlizer = visuzlizer;
             this.fileRenderer = fileRenderer;
             this.savedData = savedData;
+            this.consoleSettings = consoleSettings;
         }
 
         public void InputExecuter(string dirrection)
-        {
-            //TODO: Find bether way to do this action -> print menu !!
+        {           
             var firstRunMessage = this.visuzlizer.ReadTextFile(dirrection);
             renderer.Output(firstRunMessage);
 
@@ -58,7 +62,7 @@ namespace Syph_V02.Core.Components.Engine
                 this.renderer.Output(ex.Message);
             }
 
-            renderer.Output("Strange but this is OUTOSAVE LOG... CHANGE ME!");
+            renderer.Output(this.consoleSettings.SaveLogFileLocationMessage);
             fileRenderer.WriteToFile(savedData.GetGameLog);
         }
 

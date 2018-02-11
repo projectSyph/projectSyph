@@ -7,32 +7,50 @@ using System.Threading.Tasks;
 
 namespace Syph_V02.Core.Models
 {
+    /// <summary>
+    /// Implementation of this class is not full !! It's for DEMO V02
+    /// </summary>
     public class Player : IPlayer
     {
+       
         private string name;
         private int id;
         private IList<ISpawn> team;
+        private bool isAlive;
+
+        private int souls = 8000;
 
         public Player(string name, int id, IList<ISpawn> team)
         {
             this.name = name;
             this.id = id;
             this.team = team;
+
+            this.isAlive = true;
         }
 
         public IList<ISpawn> Inventory => throw new NotImplementedException();
 
         public int ID => throw new NotImplementedException();
 
-        public bool IsAlive => throw new NotImplementedException();
+        public bool IsAlive => this.isAlive;
 
-        public IList<ISpawn> Team => throw new NotImplementedException();
+        public IList<ISpawn> Team => this.team;
 
         public string Name =>  this.name;
 
+        public int Souls
+        {
+            get
+            {
+                return this.souls;
+            }
+            
+        }
+
         public void Die()
         {
-            throw new NotImplementedException();
+            this.isAlive = false;
         }
 
         public void ListInventory()
@@ -47,12 +65,17 @@ namespace Syph_V02.Core.Models
 
         public void Surrender()
         {
-            throw new NotImplementedException();
+            this.isAlive = false;
         }
 
         public void TakeDamage(int d)
         {
-            throw new NotImplementedException();
+            this.souls -= d;
+
+            if (this.Souls <= 0)
+            {
+                Die();
+            }
         }
     }
     //public delegate void PlayerJoin();

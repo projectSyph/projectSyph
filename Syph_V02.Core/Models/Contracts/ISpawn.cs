@@ -8,5 +8,6 @@ namespace Syph_V02.Core.Models.Contracts
 {
     public interface ISpawn
     {
+
     }
 }
