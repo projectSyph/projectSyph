@@ -10,15 +10,15 @@ namespace Syph_V02.Core.Models.Contracts
     {
         string Name { get; }
 
-        IList<ISpawn> Inventory { get; }
-
         int ID { get; }
 
         int Souls { get; }
 
         bool IsAlive { get; }
 
-        IList<ISpawn> Team { get; }
+        IList<ISpawn> Inventory { get; }
+        
+        IList<IPlayer> Team { get; }
 
         void TakeDamage(int d);
 

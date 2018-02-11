@@ -11,16 +11,15 @@ namespace Syph_V02.Core.Models
     /// Implementation of this class is not full !! It's for DEMO V02
     /// </summary>
     public class Player : IPlayer
-    {
-       
+    {       
         private string name;
         private int id;
-        private IList<ISpawn> team;
+        private int souls;
         private bool isAlive;
+        private IList<ISpawn> inventory;
+        private IList<IPlayer> team;
 
-        private int souls = 8000;
-
-        public Player(string name, int id, IList<ISpawn> team)
+        public Player(string name, int id, IList<IPlayer> team)
         {
             this.name = name;
             this.id = id;
@@ -29,44 +28,17 @@ namespace Syph_V02.Core.Models
             this.isAlive = true;
         }
 
-        public IList<ISpawn> Inventory => throw new NotImplementedException();
+        public string Name =>  this.name;
 
-        public int ID => throw new NotImplementedException();
+        public int ID => this.id;
+
+        public int Souls => this.souls;
 
         public bool IsAlive => this.isAlive;
 
-        public IList<ISpawn> Team => this.team;
+        public IList<ISpawn> Inventory => this.inventory;
 
-        public string Name =>  this.name;
-
-        public int Souls
-        {
-            get
-            {
-                return this.souls;
-            }
-            
-        }
-
-        public void Die()
-        {
-            this.isAlive = false;
-        }
-
-        public void ListInventory()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Summon(ISpawn spawn)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Surrender()
-        {
-            this.isAlive = false;
-        }
+        public IList<IPlayer> Team => this.team;
 
         public void TakeDamage(int d)
         {
@@ -76,6 +48,26 @@ namespace Syph_V02.Core.Models
             {
                 Die();
             }
+        }
+
+        public void Die()
+        {
+            this.isAlive = false;
+        }
+
+        public void Surrender()
+        {
+            this.isAlive = false;
+        }
+
+        public void Summon(ISpawn spawn)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ListInventory()
+        {
+            throw new NotImplementedException();
         }
     }
     //public delegate void PlayerJoin();

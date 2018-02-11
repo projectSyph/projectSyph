@@ -12,7 +12,6 @@ namespace Syph_V02.Core.Components.Engine.ConsoleClient
     {
         public IEnumerable<string> Input()
         {
-
             var input = Hinter.ReadHintedLine(CommandsList.CommandsLibrary, d => d);
             
             while (!string.IsNullOrEmpty(input))

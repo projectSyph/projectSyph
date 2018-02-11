@@ -22,14 +22,12 @@ using Syph_V02.Core.Components.Engine.GameManager.NewGameComponents.Constants;
 namespace Syph.CLI.InjectionConfig
 {
     public sealed class AutofacConfig : Autofac.Module
-    {
-        
+    {        
         protected override void Load(ContainerBuilder builder)
         {
             var currentAssembly = Assembly.Load("Syph_V02.Core");
 
-            builder.RegisterAssemblyTypes(currentAssembly)
-                .AsImplementedInterfaces();
+            builder.RegisterAssemblyTypes(currentAssembly).AsImplementedInterfaces();
 
             builder.RegisterType<SyphEngine>().As<IEngine>().SingleInstance();
             builder.RegisterType<ILExecutor>().As<IInputLineExecuter>().SingleInstance();

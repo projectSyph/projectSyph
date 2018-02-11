@@ -31,7 +31,6 @@ namespace Syph_V02.Core.Components.Commands
             this.constants = constants;
             this.renderer = renderer;
             this.newGameManager = newGameManager;
-            ;
         }
 
         public string Execute(IList<string> parameters)
@@ -48,7 +47,7 @@ namespace Syph_V02.Core.Components.Commands
                
                 var playerName = renderer.LineReader();
                 var id = 1; // TODO: This option is not use in demo version, IMPLEMENT IN FUTURE!!
-                var spawns = new List<ISpawn>();
+                var team = new List<IPlayer>();
 
                 if (this.data.Players.Any(x => x.Key == playerName))
                 {
@@ -61,7 +60,7 @@ namespace Syph_V02.Core.Components.Commands
                 }
                 else
                 {
-                    var player = this.playerFactory.CreateNewPlayer(playerName, id, spawns);
+                    var player = this.playerFactory.CreateNewPlayer(playerName, id, team);
                     data.AddPlayer(player);
 
                     var msg = string.Format(this.constants.PlayerSuccessfullAdded, playerName);

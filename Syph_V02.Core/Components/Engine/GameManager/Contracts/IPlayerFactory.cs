@@ -5,6 +5,6 @@ namespace Syph_V02.Core.Components.Engine.GameManager.Contracts
 {
     public interface IPlayerFactory
     {
-        IPlayer CreateNewPlayer(string name, int id, IList<ISpawn> player);
+        IPlayer CreateNewPlayer(string name, int id, IList<IPlayer> team);
     }
 }

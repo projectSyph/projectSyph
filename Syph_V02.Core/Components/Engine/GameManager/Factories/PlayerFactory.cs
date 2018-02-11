@@ -6,12 +6,11 @@ using System.Collections.Generic;
 
 namespace Syph_V02.Core.Components.Engine.GameManager.Factories
 {
-    public class PlayerFactory:IPlayerFactory
+    public class PlayerFactory : IPlayerFactory
     {
-
-        public IPlayer CreateNewPlayer(string name, int id, IList<ISpawn> spawns)
+        public IPlayer CreateNewPlayer(string name, int id, IList<IPlayer> team)
         {
-            return new Player(name, id, spawns);
+            return new Player(name, id, team);
         }
     }
 }
